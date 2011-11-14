@@ -97,13 +97,13 @@ namespace HexEditor.View
 			hexEditControl.Focus();
 		}
 		
-		public void LoadFile(OpenedFile file, Stream stream)
+		public void LoadFile(IOpenedFile file, Stream stream)
 		{
 			hexEditControl.LoadFile(file, stream);
 			hexEditControl.Invalidate();
 		}
 		
-		public void SaveFile(OpenedFile file, Stream stream)
+		public void SaveFile(IOpenedFile file, Stream stream)
 		{
 			hexEditControl.SaveFile(file, stream);
 			hexEditControl.Invalidate();

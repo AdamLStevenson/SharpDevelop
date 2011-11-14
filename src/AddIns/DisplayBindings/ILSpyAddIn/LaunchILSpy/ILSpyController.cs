@@ -90,7 +90,7 @@ namespace ICSharpCode.ILSpyAddIn
 			if (askReason != null) {
 				using(SetILSpyPathDialog dialog = new SetILSpyPathDialog(path, askReason)) {
 					
-					if (dialog.ShowDialog(WorkbenchSingleton.MainWin32Window) != DialogResult.OK || !File.Exists(dialog.SelectedFile)) {
+					if (dialog.ShowDialog(WorkbenchSingleton.Instance.MainWin32Window) != DialogResult.OK || !File.Exists(dialog.SelectedFile)) {
 						return null;
 					}
 					

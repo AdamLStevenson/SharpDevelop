@@ -48,7 +48,7 @@ namespace ICSharpCode.WixBinding
 			get { return view; }
 		}
 		
-		public IEnumerable<OpenedFile> GetSourceFiles(out OpenedFile designerCodeFile)
+		public IEnumerable<IOpenedFile> GetSourceFiles(out IOpenedFile designerCodeFile)
 		{
 			designerCodeFile = view.PrimaryFile;
 			return new [] {designerCodeFile};

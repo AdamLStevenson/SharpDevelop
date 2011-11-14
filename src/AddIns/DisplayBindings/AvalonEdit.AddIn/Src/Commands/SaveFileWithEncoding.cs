@@ -14,11 +14,11 @@ namespace ICSharpCode.AvalonEdit.AddIn.Commands
 	{
 		public override void Run()
 		{
-			IViewContent vc = WorkbenchSingleton.Workbench.ActiveViewContent;
+			IViewContent vc = WorkbenchSingleton.Instance.Workbench.ActiveViewContent;
 			ICodeEditorProvider cep = vc as ICodeEditorProvider;
 			if (cep != null) {
 				ChooseEncodingDialog dlg = new ChooseEncodingDialog();
-				dlg.Owner = WorkbenchSingleton.MainWindow;
+				dlg.Owner = WorkbenchSingleton.Instance.MainWindow;
 				dlg.Encoding = cep.CodeEditor.PrimaryTextEditor.Encoding;
 				if (dlg.ShowDialog() == true) {
 					cep.CodeEditor.PrimaryTextEditor.Encoding = dlg.Encoding;

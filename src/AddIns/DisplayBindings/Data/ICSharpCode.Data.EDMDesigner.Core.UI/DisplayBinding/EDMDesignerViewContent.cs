@@ -83,7 +83,7 @@ namespace ICSharpCode.Data.EDMDesigner.Core.UI.DisplayBinding
 
         #region Constructor
 
-		public EDMDesignerViewContent(OpenedFile primaryFile)
+		public EDMDesignerViewContent(IOpenedFile primaryFile)
 			: base(primaryFile)
 		{
 			if (primaryFile == null)
@@ -98,7 +98,7 @@ namespace ICSharpCode.Data.EDMDesigner.Core.UI.DisplayBinding
 
         #region Methods
 
-        public override void Load(OpenedFile file, Stream stream)
+        public override void Load(IOpenedFile file, Stream stream)
 		{
 			Debug.Assert(file == this.PrimaryFile);
 
@@ -160,12 +160,12 @@ namespace ICSharpCode.Data.EDMDesigner.Core.UI.DisplayBinding
             EDMDesignerChangeWatcher.Init = false;
 		}
 		
-		public override void Save(OpenedFile file, Stream stream)
+		public override void Save(IOpenedFile file, Stream stream)
 		{
             EDMXIO.WriteXDocument(_edmView).Save(stream);
 		}
 		
-		private EDMWizardWindow RunWizard(OpenedFile file, string projectStandardNamespace)
+		private EDMWizardWindow RunWizard(IOpenedFile file, string projectStandardNamespace)
 		{
             EDMWizardWindow wizard = new EDMWizardWindow(file, projectStandardNamespace);
             wizard.Owner = Application.Current.MainWindow;

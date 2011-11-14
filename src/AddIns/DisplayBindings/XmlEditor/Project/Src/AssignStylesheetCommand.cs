@@ -48,7 +48,7 @@ namespace ICSharpCode.XmlEditor
 					dialog.FilterIndex = 1;
 				}
 				
-				if (dialog.ShowDialog(WorkbenchSingleton.MainWin32Window) == DialogResult.OK) {
+				if (dialog.ShowDialog(WorkbenchSingleton.Instance.MainWin32Window) == DialogResult.OK) {
 					return dialog.FileName;
 				}
 			}

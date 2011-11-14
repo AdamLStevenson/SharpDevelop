@@ -15,7 +15,7 @@ namespace ICSharpCode.StartPage
 		{
 			ProjectService.SolutionLoaded += delegate {
 				// close all start pages when loading a solution
-				foreach (IViewContent v in WorkbenchSingleton.Workbench.ViewContentCollection.ToArray()) {
+				foreach (IViewContent v in WorkbenchSingleton.Instance.Workbench.ViewContentCollection.ToArray()) {
 					if (v is StartPageViewContent) {
 						v.WorkbenchWindow.CloseWindow(true);
 					}
@@ -25,13 +25,13 @@ namespace ICSharpCode.StartPage
 		
 		public override void Run()
 		{
-			foreach (IViewContent view in WorkbenchSingleton.Workbench.ViewContentCollection) {
+			foreach (IViewContent view in WorkbenchSingleton.Instance.Workbench.ViewContentCollection) {
 				if (view is StartPageViewContent) {
 					view.WorkbenchWindow.SelectWindow();
 					return;
 				}
 			}
-			WorkbenchSingleton.Workbench.ShowView(new StartPageViewContent());
+			WorkbenchSingleton.Instance.Workbench.ShowView(new StartPageViewContent());
 		}
 	}
 }

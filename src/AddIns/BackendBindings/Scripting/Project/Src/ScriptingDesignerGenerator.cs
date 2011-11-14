@@ -50,7 +50,7 @@ namespace ICSharpCode.Scripting
 			this.viewContent = null;
 		}
 		
-		public IEnumerable<OpenedFile> GetSourceFiles(out OpenedFile designerCodeFile)
+		public IEnumerable<IOpenedFile> GetSourceFiles(out IOpenedFile designerCodeFile)
 		{
 			designerCodeFile = viewContent.PrimaryFile;
 			return new [] {designerCodeFile};

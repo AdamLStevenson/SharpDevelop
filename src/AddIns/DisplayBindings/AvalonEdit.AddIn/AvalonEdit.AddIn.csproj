@@ -198,7 +198,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\Libraries\NRefactory\Project\NRefactory.csproj">
       <Project>{3A9AE6AA-BC07-4A2F-972C-581E3AE2F195}</Project>
-      <Name>NRefactory</Name>
+      <Name>NRefactory %28Libraries\NRefactory\NRefactory%29</Name>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Main\Base\Project\ICSharpCode.SharpDevelop.csproj">
@@ -243,9 +243,10 @@
       <Name>ICSharpCode.SharpDevelop.Widgets</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Refactor\ICSharpCode.SharpDevelop.Base\ICSharpCode.SharpDevelop.Base.csproj">
+      <Project>{18E3561D-537C-42E7-984B-7764B4C94AE6}</Project>
+      <Name>ICSharpCode.SharpDevelop.Base</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Src\MyersDiff" />
-    <Folder Include="Src\HiddenDefinition" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

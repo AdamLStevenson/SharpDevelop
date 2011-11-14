@@ -220,7 +220,7 @@ namespace ICSharpCode.SharpDevelop
 				IViewContent newContent = binding.CreateContentForFile(file);
 				if (newContent != null) {
 					DisplayBindingService.AttachSubWindows(newContent, false);
-					WorkbenchSingleton.Workbench.ShowView(newContent, switchToOpenedView);
+					WorkbenchSingleton.Instance.Workbench.ShowView(newContent, switchToOpenedView);
 				}
 				file.CloseIfAllViewsClosed();
 			}
@@ -228,7 +228,7 @@ namespace ICSharpCode.SharpDevelop
 		
 		static void ParserServiceLoadSolutionProjectsThreadEnded(object sender, EventArgs e)
 		{
-			foreach (IViewContent content in WorkbenchSingleton.Workbench.ViewContentCollection.ToArray()) {
+			foreach (IViewContent content in WorkbenchSingleton.Instance.Workbench.ViewContentCollection.ToArray()) {
 				DisplayBindingService.AttachSubWindows(content, true);
 			}
 		}
@@ -318,7 +318,7 @@ namespace ICSharpCode.SharpDevelop
 			
 			DisplayBindingService.AttachSubWindows(newContent, false);
 			
-			WorkbenchSingleton.Workbench.ShowView(newContent);
+			WorkbenchSingleton.Instance.Workbench.ShowView(newContent);
 			return newContent;
 		}
 		
@@ -329,7 +329,7 @@ namespace ICSharpCode.SharpDevelop
 		public static IList<FileName> GetOpenFiles()
 		{
 			List<FileName> fileNames = new List<FileName>();
-			foreach (IViewContent content in WorkbenchSingleton.Workbench.ViewContentCollection) {
+			foreach (IViewContent content in WorkbenchSingleton.Instance.Workbench.ViewContentCollection) {
 				FileName contentName = content.PrimaryFileName;
 				if (contentName != null && !fileNames.Contains(contentName))
 					fileNames.Add(contentName);
@@ -343,7 +343,7 @@ namespace ICSharpCode.SharpDevelop
 		public static IViewContent GetOpenFile(string fileName)
 		{
 			if (fileName != null && fileName.Length > 0) {
-				foreach (IViewContent content in WorkbenchSingleton.Workbench.ViewContentCollection) {
+				foreach (IViewContent content in WorkbenchSingleton.Instance.Workbench.ViewContentCollection) {
 					string contentName = content.PrimaryFileName;
 					if (contentName != null) {
 						if (FileUtility.IsEqualFileName(fileName, contentName))
@@ -701,7 +701,7 @@ namespace ICSharpCode.SharpDevelop
 				return true;
 			}
 			
-			public IViewContent CreateContentForFile(OpenedFile file)
+			public IViewContent CreateContentForFile(IOpenedFile file)
 			{
 				return new SimpleViewContent(errorMessage) { TitleName = Path.GetFileName(file.FileName) };
 			}

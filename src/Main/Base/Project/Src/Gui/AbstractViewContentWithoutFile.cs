@@ -21,16 +21,16 @@ namespace ICSharpCode.SharpDevelop.Gui
 		}
 		
 		[Obsolete("AbstractViewContentWithoutFile.PrimaryFile is always null")]
-		public sealed override OpenedFile PrimaryFile { get { return null; } }
+		public sealed override IOpenedFile PrimaryFile { get { return null; } }
 		
 		[Obsolete("This method is not supported on an AbstractViewContentWithoutFile")]
-		public sealed override void Load(OpenedFile file, System.IO.Stream stream)
+		public sealed override void Load(IOpenedFile file, System.IO.Stream stream)
 		{
 			throw new NotSupportedException();
 		}
 		
 		[Obsolete("This method is not supported on an AbstractViewContentWithoutFile")]
-		public sealed override void Save(OpenedFile file, System.IO.Stream stream)
+		public sealed override void Save(IOpenedFile file, System.IO.Stream stream)
 		{
 			throw new NotSupportedException();
 		}

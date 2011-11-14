@@ -64,7 +64,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 		public ExtractInterfaceOptions ShowDialog(ExtractInterfaceOptions options)
 		{
 			InitializeFields(options);
-			options.IsCancelled = (base.ShowDialog(WorkbenchSingleton.MainWin32Window) == DialogResult.Cancel);
+			options.IsCancelled = (base.ShowDialog(WorkbenchSingleton.Instance.MainWin32Window) == DialogResult.Cancel);
 			return options;
 		}
 		

@@ -58,13 +58,13 @@ namespace ICSharpCode.AvalonEdit.AddIn
 			this.delayMoveTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(delayMoveMilliseconds) };
 			this.delayMoveTimer.Stop();
 			this.delayMoveTimer.Tick += TimerMoveTick;
-			WorkbenchSingleton.Workbench.ActiveViewContentChanged += WorkbenchSingleton_Workbench_ActiveViewContentChanged;
+			WorkbenchSingleton.Instance.Workbench.ActiveViewContentChanged += WorkbenchSingleton_Workbench_ActiveViewContentChanged;
 		}
 		
 		public void Dispose()
 		{
 			ClosePopup();
-			WorkbenchSingleton.Workbench.ActiveViewContentChanged -= WorkbenchSingleton_Workbench_ActiveViewContentChanged;
+			WorkbenchSingleton.Instance.Workbench.ActiveViewContentChanged -= WorkbenchSingleton_Workbench_ActiveViewContentChanged;
 			delayMoveTimer.Stop();
 		}
 		
@@ -147,7 +147,7 @@ namespace ICSharpCode.AvalonEdit.AddIn
 		void WorkbenchSingleton_Workbench_ActiveViewContentChanged(object sender, EventArgs e)
 		{
 			// open the popup again if in current file
-			IViewContent activeViewContent = WorkbenchSingleton.Workbench.ActiveViewContent;
+			IViewContent activeViewContent = WorkbenchSingleton.Instance.Workbench.ActiveViewContent;
 			if (activeViewContent != null && activeViewContent.PrimaryFileName == this.Editor.FileName)
 				CaretPositionChanged(this, EventArgs.Empty);
 			else // otherwise close popup

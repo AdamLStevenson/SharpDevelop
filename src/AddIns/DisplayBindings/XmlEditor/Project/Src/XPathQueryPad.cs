@@ -19,7 +19,7 @@ namespace ICSharpCode.XmlEditor
 		public XPathQueryPad()
 		{
 			xpathQueryControl = new XPathQueryControl();
-			WorkbenchSingleton.Workbench.ActiveViewContentChanged += ActiveViewContentChanged;
+			WorkbenchSingleton.Instance.Workbench.ActiveViewContentChanged += ActiveViewContentChanged;
 			Properties properties = PropertyService.Get(XPathQueryControlProperties, new Properties());
 			xpathQueryControl.SetMemento(properties);
 			instance = this;
@@ -40,7 +40,7 @@ namespace ICSharpCode.XmlEditor
 		{
 			if (!disposed) {
 				disposed = true;
-				WorkbenchSingleton.Workbench.ActiveViewContentChanged -= ActiveViewContentChanged;
+				WorkbenchSingleton.Instance.Workbench.ActiveViewContentChanged -= ActiveViewContentChanged;
 				Properties properties = xpathQueryControl.CreateMemento();
 				PropertyService.Set(XPathQueryControlProperties, properties);
 				xpathQueryControl.Dispose();

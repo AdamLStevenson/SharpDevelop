@@ -87,7 +87,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 		{
 			if (disableDefinitionView)
 				return null;
-			IWorkbenchWindow window = WorkbenchSingleton.Workbench.ActiveWorkbenchWindow;
+			IWorkbenchWindow window = WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow;
 			if (window == null) return null;
 			ITextEditorProvider provider = window.ActiveViewContent as ITextEditorProvider;
 			if (provider == null) return null;

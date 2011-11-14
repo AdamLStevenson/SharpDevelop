@@ -27,7 +27,7 @@ namespace HexEditor.View
 			return 0.1;
 		}
 
-		public IViewContent CreateContentForFile(OpenedFile file)
+		public IViewContent CreateContentForFile(IOpenedFile file)
 		{
 			return new HexEditView(file);
 		}

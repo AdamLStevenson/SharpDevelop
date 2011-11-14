@@ -38,7 +38,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 		/// <summary>
 		/// Create a new AbstractViewContent instance with the specified primary file.
 		/// </summary>
-		protected AbstractViewContent(OpenedFile file) : this()
+		protected AbstractViewContent(IOpenedFile file) : this()
 		{
 			if (file == null)
 				throw new ArgumentNullException("file");
@@ -185,7 +185,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 		/// Gets switching without a Save/Load cycle for <paramref name="file"/> is supported
 		/// when switching from this view content to <paramref name="newView"/>.
 		/// </summary>
-		public virtual bool SupportsSwitchFromThisWithoutSaveLoad(OpenedFile file, IViewContent newView)
+		public virtual bool SupportsSwitchFromThisWithoutSaveLoad(IOpenedFile file, IViewContent newView)
 		{
 			return newView == this;
 		}
@@ -194,7 +194,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 		/// Gets switching without a Save/Load cycle for <paramref name="file"/> is supported
 		/// when switching from <paramref name="oldView"/> to this view content.
 		/// </summary>
-		public virtual bool SupportsSwitchToThisWithoutSaveLoad(OpenedFile file, IViewContent oldView)
+		public virtual bool SupportsSwitchToThisWithoutSaveLoad(IOpenedFile file, IViewContent oldView)
 		{
 			return oldView == this;
 		}
@@ -202,40 +202,40 @@ namespace ICSharpCode.SharpDevelop.Gui
 		/// <summary>
 		/// Executes an action before switching from this view content to the new view content.
 		/// </summary>
-		public virtual void SwitchFromThisWithoutSaveLoad(OpenedFile file, IViewContent newView)
+		public virtual void SwitchFromThisWithoutSaveLoad(IOpenedFile file, IViewContent newView)
 		{
 		}
 		
 		/// <summary>
 		/// Executes an action before switching from the old view content to this view content.
 		/// </summary>
-		public virtual void SwitchToThisWithoutSaveLoad(OpenedFile file, IViewContent oldView)
+		public virtual void SwitchToThisWithoutSaveLoad(IOpenedFile file, IViewContent oldView)
 		{
 		}
 		#endregion
 		
 		#region Files
 		FilesCollection files;
-		ReadOnlyCollection<OpenedFile> filesReadonly;
+		ReadOnlyCollection<IOpenedFile> filesReadonly;
 		
 		void InitFiles()
 		{
 			files = new FilesCollection(this);
-			filesReadonly = new ReadOnlyCollection<OpenedFile>(files);
+			filesReadonly = new ReadOnlyCollection<IOpenedFile>(files);
 		}
 		
-		protected Collection<OpenedFile> Files {
+		protected Collection<IOpenedFile> Files {
 			get { return files; }
 		}
 		
-		IList<OpenedFile> IViewContent.Files {
+		IList<IOpenedFile> IViewContent.Files {
 			get { return filesReadonly; }
 		}
 		
 		/// <summary>
 		/// Gets the primary file being edited. Might return null if no file is edited.
 		/// </summary>
-		public virtual OpenedFile PrimaryFile {
+		public virtual IOpenedFile PrimaryFile {
 			get {
 				WorkbenchSingleton.AssertMainThread();
 				if (files.Count != 0)
@@ -250,7 +250,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 		/// </summary>
 		public virtual FileName PrimaryFileName {
 			get {
-				OpenedFile file = PrimaryFile;
+				IOpenedFile file = PrimaryFile;
 				if (file != null)
 					return file.FileName;
 				else
@@ -260,7 +260,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 		
 		protected bool AutomaticallyRegisterViewOnFiles = true;
 		
-		void RegisterFileEventHandlers(OpenedFile newItem)
+		void RegisterFileEventHandlers(IOpenedFile newItem)
 		{
 			newItem.FileNameChanged += OnFileNameChanged;
 			newItem.IsDirtyChanged += OnIsDirtyChanged;
@@ -270,7 +270,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 			OnIsDirtyChanged(null, EventArgs.Empty); // re-evaluate this.IsDirty after changing the file collection
 		}
 		
-		void UnregisterFileEventHandlers(OpenedFile oldItem)
+		void UnregisterFileEventHandlers(IOpenedFile oldItem)
 		{
 			oldItem.FileNameChanged -= OnFileNameChanged;
 			oldItem.IsDirtyChanged -= OnIsDirtyChanged;
@@ -282,7 +282,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 		
 		void OnFileNameChanged(object sender, EventArgs e)
 		{
-			OnFileNameChanged((OpenedFile)sender);
+			OnFileNameChanged((IOpenedFile)sender);
 			if (titleName == null && files.Count > 0 && sender == files[0]) {
 				OnTitleNameChanged(EventArgs.Empty);
 			}
@@ -291,11 +291,11 @@ namespace ICSharpCode.SharpDevelop.Gui
 		/// <summary>
 		/// Is called when the file name of a file opened in this view content changes.
 		/// </summary>
-		protected virtual void OnFileNameChanged(OpenedFile file)
+		protected virtual void OnFileNameChanged(IOpenedFile file)
 		{
 		}
 		
-		private sealed class FilesCollection : Collection<OpenedFile>
+		private sealed class FilesCollection : Collection<IOpenedFile>
 		{
 			AbstractViewContent parent;
 			
@@ -304,13 +304,13 @@ namespace ICSharpCode.SharpDevelop.Gui
 				this.parent = parent;
 			}
 			
-			protected override void InsertItem(int index, OpenedFile item)
+			protected override void InsertItem(int index, IOpenedFile item)
 			{
 				base.InsertItem(index, item);
 				parent.RegisterFileEventHandlers(item);
 			}
 			
-			protected override void SetItem(int index, OpenedFile item)
+			protected override void SetItem(int index, IOpenedFile item)
 			{
 				parent.UnregisterFileEventHandlers(this[index]);
 				base.SetItem(index, item);
@@ -530,7 +530,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 		/// Gets if this view content is the active view content.
 		/// </summary>
 		protected bool IsActiveViewContent {
-			get { return WorkbenchSingleton.Workbench != null && WorkbenchSingleton.Workbench.ActiveViewContent == this; }
+			get { return WorkbenchSingleton.Instance.Workbench != null && WorkbenchSingleton.Instance.Workbench.ActiveViewContent == this; }
 		}
 		
 		/// <summary>
@@ -539,11 +539,11 @@ namespace ICSharpCode.SharpDevelop.Gui
 		protected event EventHandler IsActiveViewContentChanged {
 			add {
 				if (!registeredOnViewContentChange) {
-					// register WorkbenchSingleton.Workbench.ActiveViewContentChanged only on demand
+					// register WorkbenchSingleton.Instance.Workbench.ActiveViewContentChanged only on demand
 					wasActiveViewContent = IsActiveViewContent;
 					// null check is required to support running in unit test mode
-					if (WorkbenchSingleton.Workbench != null) {
-						WorkbenchSingleton.Workbench.ActiveViewContentChanged += OnActiveViewContentChanged;
+					if (WorkbenchSingleton.Instance.Workbench != null) {
+						WorkbenchSingleton.Instance.Workbench.ActiveViewContentChanged += OnActiveViewContentChanged;
 					}
 					registeredOnViewContentChange = true;
 				}
@@ -558,8 +558,8 @@ namespace ICSharpCode.SharpDevelop.Gui
 		{
 			if (registeredOnViewContentChange) {
 				// null check is required to support running in unit test mode
-				if (WorkbenchSingleton.Workbench != null) {
-					WorkbenchSingleton.Workbench.ActiveViewContentChanged -= OnActiveViewContentChanged;
+				if (WorkbenchSingleton.Instance.Workbench != null) {
+					WorkbenchSingleton.Instance.Workbench.ActiveViewContentChanged -= OnActiveViewContentChanged;
 				}
 				registeredOnViewContentChange = false;
 			}
@@ -595,11 +595,11 @@ namespace ICSharpCode.SharpDevelop.Gui
 		
 		#endregion
 		
-		public virtual void Save(OpenedFile file, Stream stream)
+		public virtual void Save(IOpenedFile file, Stream stream)
 		{
 		}
 		
-		public virtual void Load(OpenedFile file, Stream stream)
+		public virtual void Load(IOpenedFile file, Stream stream)
 		{
 		}
 		

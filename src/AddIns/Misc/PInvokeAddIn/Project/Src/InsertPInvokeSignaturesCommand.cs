@@ -20,7 +20,7 @@ namespace ICSharpCode.PInvokeAddIn
 		{
 			// Show PInvoke dialog.
 			using(InsertPInvokeSignaturesForm form = new InsertPInvokeSignaturesForm()) {
-				form.ShowDialog(WorkbenchSingleton.MainWin32Window);
+				form.ShowDialog(WorkbenchSingleton.Instance.MainWin32Window);
 			}
 		}
 	}

@@ -57,9 +57,13 @@
     <Compile Include="Src\IconViewContent.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Refactor\ICSharpCode.SharpDevelop.Base\ICSharpCode.SharpDevelop.Base.csproj">
+      <Project>{18E3561D-537C-42E7-984B-7764B4C94AE6}</Project>
+      <Name>ICSharpCode.SharpDevelop.Base</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IconEditor\IconEditor.csproj">
       <Project>{DC1CCE11-CB91-40FA-9C47-4D9EB5D67BFD}</Project>
-      <Name>IconEditor</Name>
+      <Name>IconEditor %28AddIns\Display Bindings\IconEditor\IconEditor%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\Main\Base\Project\ICSharpCode.SharpDevelop.csproj">
       <Project>{2748AD25-9C63-4E12-877B-4DCE96FBED54}</Project>

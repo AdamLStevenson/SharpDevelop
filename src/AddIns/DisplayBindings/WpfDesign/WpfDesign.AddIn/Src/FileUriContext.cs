@@ -14,9 +14,9 @@ namespace ICSharpCode.WpfDesign.AddIn
 	/// </summary>
 	public class FileUriContext : IUriContext
 	{
-		OpenedFile file;
+		IOpenedFile file;
 		
-		public FileUriContext(OpenedFile file)
+		public FileUriContext(IOpenedFile file)
 		{
 			if (file == null)
 				throw new ArgumentNullException("file");

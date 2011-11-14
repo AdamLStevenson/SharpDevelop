@@ -29,10 +29,10 @@ namespace ICSharpCode.SharpDevelop.Refactoring
 	{
 		public bool IsValid(object caller, Condition condition)
 		{
-			if (WorkbenchSingleton.Workbench == null) {
+			if (WorkbenchSingleton.Instance.Workbench == null) {
 				return false;
 			}
-			ITextEditorProvider provider = WorkbenchSingleton.Workbench.ActiveViewContent as ITextEditorProvider;
+			ITextEditorProvider provider = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as ITextEditorProvider;
 			if (provider == null)
 				return false;
 			LanguageProperties language = ParserService.CurrentProjectContent.Language;
@@ -66,10 +66,10 @@ namespace ICSharpCode.SharpDevelop.Refactoring
 			if (ParserService.LoadSolutionProjectsThreadRunning) {
 				return;
 			}
-			if (WorkbenchSingleton.Workbench == null) {
+			if (WorkbenchSingleton.Instance.Workbench == null) {
 				return;
 			}
-			ITextEditorProvider provider = WorkbenchSingleton.Workbench.ActiveViewContent as ITextEditorProvider;
+			ITextEditorProvider provider = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as ITextEditorProvider;
 			if (provider == null) return;
 			LanguageProperties language = ParserService.CurrentProjectContent.Language;
 			if (language == null) return;

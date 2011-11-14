@@ -22,7 +22,7 @@ namespace ClassDiagramAddin
 			return true; // .addin file filters for *.cd
 		}
 		
-		public IViewContent CreateContentForFile(OpenedFile file)
+		public IViewContent CreateContentForFile(IOpenedFile file)
 		{
 			return new ClassDiagramViewContent(file);
 		}

@@ -18,7 +18,7 @@ namespace ICSharpCode.SharpDevelop
 			return true;
 		}
 		
-		public ICSharpCode.SharpDevelop.Gui.IViewContent CreateContentForFile(OpenedFile file)
+		public ICSharpCode.SharpDevelop.Gui.IViewContent CreateContentForFile(IOpenedFile file)
 		{
 			if (file.IsDirty) {
 				// TODO: warn user that the file must be saved

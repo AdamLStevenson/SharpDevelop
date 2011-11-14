@@ -135,7 +135,7 @@ namespace ICSharpCode.SharpDevelop.Project
 				WorkbenchSingleton.AssertMainThread();
 				Debug.Assert(FileUtility.IsUrl(value) || Path.IsPathRooted(value));
 				
-				if (WorkbenchSingleton.Workbench == null)
+				if (WorkbenchSingleton.Instance.Workbench == null)
 					watcher = new MockProjectChangeWatcher();
 				
 				if (watcher == null) {

@@ -100,7 +100,7 @@ namespace Debugger.AddIn.Tooltips
 			
 			// verify if at the line of the root there's a pin bookmark
 			ITextEditor editor;
-			var viewContent = WorkbenchSingleton.Workbench.ActiveViewContent;
+			var viewContent = WorkbenchSingleton.Instance.Workbench.ActiveViewContent;
 			ITextEditorProvider provider = viewContent as ITextEditorProvider;
 			if (provider != null) {
 				editor = provider.TextEditor;
@@ -299,7 +299,7 @@ namespace Debugger.AddIn.Tooltips
 		
 		void PinButton_Checked(object sender, RoutedEventArgs e)
 		{
-			ITextEditorProvider provider = WorkbenchSingleton.Workbench.ActiveViewContent as ITextEditorProvider;
+			ITextEditorProvider provider = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as ITextEditorProvider;
 			var editor = provider.TextEditor;
 			if (editor == null) return;
 			var node = (ITreeNode)(((ToggleButton)(e.OriginalSource)).DataContext);
@@ -341,7 +341,7 @@ namespace Debugger.AddIn.Tooltips
 		
 		void PinButton_Unchecked(object sender, RoutedEventArgs e)
 		{
-			ITextEditorProvider provider = WorkbenchSingleton.Workbench.ActiveViewContent as ITextEditorProvider;
+			ITextEditorProvider provider = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as ITextEditorProvider;
 			var editor = provider.TextEditor;
 			if (editor == null) return;
 			

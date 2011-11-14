@@ -226,7 +226,7 @@ namespace ICSharpCode.SharpDevelop.Gui.Dialogs.ReferenceDialog.ServiceReference
 				StartDiscovery(uri, credential);
 			} else {
 				using (UserCredentialsDialog credentialsForm = new UserCredentialsDialog(uri.ToString(), authenticationType)) {
-//					if (DialogResult.OK == credentialsForm.ShowDialog(WorkbenchSingleton.MainWin32Window)) {
+//					if (DialogResult.OK == credentialsForm.ShowDialog(WorkbenchSingleton.Instance.MainWin32Window)) {
 //						StartDiscovery(uri, credentialsForm.Credential);
 //					}
 				}

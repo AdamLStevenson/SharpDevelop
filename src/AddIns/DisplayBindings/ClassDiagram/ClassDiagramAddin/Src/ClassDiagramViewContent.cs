@@ -25,7 +25,7 @@ namespace ClassDiagramAddin
 		private ClassCanvas canvas = new ClassCanvas();
 		private ToolStrip toolstrip;
 		
-		public ClassDiagramViewContent (OpenedFile file) : base(file)
+		public ClassDiagramViewContent (IOpenedFile file) : base(file)
 		{
 			this.TabPageText = "Class Diagram";
 			
@@ -42,7 +42,7 @@ namespace ClassDiagramAddin
 			get { return canvas; }
 		}
 
-		public override void Load(OpenedFile file, Stream stream)
+		public override void Load(IOpenedFile file, Stream stream)
 		{
 			XmlDocument doc = new XmlDocument();
 			doc.Load(stream);
@@ -50,7 +50,7 @@ namespace ClassDiagramAddin
 			canvas.LoadFromXml(doc, projectContent);
 		}
 		
-		public override void Save(OpenedFile file, Stream stream)
+		public override void Save(IOpenedFile file, Stream stream)
 		{
 			XmlWriterSettings settings = new XmlWriterSettings();
 			settings.Indent = true;

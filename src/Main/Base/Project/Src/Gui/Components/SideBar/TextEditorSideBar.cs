@@ -64,7 +64,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 				GenerateStandardSideBar();
 			}
 			
-			WorkbenchSingleton.WorkbenchUnloaded += delegate { SaveSideBarViewConfig(); };
+			WorkbenchSingleton.Instance.WorkbenchUnloaded += delegate { SaveSideBarViewConfig(); };
 		}
 		
 		void GenerateStandardSideBar()

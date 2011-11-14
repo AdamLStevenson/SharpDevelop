@@ -66,7 +66,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 			}
 		}
 		
-		List<PadDescriptor> padDescriptorCollection = new List<PadDescriptor>();
+		List<IPadDescriptor> padDescriptorCollection = new List<IPadDescriptor>();
 		SdStatusBar statusBar = new SdStatusBar();
 		ToolBar[] toolBars;
 		
@@ -245,7 +245,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 			}
 		}
 		
-		public IList<PadDescriptor> PadContentCollection {
+		public IList<IPadDescriptor> PadContentCollection {
 			get {
 				WorkbenchSingleton.AssertMainThread();
 				return padDescriptorCollection.AsReadOnly();
@@ -391,7 +391,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 			WorkbenchLayout.ShowView(content, switchToOpenedView);
 		}
 		
-		public void ShowPad(PadDescriptor content)
+		public void ShowPad(IPadDescriptor content)
 		{
 			WorkbenchSingleton.AssertMainThread();
 			if (content == null)
@@ -406,16 +406,16 @@ namespace ICSharpCode.SharpDevelop.Gui
 			}
 		}
 		
-		public void UnloadPad(PadDescriptor content)
+		public void UnloadPad(IPadDescriptor content)
 		{
 		}
 		
-		public PadDescriptor GetPad(Type type)
+		public IPadDescriptor GetPad(Type type)
 		{
 			WorkbenchSingleton.AssertMainThread();
 			if (type == null)
 				throw new ArgumentNullException("type");
-			foreach (PadDescriptor pad in PadContentCollection) {
+			foreach (IPadDescriptor pad in PadContentCollection) {
 				if (pad.Class == type.FullName) {
 					return pad;
 				}
@@ -584,8 +584,8 @@ namespace ICSharpCode.SharpDevelop.Gui
 					// save preferences
 					Project.ProjectService.SaveSolutionPreferences();
 					
-					while (WorkbenchSingleton.Workbench.WorkbenchWindowCollection.Count > 0) {
-						IWorkbenchWindow window = WorkbenchSingleton.Workbench.WorkbenchWindowCollection[0];
+					while (WorkbenchSingleton.Instance.Workbench.WorkbenchWindowCollection.Count > 0) {
+						IWorkbenchWindow window = WorkbenchSingleton.Instance.Workbench.WorkbenchWindowCollection[0];
 						if (!window.CloseWindow(false)) {
 							e.Cancel = true;
 							return;

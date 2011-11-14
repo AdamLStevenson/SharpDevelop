@@ -18,7 +18,7 @@ namespace ICSharpCode.XmlEditor
 		}
 		
 		public RemoveXPathHighlightingCommand()
-			: this(WorkbenchSingleton.Workbench)
+			: this(WorkbenchSingleton.Instance.Workbench)
 		{
 		}
 		

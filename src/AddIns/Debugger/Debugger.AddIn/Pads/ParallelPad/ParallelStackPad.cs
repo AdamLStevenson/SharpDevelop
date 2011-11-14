@@ -565,7 +565,7 @@ namespace ICSharpCode.SharpDevelop.Gui.Pads
 			// remove all
 			BookmarkManager.RemoveAll(b => b is SelectedFrameBookmark);
 			
-			ITextEditorProvider provider = WorkbenchSingleton.Workbench.ActiveContent as ITextEditorProvider;
+			ITextEditorProvider provider = WorkbenchSingleton.Instance.Workbench.ActiveContent as ITextEditorProvider;
 			if (provider != null) {
 				ITextEditor editor = provider.TextEditor;
 				BookmarkManager.AddMark(new SelectedFrameBookmark(editor.FileName, location));

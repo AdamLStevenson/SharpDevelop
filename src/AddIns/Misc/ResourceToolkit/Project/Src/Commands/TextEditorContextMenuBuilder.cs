@@ -109,7 +109,7 @@ namespace Hornung.ResourceToolkit.Commands
 			if (svalue == null) {
 				dialog.Text = String.Format(CultureInfo.CurrentCulture, StringParser.Parse("${res:Hornung.ResourceToolkit.CodeCompletion.AddNewDescription}"), result.ResourceFileContent.FileName);
 			}
-			if (dialog.ShowDialog(WorkbenchSingleton.MainWin32Window) == DialogResult.OK) {
+			if (dialog.ShowDialog(WorkbenchSingleton.Instance.MainWin32Window) == DialogResult.OK) {
 				if (svalue == null) {
 					// Add new resource.
 					result.ResourceFileContent.Add(dialog.Key, dialog.Value);

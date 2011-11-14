@@ -163,7 +163,7 @@ namespace ICSharpCode.SharpDevelop
 				lastParseRun = null;
 			}
 			
-			IViewContent viewContent = WorkbenchSingleton.Workbench.ActiveViewContent;
+			IViewContent viewContent = WorkbenchSingleton.Instance.Workbench.ActiveViewContent;
 			if (viewContent == null)
 				return;
 			FileName fileName = viewContent.PrimaryFileName;
@@ -721,7 +721,7 @@ namespace ICSharpCode.SharpDevelop
 		public static ParseInformation ParseCurrentViewContent()
 		{
 			WorkbenchSingleton.AssertMainThread();
-			IViewContent viewContent = WorkbenchSingleton.Workbench.ActiveViewContent;
+			IViewContent viewContent = WorkbenchSingleton.Instance.Workbench.ActiveViewContent;
 			if (viewContent != null)
 				return ParseViewContent(viewContent);
 			else
@@ -760,7 +760,7 @@ namespace ICSharpCode.SharpDevelop
 		public static Task<ParseInformation> BeginParseCurrentViewContent()
 		{
 			WorkbenchSingleton.AssertMainThread();
-			IViewContent viewContent = WorkbenchSingleton.Workbench.ActiveViewContent;
+			IViewContent viewContent = WorkbenchSingleton.Instance.Workbench.ActiveViewContent;
 			if (viewContent != null)
 				return BeginParseViewContent(viewContent);
 			else

@@ -95,9 +95,12 @@
       <Name>ICSharpCode.Core.Presentation</Name>
       <Private>False</Private>
     </ProjectReference>
-    <Folder Include="Resources" />
     <Page Include="Src\RecentProjectsControl.xaml" />
     <Page Include="Src\StartPageControl.xaml" />
+    <ProjectReference Include="..\..\..\..\Refactor\ICSharpCode.SharpDevelop.Base\ICSharpCode.SharpDevelop.Base.csproj">
+      <Project>{18E3561D-537C-42E7-984B-7764B4C94AE6}</Project>
+      <Name>ICSharpCode.SharpDevelop.Base</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
 </Project>

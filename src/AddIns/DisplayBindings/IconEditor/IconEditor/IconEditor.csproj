@@ -44,7 +44,9 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainForm.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
@@ -58,7 +60,9 @@
     <Compile Include="IconPanel.Designer.cs">
       <DependentUpon>IconPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="IconPanel.cs" />
+    <Compile Include="IconPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <EmbeddedResource Include="IconPanel.resx">
       <DependentUpon>IconPanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -66,7 +70,9 @@
     <Compile Include="EditorPanel.Designer.cs">
       <DependentUpon>EditorPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditorPanel.cs" />
+    <Compile Include="EditorPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <EmbeddedResource Include="EditorPanel.resx">
       <DependentUpon>EditorPanel.cs</DependentUpon>
     </EmbeddedResource>

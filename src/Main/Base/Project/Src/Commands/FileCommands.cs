@@ -41,7 +41,7 @@ namespace ICSharpCode.SharpDevelop.Commands
 				
 			}
 			using (NewFileDialog nfd = new NewFileDialog(null)) {
-				nfd.ShowDialog(WorkbenchSingleton.MainWin32Window);
+				nfd.ShowDialog(WorkbenchSingleton.Instance.MainWin32Window);
 			}
 		}
 	}
@@ -50,8 +50,8 @@ namespace ICSharpCode.SharpDevelop.Commands
 	{
 		public override void Run()
 		{
-			if (WorkbenchSingleton.Workbench.ActiveWorkbenchWindow != null) {
-				WorkbenchSingleton.Workbench.ActiveWorkbenchWindow.CloseWindow(false);
+			if (WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow != null) {
+				WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow.CloseWindow(false);
 			}
 		}
 	}
@@ -60,7 +60,7 @@ namespace ICSharpCode.SharpDevelop.Commands
 	{
 		public override void Run()
 		{
-			Save(WorkbenchSingleton.Workbench.ActiveWorkbenchWindow);
+			Save(WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow);
 		}
 		
 		internal static void Save(IWorkbenchWindow window)
@@ -87,7 +87,7 @@ namespace ICSharpCode.SharpDevelop.Commands
 			}
 		}
 		
-		public static void Save(OpenedFile file)
+		public static void Save(IOpenedFile file)
 		{
 			if (file.IsUntitled) {
 				SaveFileAs.Save(file);
@@ -106,10 +106,10 @@ namespace ICSharpCode.SharpDevelop.Commands
 	{
 		public override void Run()
 		{
-			IViewContent content = WorkbenchSingleton.Workbench.ActiveViewContent;
+			IViewContent content = WorkbenchSingleton.Instance.Workbench.ActiveViewContent;
 			if (content == null)
 				return;
-			OpenedFile file = content.PrimaryFile;
+			IOpenedFile file = content.PrimaryFile;
 			if (file == null || file.IsUntitled)
 				return;
 			if (file.IsDirty == false
@@ -132,7 +132,7 @@ namespace ICSharpCode.SharpDevelop.Commands
 	{
 		public override void Run()
 		{
-			Save(WorkbenchSingleton.Workbench.ActiveWorkbenchWindow);
+			Save(WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow);
 		}
 		
 		internal static void Save(IWorkbenchWindow window)
@@ -156,7 +156,7 @@ namespace ICSharpCode.SharpDevelop.Commands
 			files.ForEach(Save);
 		}
 		
-		internal static void Save(OpenedFile file)
+		internal static void Save(IOpenedFile file)
 		{
 			Debug.Assert(file != null);
 			
@@ -173,7 +173,7 @@ namespace ICSharpCode.SharpDevelop.Commands
 					}
 				}
 				
-				if (fdiag.ShowDialog(ICSharpCode.SharpDevelop.Gui.WorkbenchSingleton.MainWin32Window) == DialogResult.OK) {
+				if (fdiag.ShowDialog(ICSharpCode.SharpDevelop.Gui.WorkbenchSingleton.Instance.MainWin32Window) == DialogResult.OK) {
 					string fileName = fdiag.FileName;
 					if (!FileService.CheckFileName(fileName)) {
 						return;
@@ -191,7 +191,7 @@ namespace ICSharpCode.SharpDevelop.Commands
 	{
 		public static void SaveAll()
 		{
-			foreach (IViewContent content in WorkbenchSingleton.Workbench.ViewContentCollection) {
+			foreach (IViewContent content in WorkbenchSingleton.Instance.Workbench.ViewContentCollection) {
 				if (content is ICustomizedCommands && content.IsDirty) {
 					((ICustomizedCommands)content).SaveCommand();
 				}
@@ -222,7 +222,7 @@ namespace ICSharpCode.SharpDevelop.Commands
 				
 				// search filter like in the current open file
 				if (!foundFilter) {
-					IViewContent content = WorkbenchSingleton.Workbench.ActiveViewContent;
+					IViewContent content = WorkbenchSingleton.Instance.Workbench.ActiveViewContent;
 					if (content != null) {
 						string extension = Path.GetExtension(content.PrimaryFileName);
 						if (string.IsNullOrEmpty(extension) == false) {
@@ -244,7 +244,7 @@ namespace ICSharpCode.SharpDevelop.Commands
 				fdiag.Multiselect     = true;
 				fdiag.CheckFileExists = true;
 				
-				if (fdiag.ShowDialog(ICSharpCode.SharpDevelop.Gui.WorkbenchSingleton.MainWin32Window) == DialogResult.OK) {
+				if (fdiag.ShowDialog(ICSharpCode.SharpDevelop.Gui.WorkbenchSingleton.Instance.MainWin32Window) == DialogResult.OK) {
 					OpenFiles(fdiag.FileNames);
 				}
 			}
@@ -285,7 +285,7 @@ namespace ICSharpCode.SharpDevelop.Commands
 			if (defaultCodonIndex < 0)
 				defaultCodonIndex = 0;
 			using (OpenWithDialog dlg = new OpenWithDialog(codons, defaultCodonIndex, Path.GetExtension(fileNames[0]))) {
-				if (dlg.ShowDialog(WorkbenchSingleton.MainWin32Window) == DialogResult.OK) {
+				if (dlg.ShowDialog(WorkbenchSingleton.Instance.MainWin32Window) == DialogResult.OK) {
 					foreach (string fileName in fileNames) {
 						FileUtility.ObservedLoad(new FileService.LoadFileWrapper(dlg.SelectedBinding.Binding, true).Invoke, fileName);
 					}
@@ -298,7 +298,7 @@ namespace ICSharpCode.SharpDevelop.Commands
 	{
 		public override void Run()
 		{
-			WorkbenchSingleton.MainWindow.Close();
+			WorkbenchSingleton.Instance.MainWindow.Close();
 		}
 	}
 

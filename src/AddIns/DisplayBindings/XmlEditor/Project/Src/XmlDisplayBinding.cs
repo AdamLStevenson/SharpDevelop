@@ -63,10 +63,10 @@ namespace ICSharpCode.XmlEditor
 		
 		public static bool XmlViewContentActive {
 			get {
-				if (WorkbenchSingleton.Workbench == null) {
+				if (WorkbenchSingleton.Instance.Workbench == null) {
 					return false;
 				}
-				ITextEditorProvider view = WorkbenchSingleton.Workbench.ActiveViewContent as ITextEditorProvider;
+				ITextEditorProvider view = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as ITextEditorProvider;
 				if (view != null) {
 					return IsFileNameHandled(view.TextEditor.FileName);
 				}

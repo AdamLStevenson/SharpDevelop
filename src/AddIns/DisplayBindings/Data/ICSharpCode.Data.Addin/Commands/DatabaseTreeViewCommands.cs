@@ -19,7 +19,7 @@ namespace ICSharpCode.Data.Addin.Commands
         public override void Run()
         {
             ConnectionWizardWindow connectionWizardWindow = new ConnectionWizardWindow();
-            connectionWizardWindow.Owner = WorkbenchSingleton.MainWindow;
+            connectionWizardWindow.Owner = WorkbenchSingleton.Instance.MainWindow;
 
             connectionWizardWindow.AddAction = new Action(delegate()
             {

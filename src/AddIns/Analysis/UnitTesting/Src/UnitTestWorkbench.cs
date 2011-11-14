@@ -9,9 +9,9 @@ namespace ICSharpCode.UnitTesting
 {
 	public class UnitTestWorkbench : IUnitTestWorkbench
 	{
-		public PadDescriptor GetPad(Type type)
+		public IPadDescriptor GetPad(Type type)
 		{
-			return WorkbenchSingleton.Workbench.GetPad(type);
+			return WorkbenchSingleton.Instance.Workbench.GetPad(type);
 		}
 		
 		public void SafeThreadAsyncCall(Action method)

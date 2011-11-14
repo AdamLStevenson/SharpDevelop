@@ -46,7 +46,7 @@ namespace ICSharpCode.Svn
 			string path = GetPathFromRegistry("ProcPath");
 			if (path == null) {
 				using (TortoiseSvnNotFoundForm form = new TortoiseSvnNotFoundForm()) {
-					form.ShowDialog(WorkbenchSingleton.MainWin32Window);
+					form.ShowDialog(WorkbenchSingleton.Instance.MainWin32Window);
 				}
 			} else {
 				try {

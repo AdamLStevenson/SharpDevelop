@@ -55,10 +55,7 @@
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Configuration" />
-    <Folder Include="Src" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Compile Include="..\..\..\..\Main\GlobalAssemblyInfo.cs">
       <Link>Configuration\GlobalAssemblyInfo.cs</Link>
@@ -136,6 +133,10 @@
       <Project>{924EE450-603D-49C1-A8E5-4AFAA31CE6F3}</Project>
       <Name>ICSharpCode.SharpDevelop.Dom</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Refactor\ICSharpCode.SharpDevelop.Base\ICSharpCode.SharpDevelop.Base.csproj">
+      <Project>{18E3561D-537C-42E7-984B-7764B4C94AE6}</Project>
+      <Name>ICSharpCode.SharpDevelop.Base</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Analysis\UnitTesting\UnitTesting.csproj">
       <Project>{1F261725-6318-4434-A1B1-6C70CE4CD324}</Project>

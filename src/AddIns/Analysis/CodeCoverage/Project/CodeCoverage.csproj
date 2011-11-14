@@ -6,7 +6,7 @@
     <AssemblyName>CodeCoverage</AssemblyName>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{08ce9972-283b-44f4-82fa-966f7dfa6b7a}</ProjectGuid>
+    <ProjectGuid>{08CE9972-283B-44F4-82FA-966F7DFA6B7A}</ProjectGuid>
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
     <NoStdLib>False</NoStdLib>
     <RegisterForComInterop>False</RegisterForComInterop>
@@ -59,7 +59,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Src\CodeCoverageControl.cs" />
+    <Compile Include="Src\CodeCoverageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Src\CodeCoveragePad.cs" />
     <Compile Include="Configuration\AssemblyInfo.cs" />
     <Compile Include="Src\CodeCoverageModule.cs" />
@@ -72,7 +74,9 @@
     <Compile Include="Src\CodeCoverageTestRunner.cs" />
     <Compile Include="Src\CodeCoverageTestRunnerContext.cs" />
     <Compile Include="Src\CodeCoverageTestRunnerFactory.cs" />
-    <Compile Include="Src\CodeCoverageTreeView.cs" />
+    <Compile Include="Src\CodeCoverageTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Src\CodeCoverageModuleTreeNode.cs" />
     <Compile Include="Src\CodeCoverageTreeNode.cs" />
     <Compile Include="Src\CodeCoverageMethodTreeNode.cs" />
@@ -90,11 +94,17 @@
     <Compile Include="Src\ToggleCodeCoverageCommand.cs" />
     <Compile Include="Src\CodeCoverageHighlighter.cs" />
     <Compile Include="Src\CodeCoverageOptions.cs" />
-    <Compile Include="Src\CodeCoverageOptionsPanel.cs" />
+    <Compile Include="Src\CodeCoverageOptionsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <EmbeddedResource Include="Resources\CodeCoverageOptionsPanel.xfrm" />
     <Compile Include="Src\CodeCoverageDisplayItem.cs" />
-    <Compile Include="Src\ColorPickerComboBox.cs" />
-    <Compile Include="Src\CodeCoverageProjectOptionsPanel.cs" />
+    <Compile Include="Src\ColorPickerComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Src\CodeCoverageProjectOptionsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <EmbeddedResource Include="Resources\CodeCoverageProjectOptionsPanel.xfrm" />
     <Compile Include="Src\CodeCoverageService.cs" />
     <Compile Include="Src\RunTestWithCodeCoverageCommand.cs" />
@@ -131,6 +141,10 @@
       <Project>{857CA1A3-FC88-4BE0-AB6A-D1EE772AB288}</Project>
       <Name>ICSharpCode.Core.WinForms</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Refactor\ICSharpCode.SharpDevelop.Base\ICSharpCode.SharpDevelop.Base.csproj">
+      <Project>{18E3561D-537C-42E7-984B-7764B4C94AE6}</Project>
+      <Name>ICSharpCode.SharpDevelop.Base</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\UnitTesting\UnitTesting.csproj">
       <Project>{1F261725-6318-4434-A1B1-6C70CE4CD324}</Project>

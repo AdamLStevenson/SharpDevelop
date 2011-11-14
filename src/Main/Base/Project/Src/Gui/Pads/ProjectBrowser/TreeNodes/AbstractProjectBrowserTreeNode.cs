@@ -88,7 +88,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		
 		public virtual void ShowProperties()
 		{
-			WorkbenchSingleton.Workbench.GetPad(typeof(PropertyPad)).BringPadToFront();
+			WorkbenchSingleton.Instance.Workbench.GetPad(typeof(PropertyPad)).BringPadToFront();
 		}
 		
 		public static bool IsSomewhereBelow(string path, ProjectItem item)

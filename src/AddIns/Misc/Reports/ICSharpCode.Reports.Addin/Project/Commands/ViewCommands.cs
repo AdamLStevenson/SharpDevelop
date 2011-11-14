@@ -23,7 +23,7 @@ namespace ICSharpCode.Reports.Addin.Commands
 		
 		public override void Run()
 		{
-			WorkbenchSingleton.Workbench.ShowView(SetupDesigner());
+			WorkbenchSingleton.Instance.Workbench.ShowView(SetupDesigner());
 		}
 		
 		public static ReportDesignerView SetupDesigner ()
@@ -41,7 +41,7 @@ namespace ICSharpCode.Reports.Addin.Commands
 		}
 		
 		
-		public static ReportDesignerView SetupDesigner (OpenedFile file)
+		public static ReportDesignerView SetupDesigner (IOpenedFile file)
 		{
 			if (file == null) {
 				throw new ArgumentNullException("file");

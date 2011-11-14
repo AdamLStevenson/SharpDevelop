@@ -244,7 +244,7 @@ namespace ICSharpCode.AvalonEdit.AddIn
 					}
 					
 					// create breakpoint for the other posible active contents
-					var viewContent = WorkbenchSingleton.Workbench.ActiveContent as AbstractViewContentWithoutFile;
+					var viewContent = WorkbenchSingleton.Instance.Workbench.ActiveContent as AbstractViewContentWithoutFile;
 					if (viewContent != null) {
 						textEditor = viewContent.Services.GetService(typeof(ITextEditor)) as ITextEditor;
 						if (textEditor != null) {

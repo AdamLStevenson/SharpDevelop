@@ -58,7 +58,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 		
 		Report GetReport(IViewContent content, TextReader reader)
 		{
-			OpenedFile file = content.PrimaryFile;
+			IOpenedFile file = content.PrimaryFile;
 			if (file != null && file.IsUntitled == false)
 				return GetReport(file.FileName, reader);
 			else
@@ -91,7 +91,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 			
 			switch (((ComboBox)ControlDictionary["locationComboBox"]).SelectedIndex) {
 					case 0: {// current file
-						IViewContent viewContent = WorkbenchSingleton.Workbench.ActiveViewContent;
+						IViewContent viewContent = WorkbenchSingleton.Instance.Workbench.ActiveViewContent;
 						if (viewContent != null) {
 							IEditable editable = viewContent as IEditable;
 							if (editable == null) {
@@ -104,9 +104,9 @@ namespace ICSharpCode.SharpDevelop.Gui
 						break;
 					}
 					case 1: {// all open files
-						if (WorkbenchSingleton.Workbench.ViewContentCollection.Count > 0) {
+						if (WorkbenchSingleton.Instance.Workbench.ViewContentCollection.Count > 0) {
 							total = new Report(StringParser.Parse("${res:Dialog.WordCountDialog.TotalText}"), 0, 0, 0);
-							foreach (IViewContent content in WorkbenchSingleton.Workbench.ViewContentCollection) {
+							foreach (IViewContent content in WorkbenchSingleton.Instance.Workbench.ViewContentCollection) {
 								IEditable editable = content as IEditable;
 								if (editable != null) {
 									Report r = GetReport(content, editable.CreateSnapshot().CreateReader());

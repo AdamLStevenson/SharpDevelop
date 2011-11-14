@@ -19,7 +19,7 @@ namespace ICSharpCode.Profiler.AddIn.Commands
 		public override void Run()
 		{
 			ProfileExecutableForm form = new ProfileExecutableForm();
-			form.Owner = WorkbenchSingleton.MainWindow;
+			form.Owner = WorkbenchSingleton.Instance.MainWindow;
 			form.ShowDialog();
 		}
 	}

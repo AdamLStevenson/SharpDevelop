@@ -32,7 +32,7 @@ namespace ICSharpCode.XamlBinding.PowerToys.Commands
 			}
 			
 			EditGridColumnsAndRowsDialog dialog = new EditGridColumnsAndRowsDialog(selectedItem);
-			dialog.Owner = WorkbenchSingleton.MainWindow;
+			dialog.Owner = WorkbenchSingleton.Instance.MainWindow;
 			
 			if (dialog.ShowDialog() == true) {
 				selectedItem.ReplaceWith(dialog.ConstructedTree);

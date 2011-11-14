@@ -278,6 +278,10 @@
       <Name>ICSharpCode.Core</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Refactor\ICSharpCode.SharpDevelop.Base\ICSharpCode.SharpDevelop.Base.csproj">
+      <Project>{18E3561D-537C-42E7-984B-7764B4C94AE6}</Project>
+      <Name>ICSharpCode.SharpDevelop.Base</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ICSharpCode.Data.Core\ICSharpCode.Data.Core.csproj">
       <Project>{B7823AE9-4B43-4859-8796-2EBDC116FBB8}</Project>
       <Name>ICSharpCode.Data.Core</Name>

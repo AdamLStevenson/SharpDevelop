@@ -39,8 +39,8 @@ namespace ICSharpCode.SharpDevelop.Gui
 		
 		internal PropertyContainer(bool createPadOnConstruction)
 		{
-			if (createPadOnConstruction && WorkbenchSingleton.Workbench != null) {
-				PadDescriptor desc = WorkbenchSingleton.Workbench.GetPad(typeof(PropertyPad));
+			if (createPadOnConstruction && WorkbenchSingleton.Instance.Workbench != null) {
+				IPadDescriptor desc = WorkbenchSingleton.Instance.Workbench.GetPad(typeof(PropertyPad));
 				if (desc != null) desc.CreatePad();
 			}
 		}

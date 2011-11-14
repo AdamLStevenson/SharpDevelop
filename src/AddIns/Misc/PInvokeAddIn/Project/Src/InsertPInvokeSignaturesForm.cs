@@ -283,7 +283,7 @@ namespace ICSharpCode.PInvokeAddIn
 		
 		static ITextEditor GetTextEditor()
 		{
-			ITextEditorProvider provider = WorkbenchSingleton.Workbench.ActiveViewContent as ITextEditorProvider;
+			ITextEditorProvider provider = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as ITextEditorProvider;
 			if (provider != null)
 				return provider.TextEditor;
 			else

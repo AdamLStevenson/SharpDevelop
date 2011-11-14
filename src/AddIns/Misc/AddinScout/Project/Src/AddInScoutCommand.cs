@@ -12,7 +12,7 @@ namespace AddInScout
 		public override void Run() 
 		{
 			AddInScoutViewContent vw = new AddInScoutViewContent();
-			WorkbenchSingleton.Workbench.ShowView(vw);
+			WorkbenchSingleton.Instance.Workbench.ShowView(vw);
 		}
 	}
 }

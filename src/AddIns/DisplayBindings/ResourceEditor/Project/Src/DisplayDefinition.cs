@@ -21,7 +21,7 @@ namespace ResourceEditor
 			return true; // definition in .addin does extension-based filtering
 		}
 		
-		public IViewContent CreateContentForFile(OpenedFile file)
+		public IViewContent CreateContentForFile(IOpenedFile file)
 		{
 			return new ResourceEditWrapper(file);
 		}
@@ -59,7 +59,7 @@ namespace ResourceEditor
 			this.PrimaryFile.MakeDirty();
 		}
 		
-		public ResourceEditWrapper(OpenedFile file)
+		public ResourceEditWrapper(IOpenedFile file)
 		{
 			this.TabPageText = "Resource editor";
 			base.UserContent = resourceEditor;
@@ -73,12 +73,12 @@ namespace ResourceEditor
 			resourceEditor.Dispose();
 		}
 		
-		protected override void LoadInternal(OpenedFile file, Stream stream)
+		protected override void LoadInternal(IOpenedFile file, Stream stream)
 		{
 			resourceEditor.ResourceList.LoadFile(file.FileName, stream);
 		}
 		
-		protected override void SaveInternal(OpenedFile file, Stream stream)
+		protected override void SaveInternal(IOpenedFile file, Stream stream)
 		{
 			resourceEditor.ResourceList.SaveFile(file.FileName, stream);
 		}

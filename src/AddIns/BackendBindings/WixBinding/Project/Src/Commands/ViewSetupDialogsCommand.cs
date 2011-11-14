@@ -15,8 +15,8 @@ namespace ICSharpCode.WixBinding
 	{
 		public override void Run()
 		{
-			IWorkbench workbench = WorkbenchSingleton.Workbench;
-			PadDescriptor setupDialogsPad = workbench.GetPad(typeof(SetupDialogListPad));
+			IWorkbench workbench = WorkbenchSingleton.Instance.Workbench;
+			IPadDescriptor setupDialogsPad = workbench.GetPad(typeof(SetupDialogListPad));
 			if (setupDialogsPad != null) {
 				setupDialogsPad.BringPadToFront();
 			} else {

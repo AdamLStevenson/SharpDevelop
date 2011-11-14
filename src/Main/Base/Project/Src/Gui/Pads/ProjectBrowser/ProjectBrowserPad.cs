@@ -17,7 +17,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		public static ProjectBrowserPad Instance {
 			get {
 				if (instance == null) {
-					PadDescriptor pad = WorkbenchSingleton.Workbench.GetPad(typeof(ProjectBrowserPad));
+					IPadDescriptor pad = WorkbenchSingleton.Instance.Workbench.GetPad(typeof(ProjectBrowserPad));
 					if (pad != null) {
 						pad.CreatePad();
 					} else {
@@ -78,7 +78,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			ProjectService.SolutionClosed += ProjectServiceSolutionClosed;
 			ProjectService.SolutionPreferencesSaving += ProjectServiceSolutionPreferencesSaving;
 			
-			WorkbenchSingleton.Workbench.ActiveContentChanged += ActiveContentChanged;
+			WorkbenchSingleton.Instance.Workbench.ActiveContentChanged += ActiveContentChanged;
 			if (ProjectService.OpenSolution != null) {
 				this.LoadSolution(ProjectService.OpenSolution);
 			}
@@ -156,11 +156,11 @@ namespace ICSharpCode.SharpDevelop.Project
 		void ActiveContentChangedInvoked()
 		{
 			activeContentChangedEnqueued = false;
-			if (WorkbenchSingleton.Workbench.ActiveContent == this) {
+			if (WorkbenchSingleton.Instance.Workbench.ActiveContent == this) {
 				projectBrowserPanel.ProjectBrowserControl.PadActivated();
 			} else {
 				// we don't use ActiveViewContent here as this is the ActiveContent change event handler
-				IViewContent content = WorkbenchSingleton.Workbench.ActiveContent as IViewContent;
+				IViewContent content = WorkbenchSingleton.Instance.Workbench.ActiveContent as IViewContent;
 				if (content == null)
 					return;
 				string fileName = content.PrimaryFileName;

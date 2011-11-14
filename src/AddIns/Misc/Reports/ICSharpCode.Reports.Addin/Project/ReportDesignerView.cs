@@ -59,7 +59,7 @@ namespace ICSharpCode.Reports.Addin
 		/// Creates a new ReportDesignerView object
 		/// </summary>
 		
-		public ReportDesignerView(OpenedFile openedFile, IDesignerGenerator generator):base (openedFile)
+		public ReportDesignerView(IOpenedFile openedFile, IDesignerGenerator generator):base (openedFile)
 		{
 			if (openedFile == null) {
 				throw new ArgumentNullException("opendFile");
@@ -267,7 +267,7 @@ namespace ICSharpCode.Reports.Addin
 		private void StartReportExplorer ()
 		{
 			ReportExplorerPad explorerPad = CheckReportExplorer();
-			WorkbenchSingleton.Workbench.GetPad(typeof(ReportExplorerPad)).BringPadToFront();
+			WorkbenchSingleton.Instance.Workbench.GetPad(typeof(ReportExplorerPad)).BringPadToFront();
 			explorerPad.AddContent(this.loader.ReportModel);
 			explorerPad.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(ReportExplorer_PropertyChanged);
 		}
@@ -286,7 +286,7 @@ namespace ICSharpCode.Reports.Addin
 		{
 			ReportExplorerPad p = ReportExplorerPad.Instance;
 			if (p == null) {
-				WorkbenchSingleton.Workbench.GetPad(typeof(ReportExplorerPad)).CreatePad();
+				WorkbenchSingleton.Instance.Workbench.GetPad(typeof(ReportExplorerPad)).CreatePad();
 			}
 			return ReportExplorerPad.Instance;
 		}
@@ -656,7 +656,7 @@ namespace ICSharpCode.Reports.Addin
 		}
 		
 		
-		public override void Load(OpenedFile file, Stream stream)
+		public override void Load(IOpenedFile file, Stream stream)
 		{
 			LoggingService.Debug("ReportDesigner: Load from: " + file.FileName);
 			base.Load(file, stream);
@@ -665,7 +665,7 @@ namespace ICSharpCode.Reports.Addin
 		}
 		
 		
-		public override void Save(ICSharpCode.SharpDevelop.OpenedFile file,Stream stream)
+		public override void Save(ICSharpCode.SharpDevelop.IOpenedFile file,Stream stream)
 		{
 			LoggingService.Debug("ReportDesigner: Save to: " + file.FileName);
 			

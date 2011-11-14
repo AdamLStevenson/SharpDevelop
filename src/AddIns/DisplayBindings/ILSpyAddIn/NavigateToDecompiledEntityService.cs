@@ -48,14 +48,14 @@ namespace ICSharpCode.ILSpyAddIn
 			if (string.IsNullOrEmpty(typeName))
 				throw new ArgumentException("typeName is null or empty");
 			
-			foreach (var viewContent in WorkbenchSingleton.Workbench.ViewContentCollection.OfType<DecompiledViewContent>()) {
+			foreach (var viewContent in WorkbenchSingleton.Instance.Workbench.ViewContentCollection.OfType<DecompiledViewContent>()) {
 				if (string.Equals(viewContent.AssemblyFile, assemblyFile, StringComparison.OrdinalIgnoreCase) && typeName == viewContent.FullTypeName) {
 					viewContent.WorkbenchWindow.SelectWindow();
 					viewContent.JumpToEntity(entityTag);
 					return;
 				}
 			}
-			WorkbenchSingleton.Workbench.ShowView(new DecompiledViewContent(assemblyFile, typeName, entityTag));
+			WorkbenchSingleton.Instance.Workbench.ShowView(new DecompiledViewContent(assemblyFile, typeName, entityTag));
 		}
 		
 		public bool NavigateToMember(string assemblyFile, string typeName, string entityTag, int lineNumber, bool updateMarker)
@@ -67,7 +67,7 @@ namespace ICSharpCode.ILSpyAddIn
 				throw new ArgumentException("typeName is null or empty");
 			
 			// jump to line number if the decompiled view content exits - no need for a new decompilation
-			foreach (var viewContent in WorkbenchSingleton.Workbench.ViewContentCollection.OfType<DecompiledViewContent>()) {
+			foreach (var viewContent in WorkbenchSingleton.Instance.Workbench.ViewContentCollection.OfType<DecompiledViewContent>()) {
 				if (string.Equals(viewContent.AssemblyFile, assemblyFile, StringComparison.OrdinalIgnoreCase) && typeName == viewContent.FullTypeName) {
 					if (updateMarker) {
 						viewContent.UpdateDebuggingUI();
@@ -86,7 +86,7 @@ namespace ICSharpCode.ILSpyAddIn
 				}
 				decompiledView.JumpToLineNumber(lineNumber);
 			};
-			WorkbenchSingleton.Workbench.ShowView(decompiledView);
+			WorkbenchSingleton.Instance.Workbench.ShowView(decompiledView);
 			return true;
 		}
 	}

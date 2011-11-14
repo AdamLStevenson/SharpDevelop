@@ -13,7 +13,7 @@ namespace ICSharpCode.SharpDevelop
 	/// <summary>
 	/// Represents an opened file.
 	/// </summary>
-	public abstract class OpenedFile : ICanBeDirty
+	public abstract class OpenedFile : ICanBeDirty, IOpenedFile
 	{
 		protected IViewContent currentView;
 		bool inLoadOperation;
@@ -406,10 +406,12 @@ namespace ICSharpCode.SharpDevelop
 				throw new ArgumentException("registeredViews already contains view");
 			
 			registeredViews.Add(view);
-			
-			if (WorkbenchSingleton.Workbench != null) {
-				WorkbenchSingleton.Workbench.ActiveViewContentChanged += WorkbenchActiveViewContentChanged;
-				if (WorkbenchSingleton.Workbench.ActiveViewContent == view) {
+
+            if (WorkbenchSingleton.Instance.Workbench != null)
+            {
+                WorkbenchSingleton.Instance.Workbench.ActiveViewContentChanged += WorkbenchActiveViewContentChanged;
+                if (WorkbenchSingleton.Instance.Workbench.ActiveViewContent == view)
+                {
 					SwitchedToView(view);
 				}
 			}
@@ -424,8 +426,8 @@ namespace ICSharpCode.SharpDevelop
 				throw new ArgumentNullException("view");
 			Debug.Assert(registeredViews.Contains(view));
 			
-			if (WorkbenchSingleton.Workbench != null) {
-				WorkbenchSingleton.Workbench.ActiveViewContentChanged -= WorkbenchActiveViewContentChanged;
+			if (WorkbenchSingleton.Instance.Workbench != null) {
+                WorkbenchSingleton.Instance.Workbench.ActiveViewContentChanged -= WorkbenchActiveViewContentChanged;
 			}
 			#if DEBUG
 			view.Disposed -= ViewDisposed;
@@ -476,7 +478,7 @@ namespace ICSharpCode.SharpDevelop
 		
 		void WorkbenchActiveViewContentChanged(object sender, EventArgs e)
 		{
-			IViewContent newView = WorkbenchSingleton.Workbench.ActiveViewContent;
+			IViewContent newView = WorkbenchSingleton.Instance.Workbench.ActiveViewContent;
 			
 			if (!registeredViews.Contains(newView))
 				return;

@@ -73,9 +73,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Src" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\..\Main\Base\Project\ICSharpCode.SharpDevelop.csproj">
       <Project>{2748AD25-9C63-4E12-877B-4DCE96FBED54}</Project>
@@ -91,6 +89,10 @@
       <Project>{857CA1A3-FC88-4BE0-AB6A-D1EE772AB288}</Project>
       <Name>ICSharpCode.Core.WinForms</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Refactor\ICSharpCode.SharpDevelop.Base\ICSharpCode.SharpDevelop.Base.csproj">
+      <Project>{18E3561D-537C-42E7-984B-7764B4C94AE6}</Project>
+      <Name>ICSharpCode.SharpDevelop.Base</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

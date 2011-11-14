@@ -28,7 +28,7 @@ namespace ICSharpCode.XamlBinding.PowerToys
 		public sealed override void Run()
 		{
 			try {
-				ITextEditorProvider provider = WorkbenchSingleton.Workbench.ActiveViewContent as ITextEditorProvider;
+				ITextEditorProvider provider = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as ITextEditorProvider;
 				
 				if (provider != null) {
 					TextReader reader = provider.TextEditor.Document.CreateReader();

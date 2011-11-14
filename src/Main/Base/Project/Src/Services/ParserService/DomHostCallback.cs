@@ -38,7 +38,7 @@ namespace ICSharpCode.SharpDevelop
 		
 		static void ShowAssemblyLoadError(string fileName, string include, string message)
 		{
-			WorkbenchSingleton.Workbench.GetPad(typeof(CompilerMessageView)).BringPadToFront();
+			WorkbenchSingleton.Instance.Workbench.GetPad(typeof(CompilerMessageView)).BringPadToFront();
 			TaskService.BuildMessageViewCategory.AppendText(
 				StringParser.Parse(
 					"${res:ICSharpCode.SharpDevelop.ErrorLoadingCodeCompletionInformation}",

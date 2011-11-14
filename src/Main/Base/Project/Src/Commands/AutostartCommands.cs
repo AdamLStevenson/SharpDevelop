@@ -83,11 +83,11 @@ namespace ICSharpCode.SharpDevelop.Commands
 			ParserService.StartParserThread();
 			
 			// finally run the workbench window ...
-			app.Run(WorkbenchSingleton.MainWindow);
+			app.Run(WorkbenchSingleton.Instance.MainWindow);
 			
 			// save the workbench memento in the ide properties
 			try {
-				PropertyService.Set(workbenchMemento, WorkbenchSingleton.Workbench.CreateMemento());
+				PropertyService.Set(workbenchMemento, WorkbenchSingleton.Instance.Workbench.CreateMemento());
 			} catch (Exception e) {
 				MessageService.ShowException(e, "Exception while saving workbench state.");
 			}

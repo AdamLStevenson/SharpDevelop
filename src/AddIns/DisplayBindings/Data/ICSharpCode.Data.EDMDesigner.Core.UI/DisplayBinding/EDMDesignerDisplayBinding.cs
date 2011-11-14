@@ -22,7 +22,7 @@ namespace ICSharpCode.Data.EDMDesigner.Core.UI.DisplayBinding
 			return true; // .addin file filters for *.edmx
 		}
 
-		public IViewContent CreateContentForFile(OpenedFile file)
+		public IViewContent CreateContentForFile(IOpenedFile file)
 		{
 			try {
 				return new EDMDesignerViewContent(file);

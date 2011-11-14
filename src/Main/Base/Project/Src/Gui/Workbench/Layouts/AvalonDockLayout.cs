@@ -182,10 +182,10 @@ namespace ICSharpCode.SharpDevelop.Gui
 			}
 		}
 		
-		Dictionary<PadDescriptor, AvalonPadContent> pads = new Dictionary<PadDescriptor, AvalonPadContent>();
+		Dictionary<IPadDescriptor, AvalonPadContent> pads = new Dictionary<IPadDescriptor, AvalonPadContent>();
 		Dictionary<string, AvalonPadContent> padsByClass = new Dictionary<string, AvalonPadContent>();
 		
-		public void ShowPad(PadDescriptor padDescriptor)
+		public void ShowPad(IPadDescriptor padDescriptor)
 		{
 			AvalonPadContent pad;
 			if (pads.TryGetValue(padDescriptor, out pad)) {
@@ -200,7 +200,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 			}
 		}
 		
-		public void ActivatePad(PadDescriptor padDescriptor)
+		public void ActivatePad(IPadDescriptor padDescriptor)
 		{
 			AvalonPadContent p;
 			if (pads.TryGetValue(padDescriptor, out p)) {
@@ -212,14 +212,14 @@ namespace ICSharpCode.SharpDevelop.Gui
 			}
 		}
 		
-		public void HidePad(PadDescriptor padDescriptor)
+		public void HidePad(IPadDescriptor padDescriptor)
 		{
 			AvalonPadContent p;
 			if (pads.TryGetValue(padDescriptor, out p))
 				p.Hide();
 		}
 		
-		public void UnloadPad(PadDescriptor padDescriptor)
+		public void UnloadPad(IPadDescriptor padDescriptor)
 		{
 			AvalonPadContent p = pads[padDescriptor];
 			p.Hide();
@@ -229,7 +229,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 			p.Dispose();
 		}
 		
-		public bool IsVisible(PadDescriptor padDescriptor)
+		public bool IsVisible(IPadDescriptor padDescriptor)
 		{
 			AvalonPadContent p;
 			if (pads.TryGetValue(padDescriptor, out p))

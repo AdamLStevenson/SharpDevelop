@@ -13,7 +13,7 @@ namespace ICSharpCode.SharpDevelop.Editor.Commands
 	{
 		public override void Run()
 		{
-			IViewContent viewContent = WorkbenchSingleton.Workbench.ActiveViewContent;
+			IViewContent viewContent = WorkbenchSingleton.Instance.Workbench.ActiveViewContent;
 			
 			if (viewContent == null || !(viewContent is ITextEditorProvider)) {
 				return;
@@ -21,7 +21,7 @@ namespace ICSharpCode.SharpDevelop.Editor.Commands
 			ITextEditor textEditor = ((ITextEditorProvider)viewContent).TextEditor;
 			
 			using (SharpDevelopColorDialog cd = new SharpDevelopColorDialog()) {
-				if (cd.ShowDialog(ICSharpCode.SharpDevelop.Gui.WorkbenchSingleton.MainWin32Window) == DialogResult.OK) {
+				if (cd.ShowDialog(ICSharpCode.SharpDevelop.Gui.WorkbenchSingleton.Instance.MainWin32Window) == DialogResult.OK) {
 					string ext = Path.GetExtension(textEditor.FileName).ToLowerInvariant();
 					string colorstr;
 					if (ext == ".cs" || ext == ".vb" || ext == ".boo") {

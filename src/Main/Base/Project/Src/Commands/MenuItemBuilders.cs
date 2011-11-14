@@ -279,16 +279,16 @@ namespace ICSharpCode.SharpDevelop.Commands
 	{
 		public ICollection BuildItems(Codon codon, object owner)
 		{
-			int windowCount = WorkbenchSingleton.Workbench.WorkbenchWindowCollection.Count;
+			int windowCount = WorkbenchSingleton.Instance.Workbench.WorkbenchWindowCollection.Count;
 			if (windowCount == 0) {
 				return new object[] {};
 			}
 			var items = new object[windowCount + 1];
 			items[0] = new System.Windows.Controls.Separator();
 			for (int i = 0; i < windowCount; ++i) {
-				IWorkbenchWindow window = WorkbenchSingleton.Workbench.WorkbenchWindowCollection[i];
+				IWorkbenchWindow window = WorkbenchSingleton.Instance.Workbench.WorkbenchWindowCollection[i];
 				var item = new System.Windows.Controls.MenuItem() {
-					IsChecked = WorkbenchSingleton.Workbench.ActiveWorkbenchWindow == window,
+					IsChecked = WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow == window,
 					IsCheckable = true,
 					Header = StringParser.Parse(window.Title)
 				};
@@ -454,7 +454,7 @@ namespace ICSharpCode.SharpDevelop.Commands
 		public ICollection BuildItems(Codon codon, object owner)
 		{
 			ArrayList list = new ArrayList();
-			foreach (PadDescriptor padContent in WorkbenchSingleton.Workbench.PadContentCollection) {
+			foreach (PadDescriptor padContent in WorkbenchSingleton.Instance.Workbench.PadContentCollection) {
 				if (padContent.Category == Category) {
 					var item = new System.Windows.Controls.MenuItem();
 					item.Header = ICSharpCode.Core.Presentation.MenuService.ConvertLabel(StringParser.Parse(padContent.Title));
@@ -464,7 +464,7 @@ namespace ICSharpCode.SharpDevelop.Commands
 					item.Command = new BringPadToFrontCommand(padContent);
 					if (!string.IsNullOrEmpty(padContent.Shortcut)) {
 						var kg = Core.Presentation.MenuService.ParseShortcut(padContent.Shortcut);
-						WorkbenchSingleton.MainWindow.InputBindings.Add(
+						WorkbenchSingleton.Instance.MainWindow.InputBindings.Add(
 							new System.Windows.Input.InputBinding(item.Command, kg)
 						);
 						item.InputGestureText = kg.GetDisplayStringForCulture(Thread.CurrentThread.CurrentUICulture);

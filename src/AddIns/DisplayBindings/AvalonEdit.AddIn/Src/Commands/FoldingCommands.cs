@@ -14,7 +14,7 @@ namespace ICSharpCode.AvalonEdit.AddIn.Commands
 	{
 		public override void Run()
 		{
-			ITextEditorProvider provider = WorkbenchSingleton.Workbench.ActiveViewContent as ITextEditorProvider;
+			ITextEditorProvider provider = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as ITextEditorProvider;
 			ITextEditor editor = provider.TextEditor;
 			ParserFoldingStrategy strategy = editor.GetService(typeof(ParserFoldingStrategy)) as ParserFoldingStrategy;
 			
@@ -36,7 +36,7 @@ namespace ICSharpCode.AvalonEdit.AddIn.Commands
 	{
 		public override void Run()
 		{
-			ITextEditorProvider provider = WorkbenchSingleton.Workbench.ActiveViewContent as ITextEditorProvider;
+			ITextEditorProvider provider = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as ITextEditorProvider;
 			ITextEditor editor = provider.TextEditor;
 			ParserFoldingStrategy strategy = editor.GetService(typeof(ParserFoldingStrategy)) as ParserFoldingStrategy;
 			
@@ -59,7 +59,7 @@ namespace ICSharpCode.AvalonEdit.AddIn.Commands
 	{
 		public override void Run()
 		{
-			ITextEditorProvider provider = WorkbenchSingleton.Workbench.ActiveViewContent as ITextEditorProvider;
+			ITextEditorProvider provider = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as ITextEditorProvider;
 			ITextEditor editor = provider.TextEditor;
 			ParserFoldingStrategy strategy = editor.GetService(typeof(ParserFoldingStrategy)) as ParserFoldingStrategy;
 			

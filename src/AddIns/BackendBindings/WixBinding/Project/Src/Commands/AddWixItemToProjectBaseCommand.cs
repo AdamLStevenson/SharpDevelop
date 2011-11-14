@@ -35,7 +35,7 @@ namespace ICSharpCode.WixBinding
 			
 			// Display file dialog.
 			using (OpenFileDialog fileDialog = CreateOpenFileDialog(FileFilter)) {
-				if (DialogResult.OK == fileDialog.ShowDialog(WorkbenchSingleton.MainWin32Window)) {
+				if (DialogResult.OK == fileDialog.ShowDialog(WorkbenchSingleton.Instance.MainWin32Window)) {
 					// Add files to project.
 					WixProject project = ((WixProject)folderNode.Project);
 					AddFiles(project, fileDialog.FileNames);

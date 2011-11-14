@@ -11,7 +11,7 @@ namespace ICSharpCode.SharpDevelop.Editor.AvalonEdit
 	{
 		public bool IsValid(object owner, Condition condition)
 		{
-			ITextEditorProvider textEditorProvider = WorkbenchSingleton.Workbench.ActiveViewContent as ITextEditorProvider;
+			ITextEditorProvider textEditorProvider = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as ITextEditorProvider;
 			if (textEditorProvider != null) {
 				ITextEditor textEditor = textEditorProvider.TextEditor;
 				return textEditor.SelectionLength > 0;

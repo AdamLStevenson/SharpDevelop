@@ -352,7 +352,7 @@ namespace Hornung.ResourceToolkit.Refactoring
 					break;
 					
 				case SearchScope.CurrentFile:
-					IViewContent vc = WorkbenchSingleton.Workbench.ActiveViewContent;
+					IViewContent vc = WorkbenchSingleton.Instance.Workbench.ActiveViewContent;
 					if (vc == null) {
 						throw new InvalidOperationException("Cannot search in current file when no file is open.");
 					}
@@ -360,7 +360,7 @@ namespace Hornung.ResourceToolkit.Refactoring
 					break;
 					
 				case SearchScope.OpenFiles:
-					foreach (IViewContent v in WorkbenchSingleton.Workbench.ViewContentCollection) {
+					foreach (IViewContent v in WorkbenchSingleton.Instance.Workbench.ViewContentCollection) {
 						AddFilesFromViewContent(files, v);
 					}
 					break;

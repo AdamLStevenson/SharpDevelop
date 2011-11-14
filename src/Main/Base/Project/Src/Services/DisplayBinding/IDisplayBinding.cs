@@ -36,7 +36,7 @@ namespace ICSharpCode.SharpDevelop
 		/// <returns>
 		/// A newly created IViewContent object.
 		/// </returns>
-		IViewContent CreateContentForFile(OpenedFile file);
+		IViewContent CreateContentForFile(IOpenedFile file);
 	}
 	
 

@@ -239,7 +239,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\WpfDesign\Project\WpfDesign.csproj">
       <Project>{66A378A1-E9F4-4AD5-8946-D0EC06C2902F}</Project>
-      <Name>WpfDesign</Name>
+      <Name>WpfDesign %28AddIns\Display Bindings\WpfDesign\WpfDesign%29</Name>
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
     </ProjectReference>

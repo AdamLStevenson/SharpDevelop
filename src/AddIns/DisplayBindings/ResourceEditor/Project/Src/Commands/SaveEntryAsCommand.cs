@@ -15,7 +15,7 @@ namespace ResourceEditor
 	{
 		public override void Run()
 		{
-			ResourceEditorControl editor = ((ResourceEditWrapper)WorkbenchSingleton.Workbench.ActiveViewContent).ResourceEditor;
+			ResourceEditorControl editor = ((ResourceEditWrapper)WorkbenchSingleton.Instance.Workbench.ActiveViewContent).ResourceEditor;
 			ResourceList list = editor.ResourceList;
 			
 			if(list.SelectedItems.Count != 1) {
@@ -48,7 +48,7 @@ namespace ResourceEditor
 				return;
 			}
 			
-			DialogResult dr = sdialog.ShowDialog(ICSharpCode.SharpDevelop.Gui.WorkbenchSingleton.MainWin32Window);
+			DialogResult dr = sdialog.ShowDialog(ICSharpCode.SharpDevelop.Gui.WorkbenchSingleton.Instance.MainWin32Window);
 			sdialog.Dispose();
 			if (dr != DialogResult.OK) {
 				return;

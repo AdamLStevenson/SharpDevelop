@@ -32,7 +32,7 @@ namespace ICSharpCode.WpfDesign.AddIn
 	/// </summary>
 	public class WpfViewContent : AbstractViewContentHandlingLoadErrors, IHasPropertyContainer, IToolsHost, IOutlineContentHost
 	{
-		public WpfViewContent(OpenedFile file) : base(file)
+		public WpfViewContent(IOpenedFile file) : base(file)
 		{
 			BasicMetadata.Register();
 			
@@ -58,7 +58,7 @@ namespace ICSharpCode.WpfDesign.AddIn
 			get { return designer.DesignContext; }
 		}
 		
-		protected override void LoadInternal(OpenedFile file, System.IO.Stream stream)
+		protected override void LoadInternal(IOpenedFile file, System.IO.Stream stream)
 		{
 			Debug.Assert(file == this.PrimaryFile);
 			
@@ -110,7 +110,7 @@ namespace ICSharpCode.WpfDesign.AddIn
 		
 		private MemoryStream _stream;
 		
-		protected override void SaveInternal(OpenedFile file, System.IO.Stream stream)
+		protected override void SaveInternal(IOpenedFile file, System.IO.Stream stream)
 		{
 			if (IsDirty && designer.DesignContext != null) {
 				XmlWriterSettings settings = new XmlWriterSettings();
@@ -148,7 +148,7 @@ namespace ICSharpCode.WpfDesign.AddIn
 			}
 			
 			if (xamlErrorService.Errors.Count != 0) {
-				WorkbenchSingleton.Workbench.GetPad(typeof(ErrorListPad)).BringPadToFront();
+				WorkbenchSingleton.Instance.Workbench.GetPad(typeof(ErrorListPad)).BringPadToFront();
 			}
 		}
 		
@@ -179,7 +179,7 @@ namespace ICSharpCode.WpfDesign.AddIn
 				if (!propertyGridView.PropertyGrid.IsNameCorrect) return;
 				
 				// get the XAML file
-				OpenedFile fileName = this.Files.Where(f => f.FileName.ToString().EndsWith(".xaml")).FirstOrDefault();
+				IOpenedFile fileName = this.Files.Where(f => f.FileName.ToString().EndsWith(".xaml")).FirstOrDefault();
 				if (fileName == null) return;
 				
 				// parse the XAML file

@@ -17,7 +17,7 @@ namespace HexEditor.Util
 	public class BufferManager
 	{
 		internal Control parent;
-		OpenedFile currentFile;
+		IOpenedFile currentFile;
 		Stream stream;
 		
 		/// <summary>
@@ -49,7 +49,7 @@ namespace HexEditor.Util
 		/// <summary>
 		/// Loads the data from a stream.
 		/// </summary>
-		public void Load(OpenedFile file, Stream stream)
+		public void Load(IOpenedFile file, Stream stream)
 		{
 			this.currentFile = file;
 			this.stream = stream;
@@ -95,7 +95,7 @@ namespace HexEditor.Util
 		/// <summary>
 		/// Writes all data to a stream.
 		/// </summary>
-		public void Save(OpenedFile file, Stream stream)
+		public void Save(IOpenedFile file, Stream stream)
 		{
 			BinaryWriter writer = new BinaryWriter(stream);
 			writer.Write(this.buffer.ToArray());

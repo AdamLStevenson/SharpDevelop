@@ -21,7 +21,7 @@ namespace ICSharpCode.Reports.Addin
 			return true; // definition in .addin does extension-based filtering
 		}
 		
-		public IViewContent CreateContentForFile(OpenedFile file)
+		public IViewContent CreateContentForFile(IOpenedFile file)
 		{
 			if (file.IsDirty) {
 				ReportWizardCommand cmd = new ReportWizardCommand(file);

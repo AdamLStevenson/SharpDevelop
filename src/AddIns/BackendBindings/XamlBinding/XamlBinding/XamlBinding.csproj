@@ -153,7 +153,7 @@
     <Compile Include="XamlResolver.cs" />
     <ProjectReference Include="..\..\..\..\Libraries\NRefactory\Project\NRefactory.csproj">
       <Project>{3A9AE6AA-BC07-4A2F-972C-581E3AE2F195}</Project>
-      <Name>NRefactory</Name>
+      <Name>NRefactory %28Libraries\NRefactory\NRefactory%29</Name>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\Libraries\SharpTreeView\ICSharpCode.TreeView\ICSharpCode.TreeView.csproj">
@@ -196,18 +196,17 @@
       <Name>ICSharpCode.AvalonEdit</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Refactor\ICSharpCode.SharpDevelop.Base\ICSharpCode.SharpDevelop.Base.csproj">
+      <Project>{18E3561D-537C-42E7-984B-7764B4C94AE6}</Project>
+      <Name>ICSharpCode.SharpDevelop.Base</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\DisplayBindings\XmlEditor\Project\XmlEditor.csproj">
       <Project>{DCA2703D-250A-463E-A68A-07ED105AE6BD}</Project>
       <Name>XmlEditor</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="PowerToys" />
-    <Folder Include="Options" />
-    <Folder Include="PowerToys\Commands" />
-    <Folder Include="PowerToys\Dialogs" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="Options\CodeCompletion.xaml" />
     <Page Include="PowerToys\Dialogs\EditGridColumnsAndRowsDialog.xaml" />

@@ -21,7 +21,7 @@ namespace ICSharpCode.XmlEditor
 		
 		IClipboardHandler GetClipboardHandler()
 		{
-			return WorkbenchSingleton.Workbench.ActiveContent as IClipboardHandler;
+			return WorkbenchSingleton.Instance.Workbench.ActiveContent as IClipboardHandler;
 		}
 		
 		protected abstract bool GetEnabled(IClipboardHandler editable);

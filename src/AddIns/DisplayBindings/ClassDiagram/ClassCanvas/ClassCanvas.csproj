@@ -52,7 +52,9 @@
     <Compile Include="Interactivity\InteractiveHeaderedItem.cs" />
     <Compile Include="Interactivity\InteractiveItemsStack.cs" />
     <Compile Include="Src\CanvasItem.cs" />
-    <Compile Include="Src\ClassCanvas.cs" />
+    <Compile Include="Src\ClassCanvas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Src\ClassCanvas.Designer.cs">
       <DependentUpon>ClassCanvas.cs</DependentUpon>
     </Compile>
@@ -88,9 +90,6 @@
     <None Include="ClassDiagramAddin.sln" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interactivity" />
-    <Folder Include="Src" />
-    <Folder Include="Shapes" />
     <ProjectReference Include="..\..\..\..\Main\Base\Project\ICSharpCode.SharpDevelop.csproj">
       <Project>{2748AD25-9C63-4E12-877B-4DCE96FBED54}</Project>
       <Name>ICSharpCode.SharpDevelop</Name>
@@ -110,7 +109,6 @@
       <Project>{0991423A-DBF6-4C89-B365-A1DF1EB32E42}</Project>
       <Name>Diagrams</Name>
     </ProjectReference>
-    <Folder Include="Decorators" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
 </Project>

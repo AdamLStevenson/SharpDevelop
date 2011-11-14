@@ -12,7 +12,7 @@ namespace Plugins.RegExpTk {
 		public override void Run()
 		{
 			RegExpTkDialog dialog = new RegExpTkDialog();
-			dialog.Show(WorkbenchSingleton.MainWin32Window);
+			dialog.Show(WorkbenchSingleton.Instance.MainWin32Window);
 		}
 	}
 }

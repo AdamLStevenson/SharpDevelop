@@ -74,7 +74,7 @@ namespace ICSharpCode.WixBinding
 			}
 		}
 		
-		protected override void LoadInternal(OpenedFile file, Stream stream)
+		protected override void LoadInternal(IOpenedFile file, Stream stream)
 		{
 			if (file == this.PrimaryFile) {
 				// The FormsDesignerViewContent normally operates independently of any
@@ -113,25 +113,25 @@ namespace ICSharpCode.WixBinding
 		// cycle when switching views. This allows the text editor to keep its
 		// selection and caret position.
 		
-		public override bool SupportsSwitchFromThisWithoutSaveLoad(OpenedFile file, IViewContent newView)
+		public override bool SupportsSwitchFromThisWithoutSaveLoad(IOpenedFile file, IViewContent newView)
 		{
 			return (newView == this) || (newView == this.PrimaryViewContent);
 		}
 		
-		public override void SwitchFromThisWithoutSaveLoad(OpenedFile file, IViewContent newView)
+		public override void SwitchFromThisWithoutSaveLoad(IOpenedFile file, IViewContent newView)
 		{
 			if (newView != this) {
 				this.MergeAndUnloadDesigner();
 			}
 		}
 		
-		public override bool SupportsSwitchToThisWithoutSaveLoad(OpenedFile file, IViewContent oldView)
+		public override bool SupportsSwitchToThisWithoutSaveLoad(IOpenedFile file, IViewContent oldView)
 		{
 			return (this.DesignerCodeFile != null) &&
 				((oldView == this) || (oldView == this.PrimaryViewContent));
 		}
 		
-		public override void SwitchToThisWithoutSaveLoad(OpenedFile file, IViewContent oldView)
+		public override void SwitchToThisWithoutSaveLoad(IOpenedFile file, IViewContent oldView)
 		{
 			if (oldView != this) {
 				this.ReloadDesignerFromMemory();
@@ -231,7 +231,7 @@ namespace ICSharpCode.WixBinding
 		{
 			TaskService.ClearExceptCommentTasks();
 			TaskService.Add(new Task(this.PrimaryFileName, ex.Message, ex.LinePosition - 1, ex.LineNumber - 1, TaskType.Error));
-			WorkbenchSingleton.Workbench.GetPad(typeof(ErrorListPad)).BringPadToFront();
+			WorkbenchSingleton.Instance.Workbench.GetPad(typeof(ErrorListPad)).BringPadToFront();
 		}
 		
 		/// <summary>

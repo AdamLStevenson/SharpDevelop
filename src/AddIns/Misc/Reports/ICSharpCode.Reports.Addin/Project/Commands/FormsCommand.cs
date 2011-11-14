@@ -31,7 +31,7 @@ namespace ICSharpCode.Reports.Addin.Commands
 		
 		protected static ReportDesignerView ReportDesigner {
 			get {
-				IWorkbenchWindow window = WorkbenchSingleton.Workbench.ActiveWorkbenchWindow;
+				IWorkbenchWindow window = WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow;
 				if (window == null) {
 					return null;
 				}
@@ -65,7 +65,7 @@ namespace ICSharpCode.Reports.Addin.Commands
 		
 		public override void Run()
 		{
-			IWorkbenchWindow window = WorkbenchSingleton.Workbench.ActiveWorkbenchWindow;
+			IWorkbenchWindow window = WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow;
 			if (window == null) {
 				return;
 			}
@@ -87,7 +87,7 @@ namespace ICSharpCode.Reports.Addin.Commands
 
 		public override void Run()
 		{
-			PadDescriptor padContent = WorkbenchSingleton.Workbench.GetPad(typeof(ICSharpCode.SharpDevelop.Gui.PropertyPad));
+			IPadDescriptor padContent = WorkbenchSingleton.Instance.Workbench.GetPad(typeof(ICSharpCode.SharpDevelop.Gui.PropertyPad));
 			if (padContent != null) {
 				padContent.BringPadToFront();
 			}
@@ -414,7 +414,7 @@ namespace ICSharpCode.Reports.Addin.Commands
 	{
 		ReportDesignerView FormDesigner {
 			get {
-				IWorkbenchWindow window = WorkbenchSingleton.Workbench.ActiveWorkbenchWindow;
+				IWorkbenchWindow window = WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow;
 				if (window == null) {
 					return null;
 				}
@@ -483,7 +483,7 @@ namespace ICSharpCode.Reports.Addin.Commands
 		}
 		ReportDesignerView FormDesigner {
 			get {
-				IWorkbenchWindow window = WorkbenchSingleton.Workbench.ActiveWorkbenchWindow;
+				IWorkbenchWindow window = WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow;
 				if (window == null) {
 					return null;
 				}

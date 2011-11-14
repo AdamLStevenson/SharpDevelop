@@ -126,7 +126,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 					throw new InvalidOperationException("Invoke required");
 				if (value != CurrentLayoutName) {
 					currentLayoutName = value;
-					WorkbenchSingleton.Workbench.WorkbenchLayout.LoadConfiguration();
+					WorkbenchSingleton.Instance.Workbench.WorkbenchLayout.LoadConfiguration();
 					OnLayoutChanged(EventArgs.Empty);
 				}
 			}
@@ -135,7 +135,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 		public static void ReloadDefaultLayout()
 		{
 			currentLayoutName = DefaultLayoutName;
-			WorkbenchSingleton.Workbench.WorkbenchLayout.LoadConfiguration();
+			WorkbenchSingleton.Instance.Workbench.WorkbenchLayout.LoadConfiguration();
 			OnLayoutChanged(EventArgs.Empty);
 		}
 		

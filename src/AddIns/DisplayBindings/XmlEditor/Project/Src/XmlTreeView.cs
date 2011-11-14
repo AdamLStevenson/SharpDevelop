@@ -166,12 +166,12 @@ namespace ICSharpCode.XmlEditor
 			}
 		}
 		
-		public override bool SupportsSwitchFromThisWithoutSaveLoad(OpenedFile file, IViewContent newView)
+		public override bool SupportsSwitchFromThisWithoutSaveLoad(IOpenedFile file, IViewContent newView)
 		{
 			return false;
 		}
 		
-		public override bool SupportsSwitchToThisWithoutSaveLoad(OpenedFile file, IViewContent oldView)
+		public override bool SupportsSwitchToThisWithoutSaveLoad(IOpenedFile file, IViewContent oldView)
 		{
 			return false;
 		}

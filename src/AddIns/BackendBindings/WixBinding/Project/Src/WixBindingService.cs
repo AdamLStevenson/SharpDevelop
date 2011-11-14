@@ -20,7 +20,7 @@ namespace ICSharpCode.WixBinding
 		/// </summary>
 		public static void ClearErrorList()
 		{
-			WorkbenchSingleton.Workbench.GetPad(typeof(CompilerMessageView)).BringPadToFront();
+			WorkbenchSingleton.Instance.Workbench.GetPad(typeof(CompilerMessageView)).BringPadToFront();
 			TaskService.ClearExceptCommentTasks();
 		}
 		
@@ -32,7 +32,7 @@ namespace ICSharpCode.WixBinding
 			ClearErrorList();
 			
 			AddError(fileName, ex);
-			WorkbenchSingleton.Workbench.GetPad(typeof(ErrorListPad)).BringPadToFront();
+			WorkbenchSingleton.Instance.Workbench.GetPad(typeof(ErrorListPad)).BringPadToFront();
 		}
 		
 		/// <summary>
@@ -49,7 +49,7 @@ namespace ICSharpCode.WixBinding
 		public static void ShowErrorList()
 		{
 			if (TaskService.SomethingWentWrong) {
-				WorkbenchSingleton.Workbench.GetPad(typeof(ErrorListPad)).BringPadToFront();
+				WorkbenchSingleton.Instance.Workbench.GetPad(typeof(ErrorListPad)).BringPadToFront();
 			}
 		}
 		

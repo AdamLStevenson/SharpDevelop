@@ -12,7 +12,7 @@ namespace ResourceEditor
 	{
 		public override void Run()
 		{
-			ResourceEditWrapper editor = (ResourceEditWrapper)WorkbenchSingleton.Workbench.ActiveViewContent;
+			ResourceEditWrapper editor = (ResourceEditWrapper)WorkbenchSingleton.Instance.Workbench.ActiveViewContent;
 			
 			editor.SelectAll();
 		}

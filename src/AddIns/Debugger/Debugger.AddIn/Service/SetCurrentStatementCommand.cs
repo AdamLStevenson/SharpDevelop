@@ -12,7 +12,7 @@ namespace ICSharpCode.SharpDevelop.Services
 	{
 		public override void Run()
 		{
-			ITextEditorProvider provider = WorkbenchSingleton.Workbench.ActiveViewContent as ITextEditorProvider;
+			ITextEditorProvider provider = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as ITextEditorProvider;
 				
 			if (provider == null || DebuggerService.CurrentDebugger == null)
 				return;

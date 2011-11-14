@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.40607</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4980B743-B32F-4aba-AABD-45E2CAD3568D}</ProjectGuid>
+    <ProjectGuid>{4980B743-B32F-4ABA-AABD-45E2CAD3568D}</ProjectGuid>
     <RootNamespace>ICSharpCode.SharpDevelop.Tests</RootNamespace>
     <AssemblyName>ICSharpCode.SharpDevelop.Tests</AssemblyName>
     <OutputTarget>Library</OutputTarget>
@@ -145,6 +145,10 @@
       <Project>{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}</Project>
       <Name>ICSharpCode.AvalonEdit</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Refactor\ICSharpCode.SharpDevelop.Base\ICSharpCode.SharpDevelop.Base.csproj">
+      <Project>{18E3561D-537C-42E7-984B-7764B4C94AE6}</Project>
+      <Name>ICSharpCode.SharpDevelop.Base</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Core\Test\ICSharpCode.Core.Tests.csproj">
       <Project>{AD6FAA08-D6F5-4DBA-AF85-F4DA9F40C3B5}</Project>
       <Name>ICSharpCode.Core.Tests</Name>
@@ -155,19 +159,12 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\Libraries\NRefactory\Project\NRefactory.csproj">
       <Project>{3A9AE6AA-BC07-4A2F-972C-581E3AE2F195}</Project>
-      <Name>NRefactory</Name>
+      <Name>NRefactory %28Libraries\NRefactory\NRefactory%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Core\Project\ICSharpCode.Core.csproj">
       <Project>{35CEF10F-2D4C-45F2-9DD1-161E0FEC583C}</Project>
       <Name>ICSharpCode.Core</Name>
     </ProjectReference>
-    <Folder Include="Highlighting" />
-    <Folder Include="StringTagProvider" />
-    <Folder Include="Utils" />
-    <Folder Include="Utils\Tests" />
-    <Folder Include="WebReferences" />
-    <Folder Include="Templates" />
-    <Folder Include="Services_Navigation" />
     <ProjectReference Include="..\..\ICSharpCode.SharpDevelop.Dom\Project\ICSharpCode.SharpDevelop.Dom.csproj">
       <Project>{924EE450-603D-49C1-A8E5-4AFAA31CE6F3}</Project>
       <Name>ICSharpCode.SharpDevelop.Dom</Name>

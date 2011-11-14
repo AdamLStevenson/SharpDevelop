@@ -47,7 +47,7 @@ namespace MSHelpSystem.Commands
 		{
 			if (Help3Service.Config.ExternalHelp) DisplayHelp.Catalog();
 			else {
-				PadDescriptor toc = WorkbenchSingleton.Workbench.GetPad(typeof(Help3TocPad));
+				IPadDescriptor toc = WorkbenchSingleton.Instance.Workbench.GetPad(typeof(Help3TocPad));
 				if (toc != null) toc.BringPadToFront();
 			}
 		}
@@ -57,7 +57,7 @@ namespace MSHelpSystem.Commands
 	{
 		public override void Run()
 		{
-			PadDescriptor search = WorkbenchSingleton.Workbench.GetPad(typeof(Help3SearchPad));
+			IPadDescriptor search = WorkbenchSingleton.Instance.Workbench.GetPad(typeof(Help3SearchPad));
 			if (search != null) search.BringPadToFront();
 		}
 	}

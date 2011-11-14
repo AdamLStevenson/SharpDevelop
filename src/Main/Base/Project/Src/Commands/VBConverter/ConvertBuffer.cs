@@ -18,7 +18,7 @@ namespace ICSharpCode.SharpDevelop.Commands
 	{
 		public override void Run()
 		{
-			IViewContent content = WorkbenchSingleton.Workbench.ActiveViewContent;
+			IViewContent content = WorkbenchSingleton.Instance.Workbench.ActiveViewContent;
 			
 			if (content != null && content.PrimaryFileName != null && content is IEditable) {
 				

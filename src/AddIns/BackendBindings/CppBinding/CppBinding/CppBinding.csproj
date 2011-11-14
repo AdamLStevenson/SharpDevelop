@@ -73,7 +73,9 @@
     <Compile Include="CppLanguageBinding.cs" />
     <Compile Include="CppLanguageProperties.cs" />
     <Compile Include="Project\DependencyRelation.cs" />
-    <Compile Include="Project\DirectoriesOptions.cs" />
+    <Compile Include="Project\DirectoriesOptions.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Project\MultiDictionary.cs" />
     <Compile Include="Project\ApplicationOptions.cs">
       <SubType>UserControl</SubType>
@@ -81,9 +83,7 @@
     <Compile Include="Project\LinkerOptions.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Project\BuildEventOptions.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Project\BuildEventOptions.cs" />
     <Compile Include="Project\ItemDefinitionGroupBinding.cs" />
     <Compile Include="Project\ObservedBinding.cs" />
     <Compile Include="Project\OpenStringListEditorEvent.cs" />
@@ -145,8 +145,10 @@
       <Name>ICSharpCode.SharpDevelop.Dom</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Refactor\ICSharpCode.SharpDevelop.Base\ICSharpCode.SharpDevelop.Base.csproj">
+      <Project>{18E3561D-537C-42E7-984B-7764B4C94AE6}</Project>
+      <Name>ICSharpCode.SharpDevelop.Base</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

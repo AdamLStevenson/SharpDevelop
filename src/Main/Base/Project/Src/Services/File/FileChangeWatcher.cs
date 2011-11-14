@@ -72,7 +72,7 @@ namespace ICSharpCode.SharpDevelop
 			if (file == null)
 				throw new ArgumentNullException("file");
 			this.file = file;
-			WorkbenchSingleton.MainWindow.Activated += MainForm_Activated;
+			WorkbenchSingleton.Instance.MainWindow.Activated += MainForm_Activated;
 			file.FileNameChanged += file_FileNameChanged;
 			activeWatchers.Add(this);
 			SetWatcher();
@@ -88,7 +88,7 @@ namespace ICSharpCode.SharpDevelop
 			WorkbenchSingleton.AssertMainThread();
 			activeWatchers.Remove(this);
 			if (file != null) {
-				WorkbenchSingleton.MainWindow.Activated -= MainForm_Activated;
+				WorkbenchSingleton.Instance.MainWindow.Activated -= MainForm_Activated;
 				file.FileNameChanged -= file_FileNameChanged;
 				file = null;
 			}
@@ -134,8 +134,8 @@ namespace ICSharpCode.SharpDevelop
 			try {
 				if (watcher == null) {
 					watcher = new FileSystemWatcher();
-					if (WorkbenchSingleton.Workbench != null)
-						watcher.SynchronizingObject = WorkbenchSingleton.Workbench.SynchronizingObject;
+					if (WorkbenchSingleton.Instance.Workbench != null)
+						watcher.SynchronizingObject = WorkbenchSingleton.Instance.Workbench.SynchronizingObject;
 					watcher.Changed += OnFileChangedEvent;
 					watcher.Created += OnFileChangedEvent;
 					watcher.Renamed += OnFileChangedEvent;
@@ -170,7 +170,7 @@ namespace ICSharpCode.SharpDevelop
 			LoggingService.Debug("File " + file.FileName + " was changed externally: " + e.ChangeType);
 			if (!wasChangedExternally) {
 				wasChangedExternally = true;
-				if (WorkbenchSingleton.Workbench.IsActiveWindow) {
+				if (WorkbenchSingleton.Instance.Workbench.IsActiveWindow) {
 					// delay reloading message a bit, prevents showing two messages
 					// when the file changes twice in quick succession; and prevents
 					// trying to reload the file while it is still being written

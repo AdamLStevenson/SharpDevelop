@@ -28,8 +28,8 @@ namespace ICSharpCode.Reports.Addin
 		
 		public ReportExplorerPad():base()
 		{
-			WorkbenchSingleton.Workbench.ActiveViewContentChanged += ActiveViewContentChanged;
-			WorkbenchSingleton.Workbench.ViewClosed += ActiveViewClosed;
+			WorkbenchSingleton.Instance.Workbench.ActiveViewContentChanged += ActiveViewContentChanged;
+			WorkbenchSingleton.Instance.Workbench.ViewClosed += ActiveViewClosed;
 			this.explorerTree = new ExplorerTree();
 			this.explorerTree.MouseDown += new MouseEventHandler(ReportExplorer_MouseDown);
 			this.explorerTree.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(ReportExplorerPad_PropertyChanged);
@@ -62,7 +62,7 @@ namespace ICSharpCode.Reports.Addin
 		
 		void ActiveViewContentChanged(object source, EventArgs e)
 		{
-			ReportDesignerView vv = WorkbenchSingleton.Workbench.ActiveViewContent as ReportDesignerView;
+			ReportDesignerView vv = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as ReportDesignerView;
 			if (vv != null) {
 				Console.WriteLine("Explorerpad:ActiveViewContentChanged {0}",vv.TitleName);
 			}
@@ -183,7 +183,7 @@ namespace ICSharpCode.Reports.Addin
 		/// </summary>
 		public override void Dispose()
 		{
-			WorkbenchSingleton.Workbench.ActiveViewContentChanged -= ActiveViewContentChanged;
+			WorkbenchSingleton.Instance.Workbench.ActiveViewContentChanged -= ActiveViewContentChanged;
 			this.explorerTree.Dispose();
 		}
 		

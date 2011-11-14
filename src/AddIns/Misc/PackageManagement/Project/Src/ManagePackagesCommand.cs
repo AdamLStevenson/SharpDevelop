@@ -34,7 +34,7 @@ namespace ICSharpCode.PackageManagement
 		protected virtual IManagePackagesView CreateManagePackagesView()
 		{
 			return new ManagePackagesView() {
-				Owner = WorkbenchSingleton.MainWindow
+				Owner = WorkbenchSingleton.Instance.MainWindow
 			};
 		}
 	}

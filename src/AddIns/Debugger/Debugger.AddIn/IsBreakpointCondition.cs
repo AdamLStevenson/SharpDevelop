@@ -25,9 +25,9 @@ namespace Debugger.AddIn
 		
 		public bool IsValid(object caller, Condition condition)
 		{
-			if (WorkbenchSingleton.Workbench == null || WorkbenchSingleton.Workbench.ActiveWorkbenchWindow == null)
+			if (WorkbenchSingleton.Instance.Workbench == null || WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow == null)
 				return false;
-			ITextEditorProvider provider = WorkbenchSingleton.Workbench.ActiveWorkbenchWindow.ActiveViewContent as ITextEditorProvider;
+			ITextEditorProvider provider = WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow.ActiveViewContent as ITextEditorProvider;
 			if (provider == null)
 				return false;
 			if (string.IsNullOrEmpty(provider.TextEditor.FileName))

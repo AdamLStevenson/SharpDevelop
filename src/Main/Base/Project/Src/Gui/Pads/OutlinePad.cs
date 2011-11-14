@@ -34,13 +34,13 @@ namespace ICSharpCode.SharpDevelop.Gui
 		
 		public OutlinePad()
 		{
-			WorkbenchSingleton.Workbench.ActiveViewContentChanged += WorkbenchActiveContentChanged;
+			WorkbenchSingleton.Instance.Workbench.ActiveViewContentChanged += WorkbenchActiveContentChanged;
 			WorkbenchActiveContentChanged(null, null);
 		}
 		
 		void WorkbenchActiveContentChanged(object sender, EventArgs e)
 		{
-			IViewContent view = WorkbenchSingleton.Workbench.ActiveViewContent;
+			IViewContent view = WorkbenchSingleton.Instance.Workbench.ActiveViewContent;
 			if(view!=null){
 				IOutlineContentHost content = view.GetService(typeof(IOutlineContentHost)) as IOutlineContentHost;
 				if(content!=null){
@@ -49,7 +49,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 				}
 			}
 			
-			ITextEditorProvider provider = WorkbenchSingleton.Workbench.ActiveViewContent as ITextEditorProvider;
+			ITextEditorProvider provider = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as ITextEditorProvider;
 			if (provider != null) {
 				IOutlineContentHost content = provider.TextEditor.GetService(typeof(IOutlineContentHost)) as IOutlineContentHost;
 				if (content != null) {

@@ -8,7 +8,7 @@ namespace ICSharpCode.UnitTesting
 {
 	public interface IUnitTestWorkbench
 	{
-		PadDescriptor GetPad(Type type);
+		IPadDescriptor GetPad(Type type);
 		void SafeThreadAsyncCall(Action method);
 		void SafeThreadAsyncCall<A>(Action<A> method, A arg1);
 	}

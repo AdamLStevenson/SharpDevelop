@@ -66,7 +66,7 @@ namespace ICSharpCode.FormsDesigner
 			this.viewContent = null;
 		}
 		
-		public IEnumerable<OpenedFile> GetSourceFiles(out OpenedFile designerCodeFile)
+		public IEnumerable<IOpenedFile> GetSourceFiles(out IOpenedFile designerCodeFile)
 		{
 			// get new initialize components
 			ParseInformation info = ParserService.ParseFile(this.viewContent.PrimaryFileName, this.viewContent.PrimaryFileContent);
@@ -390,12 +390,12 @@ namespace ICSharpCode.FormsDesigner
 		
 		protected void Reparse()
 		{
-			Dictionary<OpenedFile, ParseInformation> parsings = new Dictionary<OpenedFile, ParseInformation>();
+			Dictionary<IOpenedFile, ParseInformation> parsings = new Dictionary<IOpenedFile, ParseInformation>();
 			ParseInformation info;
 			ICompilationUnit cu;
 			
 			// Reparse all source files for the designed form
-			foreach (KeyValuePair<OpenedFile, IDocument> entry in this.ViewContent.SourceFiles) {
+			foreach (KeyValuePair<IOpenedFile, IDocument> entry in this.ViewContent.SourceFiles) {
 				parsings.Add(entry.Key, ParserService.ParseFile(entry.Key.FileName, entry.Value));
 			}
 			

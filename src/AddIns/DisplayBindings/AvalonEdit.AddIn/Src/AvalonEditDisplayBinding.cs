@@ -34,7 +34,7 @@ namespace ICSharpCode.AvalonEdit.AddIn
 			return true;
 		}
 		
-		public IViewContent CreateContentForFile(OpenedFile file)
+		public IViewContent CreateContentForFile(IOpenedFile file)
 		{
 			return new AvalonEditViewContent(file);
 		}
@@ -60,10 +60,10 @@ namespace ICSharpCode.AvalonEdit.AddIn
 			return true;
 		}
 		
-		public IViewContent CreateContentForFile(OpenedFile file)
+		public IViewContent CreateContentForFile(IOpenedFile file)
 		{
 			ChooseEncodingDialog dlg = new ChooseEncodingDialog();
-			dlg.Owner = WorkbenchSingleton.MainWindow;
+			dlg.Owner = WorkbenchSingleton.Instance.MainWindow;
 			using (Stream stream = file.OpenRead()) {
 				using (StreamReader reader = FileReader.OpenStream(stream, FileService.DefaultFileEncoding.GetEncoding())) {
 					reader.Peek(); // force reader to auto-detect encoding

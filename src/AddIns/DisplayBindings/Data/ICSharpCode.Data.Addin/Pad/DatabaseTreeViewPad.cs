@@ -62,8 +62,8 @@ namespace ICSharpCode.Data.Addin.Pad
 		/// </summary>	
 		public DatabasesTreeViewPad() : base()
 		{
-			WorkbenchSingleton.Workbench.ActiveViewContentChanged += ActiveViewContentChanged;
-			WorkbenchSingleton.Workbench.ViewClosed += ActiveViewClosed;
+			WorkbenchSingleton.Instance.Workbench.ActiveViewContentChanged += ActiveViewContentChanged;
+			WorkbenchSingleton.Instance.Workbench.ViewClosed += ActiveViewClosed;
 
             _control = new DatabasesTreeViewUserControl();
 			_databasesTreeView = new DatabasesTreeView();
@@ -97,7 +97,7 @@ namespace ICSharpCode.Data.Addin.Pad
 		/// </summary>
 		public override void Dispose()
 		{
-			WorkbenchSingleton.Workbench.ActiveViewContentChanged -= ActiveViewContentChanged;
+			WorkbenchSingleton.Instance.Workbench.ActiveViewContentChanged -= ActiveViewContentChanged;
 		}
 
         #endregion

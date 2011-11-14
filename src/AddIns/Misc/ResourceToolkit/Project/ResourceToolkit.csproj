@@ -72,7 +72,9 @@
     <Compile Include="Src\CodeCompletion\VBNetResourceCodeCompletionBinding.cs" />
     <Compile Include="Src\Commands\RefactoringCommands.cs" />
     <Compile Include="Src\Commands\TextEditorContextMenuBuilder.cs" />
-    <Compile Include="Src\Gui\EditStringResourceDialog.cs" />
+    <Compile Include="Src\Gui\EditStringResourceDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Src\Gui\UnusedResourceKeysViewContent.cs" />
     <Compile Include="Src\Refactoring\AnyResourceReferenceFinder.cs" />
     <Compile Include="Src\Refactoring\IResourceReferenceFinder.cs" />
@@ -146,22 +148,15 @@
     <Content Include="Hornung.ResourceToolkit.addin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Folder Include="Src" />
-    <Folder Include="Src\CodeCompletion" />
-    <Folder Include="Src\Commands" />
-    <Folder Include="Src\Gui" />
-    <Folder Include="Src\Refactoring" />
-    <Folder Include="Src\Resolver" />
-    <Folder Include="Src\ResourceFileContent" />
-    <Folder Include="Src\ToolTips" />
-    <Folder Include="Resources" />
-    <Folder Include="Configuration" />
     <ProjectReference Include="..\..\..\..\Libraries\NRefactory\Project\NRefactory.csproj">
       <Project>{3A9AE6AA-BC07-4A2F-972C-581E3AE2F195}</Project>
-      <Name>NRefactory</Name>
+      <Name>NRefactory %28Libraries\NRefactory\NRefactory%29</Name>
       <Private>False</Private>
     </ProjectReference>
-    <Folder Include="Src\Conditions" />
+    <ProjectReference Include="..\..\..\..\Refactor\ICSharpCode.SharpDevelop.Base\ICSharpCode.SharpDevelop.Base.csproj">
+      <Project>{18E3561D-537C-42E7-984B-7764B4C94AE6}</Project>
+      <Name>ICSharpCode.SharpDevelop.Base</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
 </Project>

@@ -66,7 +66,9 @@
     <Compile Include="SettingsView.Designer.cs">
       <DependentUpon>SettingsView.cs</DependentUpon>
     </Compile>
-    <Compile Include="SettingsView.cs" />
+    <Compile Include="SettingsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="SettingsEntry.cs" />
     <EmbeddedResource Include="SettingsView.resx">
       <DependentUpon>SettingsView.cs</DependentUpon>
@@ -93,6 +95,10 @@
       <Project>{924EE450-603D-49C1-A8E5-4AFAA31CE6F3}</Project>
       <Name>ICSharpCode.SharpDevelop.Dom</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Refactor\ICSharpCode.SharpDevelop.Base\ICSharpCode.SharpDevelop.Base.csproj">
+      <Project>{18E3561D-537C-42E7-984B-7764B4C94AE6}</Project>
+      <Name>ICSharpCode.SharpDevelop.Base</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />

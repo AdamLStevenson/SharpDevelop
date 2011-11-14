@@ -13,7 +13,7 @@ namespace ICSharpCode.WixBinding
 		ActivePackageFilesView activePackageFilesView;
 		
 		public AbstractActivePackageFilesViewCommand()
-			: this(WorkbenchSingleton.Workbench)
+			: this(WorkbenchSingleton.Instance.Workbench)
 		{
 		}
 

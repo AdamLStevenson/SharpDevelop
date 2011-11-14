@@ -16,16 +16,16 @@ namespace ICSharpCode.FormsDesigner
 	/// Manages the source code files and their content associated with
 	/// an open forms designer view.
 	/// </summary>
-	public sealed class DesignerSourceCodeStorage : IEnumerable<KeyValuePair<OpenedFile, IDocument>>
+	public sealed class DesignerSourceCodeStorage : IEnumerable<KeyValuePair<IOpenedFile, IDocument>>
 	{
-		readonly Dictionary<OpenedFile, FileContent> fileContents = new Dictionary<OpenedFile, FileContent>();
-		OpenedFile designerCodeFile;
+		readonly Dictionary<IOpenedFile, FileContent> fileContents = new Dictionary<IOpenedFile, FileContent>();
+		IOpenedFile designerCodeFile;
 		
 		public DesignerSourceCodeStorage()
 		{
 		}
 		
-		public OpenedFile DesignerCodeFile {
+		public IOpenedFile DesignerCodeFile {
 			get { return this.designerCodeFile; }
 			set {
 				if (value != null && !this.fileContents.ContainsKey(value)) {
@@ -39,7 +39,7 @@ namespace ICSharpCode.FormsDesigner
 		/// Gets the <see cref="IDocument"/> associated with the specified file or
 		/// <c>null</c> if the file is not registered with the current instance.
 		/// </summary>
-		public IDocument this[OpenedFile file] {
+		public IDocument this[IOpenedFile file] {
 			get {
 				FileContent c;
 				if (this.fileContents.TryGetValue(file, out c)) {
@@ -50,10 +50,10 @@ namespace ICSharpCode.FormsDesigner
 			}
 		}
 		
-		public IEnumerator<KeyValuePair<OpenedFile, IDocument>> GetEnumerator()
+		public IEnumerator<KeyValuePair<IOpenedFile, IDocument>> GetEnumerator()
 		{
-			foreach (KeyValuePair<OpenedFile, FileContent> entry in this.fileContents) {
-				yield return new KeyValuePair<OpenedFile, IDocument>(entry.Key, entry.Value.Document);
+			foreach (KeyValuePair<IOpenedFile, FileContent> entry in this.fileContents) {
+				yield return new KeyValuePair<IOpenedFile, IDocument>(entry.Key, entry.Value.Document);
 			}
 		}
 		
@@ -62,7 +62,7 @@ namespace ICSharpCode.FormsDesigner
 			return this.GetEnumerator();
 		}
 		
-		public void LoadFile(OpenedFile file, Stream stream)
+		public void LoadFile(IOpenedFile file, Stream stream)
 		{
 			if (stream == null)
 				throw new ArgumentNullException("stream");
@@ -77,7 +77,7 @@ namespace ICSharpCode.FormsDesigner
 			c.LoadFrom(stream);
 		}
 		
-		public void SaveFile(OpenedFile file, Stream stream)
+		public void SaveFile(IOpenedFile file, Stream stream)
 		{
 			if (stream == null)
 				throw new ArgumentNullException("stream");
@@ -119,22 +119,22 @@ namespace ICSharpCode.FormsDesigner
 		/// Adds a file with the specified document and the specified encoding.
 		/// </summary>
 		/// <param name="doNotLoad">When true, the SourceCodeStorage will not load the stream content into the document when the view is loaded. Use this when the document content is already managed elsewhere.</param>
-		public void AddFile(OpenedFile file, IDocument document, Encoding encoding, bool doNotLoad)
+		public void AddFile(IOpenedFile file, IDocument document, Encoding encoding, bool doNotLoad)
 		{
 			this.fileContents.Add(file, new FileContent(document, encoding, doNotLoad));
 		}
 		
-		public bool ContainsFile(OpenedFile file)
+		public bool ContainsFile(IOpenedFile file)
 		{
 			return this.fileContents.ContainsKey(file);
 		}
 		
-		public bool RemoveFile(OpenedFile file)
+		public bool RemoveFile(IOpenedFile file)
 		{
 			return this.fileContents.Remove(file);
 		}
 		
-		public Encoding GetFileEncoding(OpenedFile file)
+		public Encoding GetFileEncoding(IOpenedFile file)
 		{
 			if (file == null)
 				throw new ArgumentNullException("file");

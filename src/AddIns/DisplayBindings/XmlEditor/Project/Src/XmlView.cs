@@ -21,7 +21,7 @@ namespace ICSharpCode.XmlEditor
 {
 	public class XmlView
 	{
-		static readonly Dictionary<OpenedFile, XmlView> mapping = new Dictionary<OpenedFile, XmlView>();
+		static readonly Dictionary<IOpenedFile, XmlView> mapping = new Dictionary<IOpenedFile, XmlView>();
 		XmlSchemaCompletionCollection schemas;
 		
 		XmlView()
@@ -34,7 +34,7 @@ namespace ICSharpCode.XmlEditor
 		/// </summary>
 		/// <param name="file">The file to retrieve the data for.</param>
 		/// <returns>null if the file is not a valid XML file, otherwise a XmlView instance with additional data used by the XML editor.</returns>
-		public static XmlView ForFile(OpenedFile file)
+		public static XmlView ForFile(IOpenedFile file)
 		{
 			if (file == null) {
 				return null;
@@ -58,7 +58,7 @@ namespace ICSharpCode.XmlEditor
 			return ForFile(FileService.GetOpenedFile(fileName));
 		}
 		
-		public OpenedFile File { get; set; }
+		public IOpenedFile File { get; set; }
 		
 		public static XmlView ForViewContent(IViewContent view)
 		{
@@ -107,7 +107,7 @@ namespace ICSharpCode.XmlEditor
 		}
 		
 		public static XmlView ActiveXmlView {
-			get { return XmlView.ForViewContent(WorkbenchSingleton.Workbench.ActiveViewContent); }
+			get { return XmlView.ForViewContent(WorkbenchSingleton.Instance.Workbench.ActiveViewContent); }
 		}
 		
 		public void GoToSchemaDefinition()
@@ -162,7 +162,7 @@ namespace ICSharpCode.XmlEditor
 		static void ShowErrorList()
 		{
 			if (ErrorListPad.ShowAfterBuild && TaskService.SomethingWentWrong) {
-				WorkbenchSingleton.Workbench.GetPad(typeof(ErrorListPad)).BringPadToFront();
+				WorkbenchSingleton.Instance.Workbench.GetPad(typeof(ErrorListPad)).BringPadToFront();
 			}
 		}
 		
@@ -445,7 +445,7 @@ namespace ICSharpCode.XmlEditor
 		public void RunXslTransform(string xsl)
 		{
 			try {
-				WorkbenchSingleton.Workbench.GetPad(typeof(CompilerMessageView)).BringPadToFront();
+				WorkbenchSingleton.Instance.Workbench.GetPad(typeof(CompilerMessageView)).BringPadToFront();
 				
 				TaskService.ClearExceptCommentTasks();
 				
@@ -515,7 +515,7 @@ namespace ICSharpCode.XmlEditor
 		bool IsValidXsl(string xml)
 		{
 			try	{
-				WorkbenchSingleton.Workbench.GetPad(typeof(CompilerMessageView)).BringPadToFront();
+				WorkbenchSingleton.Instance.Workbench.GetPad(typeof(CompilerMessageView)).BringPadToFront();
 
 				StringReader reader = new StringReader(xml);
 				XPathDocument doc = new XPathDocument(reader);
@@ -540,7 +540,7 @@ namespace ICSharpCode.XmlEditor
 		/// </summary>
 		static void ShowOutputWindow()
 		{
-			WorkbenchSingleton.Workbench.GetPad(typeof(CompilerMessageView)).BringPadToFront();
+			WorkbenchSingleton.Instance.Workbench.GetPad(typeof(CompilerMessageView)).BringPadToFront();
 		}
 		
 		/// <summary>

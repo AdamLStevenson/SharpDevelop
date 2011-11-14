@@ -112,7 +112,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 					taskbarProgressState = TaskbarItemProgressState.Normal;
 			}
 			
-			TaskbarItemInfo taskbar = WorkbenchSingleton.MainWindow.TaskbarItemInfo;
+			TaskbarItemInfo taskbar = WorkbenchSingleton.Instance.MainWindow.TaskbarItemInfo;
 			if (taskbar != null) {
 				taskbar.ProgressState = taskbarProgressState;
 				taskbar.ProgressValue = workDone;
@@ -172,7 +172,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 						if (!statusProgressBarIsVisible) {
 							statusProgressBarItem.Visibility = Visibility.Collapsed;
 							jobNamePanel.Content = currentTaskName = "";
-							var taskbar = WorkbenchSingleton.MainWindow.TaskbarItemInfo;
+							var taskbar = WorkbenchSingleton.Instance.MainWindow.TaskbarItemInfo;
 							if (taskbar != null)
 								taskbar.ProgressState = TaskbarItemProgressState.None;
 							StopHideProgress();

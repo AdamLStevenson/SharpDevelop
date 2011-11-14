@@ -10,9 +10,9 @@ namespace ICSharpCode.WpfDesign.AddIn
 {
     public class PropertyDescriptionService : IPropertyDescriptionService
     {
-        OpenedFile file;
+        IOpenedFile file;
 
-        public PropertyDescriptionService(OpenedFile file)
+        public PropertyDescriptionService(IOpenedFile file)
         {
             if (file == null)
                 throw new ArgumentNullException("file");

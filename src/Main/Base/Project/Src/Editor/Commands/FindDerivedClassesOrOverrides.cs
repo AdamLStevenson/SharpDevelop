@@ -33,7 +33,7 @@ namespace ICSharpCode.SharpDevelop.Editor.Commands
 		// TODO
 //		public override bool IsEnabled {
 //			get { 
-//				WorkbenchSingleton.Workbench.ActiveViewContent.
+//				WorkbenchSingleton.Instance.Workbench.ActiveViewContent.
 //				var symbol = ParserService.Resolve(
 //				var classUnderCaret = GetClass(symbol);
 //				if (classUnderCaret != 				

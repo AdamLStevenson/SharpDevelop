@@ -111,8 +111,6 @@
     <FileAlignment>4096</FileAlignment>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Templates" />
-    <Folder Include="Templates\Files" />
     <Folder Include="Windows\" />
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +140,10 @@
       <Project>{7E4A7172-7FF5-48D0-B719-7CD959DD1AC9}</Project>
       <Name>ICSharpCode.Core.Presentation</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Refactor\ICSharpCode.SharpDevelop.Base\ICSharpCode.SharpDevelop.Base.csproj">
+      <Project>{18E3561D-537C-42E7-984B-7764B4C94AE6}</Project>
+      <Name>ICSharpCode.SharpDevelop.Base</Name>
     </ProjectReference>
     <ProjectReference Include="..\ICSharpCode.Data.Core.UI\ICSharpCode.Data.Core.UI.csproj">
       <Project>{BAD94D6E-4159-4CB6-B991-486F412D9BB6}</Project>

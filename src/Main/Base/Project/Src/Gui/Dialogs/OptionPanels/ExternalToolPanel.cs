@@ -102,7 +102,7 @@ namespace ICSharpCode.SharpDevelop.Gui.OptionPanels
 				fdiag.CheckFileExists = true;
 				fdiag.Filter = StringParser.Parse(ExecutableFilesFilter);
 				
-				if (fdiag.ShowDialog(ICSharpCode.SharpDevelop.Gui.WorkbenchSingleton.MainWin32Window) == DialogResult.OK) {
+				if (fdiag.ShowDialog(ICSharpCode.SharpDevelop.Gui.WorkbenchSingleton.Instance.MainWin32Window) == DialogResult.OK) {
 					ControlDictionary["commandTextBox"].Text = fdiag.FileName;
 				}
 			}

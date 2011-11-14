@@ -25,11 +25,11 @@ namespace ICSharpCode.IconEditorAddIn
 			get { return true; }
 		}
 		
-		public IconViewContent(OpenedFile file) : base(file)
+		public IconViewContent(IOpenedFile file) : base(file)
 		{
 		}
 		
-		public override void Load(OpenedFile file, Stream stream)
+		public override void Load(IOpenedFile file, Stream stream)
 		{
 			editor.ShowFile(new IconFile(stream));
 		}

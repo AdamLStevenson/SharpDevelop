@@ -22,7 +22,7 @@ using ICSharpCode.NRefactory;
 using ICSharpCode.SharpDevelop.Dom;
 using ICSharpCode.SharpDevelop.Editor;
 using ICSharpCode.SharpDevelop.Gui;
-using WinForms = System.Windows.Forms;
+using WinForms2 = System.Windows.Forms;
 
 namespace ICSharpCode.SharpDevelop
 {
@@ -99,10 +99,10 @@ namespace ICSharpCode.SharpDevelop
 		{
 			return new ReadOnlyCollectionWrapper<T>(arr);
 		}
-		
-		public static IEnumerable<WinForms.Control> GetRecursive(this WinForms.Control.ControlCollection collection)
+
+        public static IEnumerable<WinForms2.Control> GetRecursive(this WinForms2.Control.ControlCollection collection)
 		{
-			return collection.Cast<WinForms.Control>().Flatten(c => c.Controls.Cast<WinForms.Control>());
+            return collection.Cast<WinForms2.Control>().Flatten(c => c.Controls.Cast<WinForms2.Control>());
 		}
 		
 		/// <summary>
@@ -193,9 +193,9 @@ namespace ICSharpCode.SharpDevelop
 				}
 				host.Dispose();
 			}
-			if (content is WinForms.Control) {
+			if (content is WinForms2.Control) {
 				contentControl.Content = new SDWindowsFormsHost {
-					Child = (WinForms.Control)content,
+					Child = (WinForms2.Control)content,
 					ServiceObject = serviceObject,
 					DisposeChild = false
 				};
@@ -225,9 +225,9 @@ namespace ICSharpCode.SharpDevelop
 				}
 				host.Dispose();
 			}
-			if (content is WinForms.Control) {
+			if (content is WinForms2.Control) {
 				contentControl.Content = new SDWindowsFormsHost {
-					Child = (WinForms.Control)content,
+					Child = (WinForms2.Control)content,
 					ServiceObject = serviceObject,
 					DisposeChild = false
 				};

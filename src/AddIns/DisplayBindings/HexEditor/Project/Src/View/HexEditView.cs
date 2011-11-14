@@ -14,7 +14,7 @@ namespace HexEditor.View
 	{
 		HexEditContainer hexEditContainer;
 		
-		public HexEditView(OpenedFile file)
+		public HexEditView(IOpenedFile file)
 		{
 			hexEditContainer = new HexEditContainer();
 			hexEditContainer.hexEditControl.DocumentChanged += new EventHandler(DocumentChanged);
@@ -30,7 +30,7 @@ namespace HexEditor.View
 			get { return hexEditContainer; }
 		}
 		
-		public override void Save(OpenedFile file, Stream stream)
+		public override void Save(IOpenedFile file, Stream stream)
 		{
 			AnalyticsMonitorService.TrackFeature(typeof(HexEditView), "Save");
 			this.hexEditContainer.SaveFile(file, stream);
@@ -38,7 +38,7 @@ namespace HexEditor.View
 			this.TabPageText = this.TitleName;
 		}
 		
-		public override void Load(OpenedFile file, Stream stream)
+		public override void Load(IOpenedFile file, Stream stream)
 		{
 			AnalyticsMonitorService.TrackFeature(typeof(HexEditView), "Load");
 			this.hexEditContainer.LoadFile(file, stream);

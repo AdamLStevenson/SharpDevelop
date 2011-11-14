@@ -23,7 +23,7 @@ namespace Debugger.AddIn
 		{
 			List<ToolStripItem> items = new List<ToolStripItem>();
 			
-			ITextEditorProvider provider = WorkbenchSingleton.Workbench.ActiveWorkbenchWindow.ActiveViewContent as ITextEditorProvider;
+			ITextEditorProvider provider = WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow.ActiveViewContent as ITextEditorProvider;
 			
 			BreakpointBookmark point = null;
 			
@@ -64,7 +64,7 @@ namespace Debugger.AddIn
 						break;
 					case "Condition":
 						EditBreakpointScriptWindow window = new EditBreakpointScriptWindow(bookmark) {
-							Owner = WorkbenchSingleton.MainWindow
+							Owner = WorkbenchSingleton.Instance.MainWindow
 						};
 						
 						if (window.ShowDialog() ?? false) {

@@ -26,7 +26,7 @@ namespace Debugger.AddIn
 				
 				var inputWindow = new WatchInputBox(StringParser.Parse("${res:MainWindow.Windows.Debug.Watch.AddWatch}"),
 				                                    StringParser.Parse("${res:MainWindow.Windows.Debug.Watch.EnterExpression}"));
-				inputWindow.Owner = ICSharpCode.SharpDevelop.Gui.WorkbenchSingleton.MainWindow;
+				inputWindow.Owner = ICSharpCode.SharpDevelop.Gui.WorkbenchSingleton.Instance.MainWindow;
 				var result = inputWindow.ShowDialog();
 				if (!result.HasValue || !result.Value)
 					return;

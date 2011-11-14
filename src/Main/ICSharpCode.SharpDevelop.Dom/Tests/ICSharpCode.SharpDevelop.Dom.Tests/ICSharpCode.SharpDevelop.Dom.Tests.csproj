@@ -65,7 +65,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Libraries\NRefactory\Project\NRefactory.csproj">
       <Project>{3A9AE6AA-BC07-4A2F-972C-581E3AE2F195}</Project>
-      <Name>NRefactory</Name>
+      <Name>NRefactory %28Libraries\NRefactory\NRefactory%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Base\Test\ICSharpCode.SharpDevelop.Tests.csproj">
       <Project>{4980B743-B32F-4aba-AABD-45E2CAD3568D}</Project>
@@ -75,6 +75,5 @@
       <Project>{924EE450-603D-49C1-A8E5-4AFAA31CE6F3}</Project>
       <Name>ICSharpCode.SharpDevelop.Dom</Name>
     </ProjectReference>
-    <Folder Include="NUnitHelpers" />
   </ItemGroup>
 </Project>

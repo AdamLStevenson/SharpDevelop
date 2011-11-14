@@ -30,7 +30,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 		{
 			if (Instance == null) {
 				Instance = new GotoDialog();
-				Instance.Owner = WorkbenchSingleton.MainWindow;
+				Instance.Owner = WorkbenchSingleton.Instance.MainWindow;
 				Instance.Show();
 			} else {
 				Instance.Activate();
@@ -345,7 +345,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 		
 		ITextEditor GetEditor()
 		{
-			IViewContent viewContent = WorkbenchSingleton.Workbench.ActiveViewContent;
+			IViewContent viewContent = WorkbenchSingleton.Instance.Workbench.ActiveViewContent;
 			if (viewContent is ITextEditorProvider) {
 				return ((ITextEditorProvider)viewContent).TextEditor;
 			}

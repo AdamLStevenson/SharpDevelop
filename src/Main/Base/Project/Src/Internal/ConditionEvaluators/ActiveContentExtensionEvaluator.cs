@@ -21,11 +21,11 @@ namespace ICSharpCode.SharpDevelop
 	{
 		public bool IsValid(object caller, Condition condition)
 		{
-			if (WorkbenchSingleton.Workbench == null || WorkbenchSingleton.Workbench.ActiveWorkbenchWindow == null || WorkbenchSingleton.Workbench.ActiveViewContent == null) {
+			if (WorkbenchSingleton.Instance.Workbench == null || WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow == null || WorkbenchSingleton.Instance.Workbench.ActiveViewContent == null) {
 				return false;
 			}
 			try {
-				string name = WorkbenchSingleton.Workbench.ActiveViewContent.PrimaryFileName;
+				string name = WorkbenchSingleton.Instance.Workbench.ActiveViewContent.PrimaryFileName;
 				
 				if (name == null) {
 					return false;

@@ -16,7 +16,7 @@ namespace ICSharpCode.SharpDevelop.BrowserDisplayBinding
 				|| fileName.StartsWith("browser:");
 		}
 		
-		public IViewContent CreateContentForFile(OpenedFile file)
+		public IViewContent CreateContentForFile(IOpenedFile file)
 		{
 			string fileName = file.FileName;
 			

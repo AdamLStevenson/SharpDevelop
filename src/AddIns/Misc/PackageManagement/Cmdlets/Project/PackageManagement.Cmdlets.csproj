@@ -70,12 +70,10 @@
     </ProjectReference>
     <ProjectReference Include="..\..\Project\PackageManagement.csproj">
       <Project>{AE4AB0FA-6087-4480-AF37-0FA1452B3DA1}</Project>
-      <Name>PackageManagement</Name>
+      <Name>PackageManagement %28AddIns\Misc\PackageManagement\PackageManagement%29</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Src" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
 </Project>

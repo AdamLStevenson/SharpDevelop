@@ -17,7 +17,7 @@ namespace ICSharpCode.WixBinding
 		ActivePackageFilesView activePackageFilesView;
 		
 		public AddElementCommand(string name) 
-			: this(name, WorkbenchSingleton.Workbench)
+			: this(name, WorkbenchSingleton.Instance.Workbench)
 		{
 		}
 		

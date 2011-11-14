@@ -22,9 +22,9 @@ namespace ICSharpCode.SettingsEditor
 		PropertyContainer propertyContainer = new PropertyContainer();
 		SettingsDocument setDoc = new SettingsDocument();
 		MemoryStream appConfigStream;
-		OpenedFile appConfigFile;
+		IOpenedFile appConfigFile;
 		
-		public SettingsViewContent(OpenedFile file) : base(file)
+		public SettingsViewContent(IOpenedFile file) : base(file)
 		{
 			TryOpenAppConfig(false);
 			view.SelectionChanged += delegate {
@@ -58,7 +58,7 @@ namespace ICSharpCode.SettingsEditor
 			}
 		}
 		
-		protected override void LoadInternal(OpenedFile file, Stream stream)
+		protected override void LoadInternal(IOpenedFile file, Stream stream)
 		{
 			if (file == PrimaryFile) {
 				try {
@@ -84,7 +84,7 @@ namespace ICSharpCode.SettingsEditor
 			}
 		}
 		
-		protected override void SaveInternal(OpenedFile file, Stream stream)
+		protected override void SaveInternal(IOpenedFile file, Stream stream)
 		{
 			if (file == PrimaryFile) {
 				using (XmlTextWriter writer = new XmlTextWriter(stream, Encoding.UTF8)) {

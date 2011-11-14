@@ -271,7 +271,7 @@ namespace ICSharpCode.SharpDevelop.Services
 		public void ShowAttachDialog()
 		{
 			using (AttachToProcessForm attachForm = new AttachToProcessForm()) {
-				if (attachForm.ShowDialog(WorkbenchSingleton.MainWin32Window) == DialogResult.OK) {
+				if (attachForm.ShowDialog(WorkbenchSingleton.Instance.MainWin32Window) == DialogResult.OK) {
 					Attach(attachForm.Process);
 				}
 			}
@@ -1079,7 +1079,7 @@ namespace ICSharpCode.SharpDevelop.Services
 			if (debuggedProcess == null || debuggedProcess.SelectedThread == null)
 				return;
 			
-			WorkbenchSingleton.MainWindow.Activate();
+			WorkbenchSingleton.Instance.MainWindow.Activate();
 			
 			
 			if (debuggedProcess.IsSelectedFrameForced()) {

@@ -118,7 +118,7 @@ namespace ICSharpCode.SharpDevelop.Sda
 			{
 				var routedCommand = wpfCommand as System.Windows.Input.RoutedCommand;
 				if (routedCommand != null) {
-					var target = System.Windows.Input.FocusManager.GetFocusedElement(WorkbenchSingleton.MainWindow);
+					var target = System.Windows.Input.FocusManager.GetFocusedElement(WorkbenchSingleton.Instance.MainWindow);
 					routedCommand.Execute(this.Owner, target);
 				} else {
 					wpfCommand.Execute(this.Owner);
@@ -173,7 +173,7 @@ namespace ICSharpCode.SharpDevelop.Sda
 			} finally {
 				LoggingService.Info("Unloading services...");
 				try {
-					WorkbenchSingleton.OnWorkbenchUnloaded();
+					WorkbenchSingleton.Instance.OnWorkbenchUnloaded();
 					PropertyService.Save();
 				} catch (Exception ex) {
 					LoggingService.Warn("Exception during unloading", ex);
@@ -221,7 +221,7 @@ namespace ICSharpCode.SharpDevelop.Sda
 		}
 		void GetOpenDocuments(List<Document> l)
 		{
-			foreach (IViewContent vc in WorkbenchSingleton.Workbench.ViewContentCollection) {
+			foreach (IViewContent vc in WorkbenchSingleton.Instance.Workbench.ViewContentCollection) {
 				Document d = Document.FromWindow(vc);
 				if (d != null) {
 					l.Add(d);
@@ -274,11 +274,11 @@ namespace ICSharpCode.SharpDevelop.Sda
 		}
 		bool CloseWorkbenchInternal(bool force)
 		{
-			foreach (IWorkbenchWindow window in WorkbenchSingleton.Workbench.WorkbenchWindowCollection.ToArray()) {
+			foreach (IWorkbenchWindow window in WorkbenchSingleton.Instance.Workbench.WorkbenchWindowCollection.ToArray()) {
 				if (!window.CloseWindow(force))
 					return false;
 			}
-			WorkbenchSingleton.MainWindow.Close();
+			WorkbenchSingleton.Instance.MainWindow.Close();
 			return true;
 		}
 		
@@ -306,11 +306,11 @@ namespace ICSharpCode.SharpDevelop.Sda
 		}
 		bool GetWorkbenchVisibleInternal()
 		{
-			return WorkbenchSingleton.MainWindow.Visibility == Visibility.Visible;
+			return WorkbenchSingleton.Instance.MainWindow.Visibility == Visibility.Visible;
 		}
 		void SetWorkbenchVisibleInternal(bool value)
 		{
-			WorkbenchSingleton.MainWindow.Visibility = value ? Visibility.Visible : Visibility.Hidden;
+			WorkbenchSingleton.Instance.MainWindow.Visibility = value ? Visibility.Visible : Visibility.Hidden;
 		}
 	}
 }

@@ -1639,7 +1639,7 @@ namespace HexEditor
 		/// </summary>
 		/// <param name="file">The file-info to open.</param>
 		/// <param name="stream">The stream to read from/write to.</param>
-		public void LoadFile(OpenedFile file, Stream stream)
+		public void LoadFile(IOpenedFile file, Stream stream)
 		{
 			buffer.Load(file, stream);
 			if (this.progressBar != null) {
@@ -1677,7 +1677,7 @@ namespace HexEditor
 		/// <summary>
 		/// Saves the current buffer to a stream.
 		/// </summary>
-		public void SaveFile(OpenedFile file, Stream stream)
+		public void SaveFile(IOpenedFile file, Stream stream)
 		{
 			buffer.Save(file, stream);
 		}

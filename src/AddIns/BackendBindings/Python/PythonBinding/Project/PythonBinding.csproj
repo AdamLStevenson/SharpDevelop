@@ -94,10 +94,14 @@
     <Compile Include="Src\ConstructorInfo.cs" />
     <Compile Include="Src\ConvertProjectToPythonProjectCommand.cs" />
     <Compile Include="Src\ConvertToPythonMenuCommand.cs" />
-    <Compile Include="Src\ApplicationSettingsPanel.cs" />
+    <Compile Include="Src\ApplicationSettingsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Configuration\AssemblyInfo.cs" />
     <Compile Include="Src\AddInOptions.cs" />
-    <Compile Include="Src\CompilingOptionsPanel.cs" />
+    <Compile Include="Src\CompilingOptionsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Src\IPythonResolver.cs" />
     <Compile Include="Src\MemberName.cs" />
     <Compile Include="Src\PythonBuiltInModuleMemberName.cs" />
@@ -178,7 +182,9 @@
     <Compile Include="Src\PythonImportExpressionContext.cs" />
     <Compile Include="Src\PythonLanguageProperties.cs" />
     <Compile Include="Src\PythonImportModuleResolveResult.cs" />
-    <Compile Include="Src\PythonOptionsPanel.cs" />
+    <Compile Include="Src\PythonOptionsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Src\PythonParser.cs" />
     <Compile Include="Src\PythonProject.cs" />
     <Compile Include="Src\PythonPropertyValueAssignment.cs" />
@@ -253,11 +259,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Lib" />
-    <Folder Include="DLLs" />
-    <Folder Include="TestRunner" />
-    <Folder Include="Templates" />
-    <Folder Include="Resources" />
     <ProjectReference Include="..\..\..\..\..\Libraries\AvalonEdit\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
       <Project>{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}</Project>
       <Name>ICSharpCode.AvalonEdit</Name>
@@ -265,7 +266,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\..\Libraries\NRefactory\Project\NRefactory.csproj">
       <Project>{3A9AE6AA-BC07-4A2F-972C-581E3AE2F195}</Project>
-      <Name>NRefactory</Name>
+      <Name>NRefactory %28Libraries\NRefactory\NRefactory%29</Name>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\..\Main\Base\Project\ICSharpCode.SharpDevelop.csproj">
@@ -282,6 +283,10 @@
       <Project>{924EE450-603D-49C1-A8E5-4AFAA31CE6F3}</Project>
       <Name>ICSharpCode.SharpDevelop.Dom</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Refactor\ICSharpCode.SharpDevelop.Base\ICSharpCode.SharpDevelop.Base.csproj">
+      <Project>{18E3561D-537C-42E7-984B-7764B4C94AE6}</Project>
+      <Name>ICSharpCode.SharpDevelop.Base</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\Analysis\UnitTesting\UnitTesting.csproj">
       <Project>{1F261725-6318-4434-A1B1-6C70CE4CD324}</Project>

@@ -31,7 +31,7 @@ namespace ICSharpCode.AvalonEdit.AddIn
 		readonly CodeEditor codeEditor = new CodeEditor();
 		IAnalyticsMonitorTrackedFeature trackedFeature;
 		
-		public AvalonEditViewContent(OpenedFile file, Encoding fixedEncodingForLoading = null)
+		public AvalonEditViewContent(IOpenedFile file, Encoding fixedEncodingForLoading = null)
 		{
 			if (fixedEncodingForLoading != null) {
 				codeEditor.UseFixedEncoding = true;
@@ -92,7 +92,7 @@ namespace ICSharpCode.AvalonEdit.AddIn
 			get { return codeEditor.PrimaryTextEditor.TextArea; }
 		}
 		
-		public override void Save(OpenedFile file, Stream stream)
+		public override void Save(IOpenedFile file, Stream stream)
 		{
 			if (file != PrimaryFile)
 				return;
@@ -129,7 +129,7 @@ namespace ICSharpCode.AvalonEdit.AddIn
 		
 		bool isLoading;
 		
-		public override void Load(OpenedFile file, Stream stream)
+		public override void Load(IOpenedFile file, Stream stream)
 		{
 			if (file != PrimaryFile)
 				return;
@@ -157,7 +157,7 @@ namespace ICSharpCode.AvalonEdit.AddIn
 			}
 		}
 		
-		protected override void OnFileNameChanged(OpenedFile file)
+		protected override void OnFileNameChanged(IOpenedFile file)
 		{
 			base.OnFileNameChanged(file);
 			if (file == PrimaryFile) {
@@ -321,7 +321,7 @@ namespace ICSharpCode.AvalonEdit.AddIn
 			get { return codeEditor.ActiveTextEditorAdapter; }
 		}
 		
-		public IDocument GetDocumentForFile(OpenedFile file)
+		public IDocument GetDocumentForFile(IOpenedFile file)
 		{
 			if (file == this.PrimaryFile)
 				return codeEditor.DocumentAdapter;

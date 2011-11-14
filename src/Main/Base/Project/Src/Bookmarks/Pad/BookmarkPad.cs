@@ -21,7 +21,7 @@ namespace ICSharpCode.SharpDevelop.Bookmarks
 		public static BookmarkPad Instance {
 			get {
 				if (instance == null) {
-					WorkbenchSingleton.Workbench.GetPad(typeof(BookmarkPad)).CreatePad();
+					WorkbenchSingleton.Instance.Workbench.GetPad(typeof(BookmarkPad)).CreatePad();
 				}
 				return instance;
 			}

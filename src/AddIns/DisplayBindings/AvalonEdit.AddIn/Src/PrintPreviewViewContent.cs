@@ -87,12 +87,12 @@ namespace ICSharpCode.AvalonEdit.AddIn
 		
 		public static void ShowDocument(IDocumentPaginatorSource document, string description)
 		{
-			PrintPreviewViewContent vc = WorkbenchSingleton.Workbench.ViewContentCollection.OfType<PrintPreviewViewContent>().FirstOrDefault();
+			PrintPreviewViewContent vc = WorkbenchSingleton.Instance.Workbench.ViewContentCollection.OfType<PrintPreviewViewContent>().FirstOrDefault();
 			if (vc != null) {
 				vc.WorkbenchWindow.SelectWindow();
 			} else {
 				vc = new PrintPreviewViewContent();
-				WorkbenchSingleton.Workbench.ShowView(vc);
+				WorkbenchSingleton.Instance.Workbench.ShowView(vc);
 			}
 			vc.Document = document;
 			vc.Description = description;

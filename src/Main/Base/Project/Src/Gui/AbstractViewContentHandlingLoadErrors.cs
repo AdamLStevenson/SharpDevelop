@@ -32,7 +32,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 		{
 		}
 		
-		protected AbstractViewContentHandlingLoadErrors(OpenedFile file) : base(file)
+		protected AbstractViewContentHandlingLoadErrors(IOpenedFile file) : base(file)
 		{
 		}
 		
@@ -90,7 +90,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 			contentControl.SetContent(errorTextBox, this);
 		}
 		
-		Dictionary<OpenedFile, LoadError> errorList = new Dictionary<OpenedFile, LoadError>();
+		Dictionary<IOpenedFile, LoadError> errorList = new Dictionary<IOpenedFile, LoadError>();
 		
 		/// <summary>
 		/// Gets a text to be shown above the exception when a load error occurs.
@@ -100,7 +100,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 			get { return String.Empty; }
 		}
 		
-		public override sealed void Load(OpenedFile file, Stream stream)
+		public override sealed void Load(IOpenedFile file, Stream stream)
 		{
 			try {
 				LoadInternal(file, new UnclosableStream(stream));
@@ -118,7 +118,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 			}
 		}
 		
-		public override sealed void Save(OpenedFile file, Stream stream)
+		public override sealed void Save(IOpenedFile file, Stream stream)
 		{
 			if (errorList.ContainsKey(file)) {
 				byte[] data = errorList[file].fileData;
@@ -128,7 +128,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 			}
 		}
 		
-		protected abstract void LoadInternal(OpenedFile file, Stream stream);
-		protected abstract void SaveInternal(OpenedFile file, Stream stream);
+		protected abstract void LoadInternal(IOpenedFile file, Stream stream);
+		protected abstract void SaveInternal(IOpenedFile file, Stream stream);
 	}
 }

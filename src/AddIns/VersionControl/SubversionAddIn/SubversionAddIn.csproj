@@ -62,7 +62,9 @@
     <None Include="ICSharpCode.Svn.addin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Compile Include="Src\Gui\HistoryViewDisplayBinding\InfoPanel.cs" />
+    <Compile Include="Src\Gui\HistoryViewDisplayBinding\InfoPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Src\Gui\HistoryViewDisplayBinding\InfoPanel.Designer.cs">
       <DependentUpon>InfoPanel.cs</DependentUpon>
     </Compile>
@@ -76,9 +78,7 @@
     <Compile Include="Src\Gui\HistoryViewDisplayBinding\HistoryViewPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Src\Gui\SubversionOptionsPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Src\Gui\SubversionOptionsPanel.cs" />
     <Compile Include="Src\Gui\ProjectBrowserVisitor\OverlayIconManager.cs" />
     <Compile Include="Src\Gui\SvnGuiWrapper.cs" />
     <Compile Include="Src\Gui\TortoiseSvnNotFoundForm.cs" />
@@ -95,7 +95,6 @@
     <ProjectReference Include="..\..\..\Main\Base\Project\ICSharpCode.SharpDevelop.csproj">
       <Project>{2748AD25-9C63-4E12-877B-4DCE96FBED54}</Project>
       <Name>ICSharpCode.SharpDevelop</Name>
-      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Main\Core\Project\ICSharpCode.Core.csproj">
       <Project>{35CEF10F-2D4C-45F2-9DD1-161E0FEC583C}</Project>
@@ -111,6 +110,10 @@
       <Project>{924EE450-603D-49C1-A8E5-4AFAA31CE6F3}</Project>
       <Name>ICSharpCode.SharpDevelop.Dom</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Refactor\ICSharpCode.SharpDevelop.Base\ICSharpCode.SharpDevelop.Base.csproj">
+      <Project>{18E3561D-537C-42E7-984B-7764B4C94AE6}</Project>
+      <Name>ICSharpCode.SharpDevelop.Base</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />

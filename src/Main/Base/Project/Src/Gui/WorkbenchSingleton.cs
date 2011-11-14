@@ -11,7 +11,7 @@ using ICSharpCode.Core.WinForms;
 
 namespace ICSharpCode.SharpDevelop.Gui
 {
-	public static class WorkbenchSingleton
+	public class WorkbenchSingleton:IWorkbenchSingleton
 	{
 		const string uiIconStyle             = "IconMenuItem.IconMenuStyle";
 		const string uiLanguageProperty      = "CoreProperties.UILanguage";
@@ -19,11 +19,25 @@ namespace ICSharpCode.SharpDevelop.Gui
 		const string activeContentState      = "Workbench.ActiveContent";
 		
 		static IWorkbench workbench;
+        static WorkbenchSingleton _Instance;
+
+        static WorkbenchSingleton()
+        {
+            _Instance = new WorkbenchSingleton();
+        }
+
+        public static IWorkbenchSingleton Instance
+        {
+            get
+            {
+                return _Instance;
+            }
+        }
 		
 		/// <summary>
 		/// Gets the main form. Returns null in unit-testing mode.
 		/// </summary>
-		public static IWin32Window MainWin32Window {
+		public IWin32Window MainWin32Window {
 			get {
 				if (workbench != null) {
 					return workbench.MainWin32Window;
@@ -35,7 +49,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 		/// <summary>
 		/// Gets the main window. Returns null in unit-testing mode.
 		/// </summary>
-		public static Window MainWindow {
+		public Window MainWindow {
 			get {
 				if (workbench != null) {
 					return workbench.MainWindow;
@@ -47,8 +61,9 @@ namespace ICSharpCode.SharpDevelop.Gui
 		/// <summary>
 		/// Gets the workbench. Returns null in unit-testing mode.
 		/// </summary>
-		public static IWorkbench Workbench {
-			get {
+		public IWorkbench Workbench {
+			get
+            {
 				return workbench;
 			}
 		}
@@ -59,9 +74,9 @@ namespace ICSharpCode.SharpDevelop.Gui
 			}
 		}
 		
-		public static void InitializeWorkbench(IWorkbench workbench, IWorkbenchLayout layout)
+		public static void InitializeWorkbench(IWorkbench pWorkbench, IWorkbenchLayout layout)
 		{
-			WorkbenchSingleton.workbench = workbench;
+			workbench = pWorkbench;
 			
 			LanguageService.ValidateLanguage();
 			
@@ -77,34 +92,34 @@ namespace ICSharpCode.SharpDevelop.Gui
 			
 			var messageService = Core.Services.ServiceManager.Instance.MessageService as IDialogMessageService;
 			if (messageService != null) {
-				messageService.DialogOwner = workbench.MainWin32Window;
+				messageService.DialogOwner = pWorkbench.MainWin32Window;
 				Debug.Assert(messageService.DialogOwner != null);
-				messageService.DialogSynchronizeInvoke = workbench.SynchronizingObject;
+				messageService.DialogSynchronizeInvoke = pWorkbench.SynchronizingObject;
 			}
 			
-			workbench.Initialize();
-			workbench.SetMemento(PropertyService.Get(workbenchMemento, new Properties()));
-			workbench.WorkbenchLayout = layout;
+			pWorkbench.Initialize();
+			pWorkbench.SetMemento(PropertyService.Get(workbenchMemento, new Properties()));
+			pWorkbench.WorkbenchLayout = layout;
+
+            ApplicationStateInfoService.RegisterStateGetter(activeContentState, delegate { return WorkbenchSingleton.Instance.Workbench.ActiveContent; });
 			
-			ApplicationStateInfoService.RegisterStateGetter(activeContentState, delegate { return WorkbenchSingleton.Workbench.ActiveContent; });
-			
-			OnWorkbenchCreated();
+			_Instance.OnWorkbenchCreated();
 			
 			// initialize workbench-dependent services:
 			Project.ProjectService.InitializeService();
 			NavigationService.InitializeService();
 			
-			workbench.ActiveContentChanged += delegate {
-				Debug.WriteLine("ActiveContentChanged to " + workbench.ActiveContent);
-				LoggingService.Debug("ActiveContentChanged to " + workbench.ActiveContent);
+			pWorkbench.ActiveContentChanged += delegate {
+				Debug.WriteLine("ActiveContentChanged to " + pWorkbench.ActiveContent);
+				LoggingService.Debug("ActiveContentChanged to " + pWorkbench.ActiveContent);
 			};
-			workbench.ActiveViewContentChanged += delegate {
-				Debug.WriteLine("ActiveViewContentChanged to " + workbench.ActiveViewContent);
-				LoggingService.Debug("ActiveViewContentChanged to " + workbench.ActiveViewContent);
+			pWorkbench.ActiveViewContentChanged += delegate {
+				Debug.WriteLine("ActiveViewContentChanged to " + pWorkbench.ActiveViewContent);
+				LoggingService.Debug("ActiveViewContentChanged to " + pWorkbench.ActiveViewContent);
 			};
-			workbench.ActiveWorkbenchWindowChanged += delegate {
-				Debug.WriteLine("ActiveWorkbenchWindowChanged to " + workbench.ActiveWorkbenchWindow);
-				LoggingService.Debug("ActiveWorkbenchWindowChanged to " + workbench.ActiveWorkbenchWindow);
+			pWorkbench.ActiveWorkbenchWindowChanged += delegate {
+				Debug.WriteLine("ActiveWorkbenchWindowChanged to " + pWorkbench.ActiveWorkbenchWindow);
+				LoggingService.Debug("ActiveWorkbenchWindowChanged to " + pWorkbench.ActiveWorkbenchWindow);
 			};
 		}
 		
@@ -112,7 +127,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 		/// Runs workbench cleanup.
 		/// Is called by ICSharpCode.SharpDevelop.Sda and should not be called manually!
 		/// </summary>
-		public static void OnWorkbenchUnloaded()
+		public void OnWorkbenchUnloaded()
 		{
 			if (!Project.ProjectService.IsClosingCanceled()) {
 				Project.ProjectService.CloseSolution();
@@ -300,7 +315,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 		}
 		#endregion
 		
-		static void OnWorkbenchCreated()
+		void OnWorkbenchCreated()
 		{
 			WorkbenchCreated(null, EventArgs.Empty);
 		}
@@ -308,11 +323,11 @@ namespace ICSharpCode.SharpDevelop.Gui
 		/// <summary>
 		/// Is called, when the workbench is created
 		/// </summary>
-		public static event EventHandler WorkbenchCreated = delegate {};
+		public event EventHandler WorkbenchCreated = delegate {};
 		
 		/// <summary>
 		/// Is called, when the workbench is unloaded
 		/// </summary>
-		public static event EventHandler WorkbenchUnloaded = delegate {};
+		public event EventHandler WorkbenchUnloaded = delegate {};
 	}
 }

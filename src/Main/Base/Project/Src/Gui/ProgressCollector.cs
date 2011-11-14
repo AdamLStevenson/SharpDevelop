@@ -12,7 +12,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 	/// <summary>
 	/// Collects progress using nested IProgressMonitors and provides it to a different thread using events.
 	/// </summary>
-	public sealed class ProgressCollector : INotifyPropertyChanged
+    public sealed class ProgressCollector : IProgressCollector
 	{
 		readonly ISynchronizeInvoke eventThread;
 		readonly CancellationToken cancellationToken;

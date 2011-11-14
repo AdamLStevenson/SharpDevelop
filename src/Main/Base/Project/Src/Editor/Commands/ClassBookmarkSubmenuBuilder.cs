@@ -136,7 +136,7 @@ namespace ICSharpCode.SharpDevelop.Editor.Commands
 		
 		public static IClass GetCurrentPart(IClass possibleCompound)
 		{
-			IViewContent viewContent = WorkbenchSingleton.Workbench.ActiveViewContent;
+			IViewContent viewContent = WorkbenchSingleton.Instance.Workbench.ActiveViewContent;
 			if (viewContent != null)
 				return GetPart(possibleCompound, viewContent.PrimaryFileName);
 			else

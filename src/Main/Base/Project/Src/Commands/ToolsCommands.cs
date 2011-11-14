@@ -14,7 +14,7 @@ namespace ICSharpCode.SharpDevelop.Commands
 		{
 			TabbedOptionsDialog o = new TabbedOptionsDialog(node.BuildChildItems<IOptionPanelDescriptor>(null));
 			o.Title = dialogTitle;
-			o.Owner = WorkbenchSingleton.MainWindow;
+			o.Owner = WorkbenchSingleton.Instance.MainWindow;
 			return o.ShowDialog();
 		}
 		
@@ -22,7 +22,7 @@ namespace ICSharpCode.SharpDevelop.Commands
 		{
 			TreeViewOptionsDialog o = new TreeViewOptionsDialog(node.BuildChildItems<IOptionPanelDescriptor>(null));
 			o.Title = dialogTitle;
-			o.Owner = WorkbenchSingleton.MainWindow;
+			o.Owner = WorkbenchSingleton.Instance.MainWindow;
 			return o.ShowDialog();
 		}
 		
@@ -42,7 +42,7 @@ namespace ICSharpCode.SharpDevelop.Commands
 	{
 		public override void Run()
 		{
-			WorkbenchSingleton.Workbench.FullScreen = !WorkbenchSingleton.Workbench.FullScreen;
+			WorkbenchSingleton.Instance.Workbench.FullScreen = !WorkbenchSingleton.Instance.Workbench.FullScreen;
 		}
 	}
 }

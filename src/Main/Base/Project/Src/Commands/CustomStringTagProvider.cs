@@ -20,7 +20,7 @@ namespace ICSharpCode.SharpDevelop.Commands
 	{
 		string GetCurrentItemPath()
 		{
-			return WorkbenchSingleton.Workbench.ActiveViewContent.PrimaryFileName;
+			return WorkbenchSingleton.Instance.Workbench.ActiveViewContent.PrimaryFileName;
 		}
 		
 		string GetCurrentTargetPath()
@@ -28,8 +28,8 @@ namespace ICSharpCode.SharpDevelop.Commands
 			if (ProjectService.CurrentProject != null) {
 				return ProjectService.CurrentProject.OutputAssemblyFullPath;
 			}
-			/*if (WorkbenchSingleton.Workbench.ActiveWorkbenchWindow != null) {
-				string fileName = WorkbenchSingleton.Workbench.ActiveWorkbenchWindow.ViewContent.FileName;
+			/*if (WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow != null) {
+				string fileName = WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow.ViewContent.FileName;
 				return ProjectService.GetOutputAssemblyName(fileName);
 			}*/
 			return String.Empty;
@@ -84,21 +84,21 @@ namespace ICSharpCode.SharpDevelop.Commands
 					
 				case "CURLINE":
 					{
-						IPositionable positionable = WorkbenchSingleton.Workbench.ActiveViewContent as IPositionable;
+						IPositionable positionable = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as IPositionable;
 						if (positionable != null)
 							return positionable.Line.ToString();
 						return string.Empty;
 					}
 				case "CURCOL":
 					{
-						IPositionable positionable = WorkbenchSingleton.Workbench.ActiveViewContent as IPositionable;
+						IPositionable positionable = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as IPositionable;
 						if (positionable != null)
 							return positionable.Column.ToString();
 						return string.Empty;
 					}
 				case "CURTEXT":
 					{
-						var tecp = WorkbenchSingleton.Workbench.ActiveViewContent as ITextEditorProvider;
+						var tecp = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as ITextEditorProvider;
 						if (tecp != null) {
 							return tecp.TextEditor.SelectedText;
 						}

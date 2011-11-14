@@ -16,7 +16,7 @@ namespace ResourceEditor
 	{
 		public override void Run()
 		{
-			ResourceEditorControl editor = ((ResourceEditWrapper)WorkbenchSingleton.Workbench.ActiveViewContent).ResourceEditor;
+			ResourceEditorControl editor = ((ResourceEditWrapper)WorkbenchSingleton.Instance.Workbench.ActiveViewContent).ResourceEditor;
 			
 			if(editor.ResourceList.WriteProtected) {
 				return;
@@ -28,7 +28,7 @@ namespace ResourceEditor
 				fdiag.Multiselect    = true;
 				fdiag.CheckFileExists = true;
 				
-				if (fdiag.ShowDialog(ICSharpCode.SharpDevelop.Gui.WorkbenchSingleton.MainWin32Window) == DialogResult.OK) {
+				if (fdiag.ShowDialog(ICSharpCode.SharpDevelop.Gui.WorkbenchSingleton.Instance.MainWin32Window) == DialogResult.OK) {
 					foreach (string filename in fdiag.FileNames) {
 						string oresname = Path.ChangeExtension(Path.GetFileName(filename), null);
 						if (oresname == "") oresname = "new";

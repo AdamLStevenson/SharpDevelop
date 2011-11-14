@@ -17,7 +17,7 @@ namespace ICSharpCode.PackageManagement
 		public Window Owner {
 			get {
 				if (owner == null) {
-					owner = WorkbenchSingleton.MainWindow;
+					owner = WorkbenchSingleton.Instance.MainWindow;
 				}
 				return owner;
 			}

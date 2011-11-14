@@ -13,10 +13,10 @@ namespace ICSharpCode.WpfDesign.AddIn
 {
 	public class MyTypeFinder : XamlTypeFinder
 	{
-		OpenedFile file;
+		IOpenedFile file;
 		readonly TypeResolutionService typeResolutionService = new TypeResolutionService();
 		
-		public static MyTypeFinder Create(OpenedFile file)
+		public static MyTypeFinder Create(IOpenedFile file)
 		{
 			MyTypeFinder f = new MyTypeFinder();
 			f.file = file;
@@ -68,7 +68,7 @@ namespace ICSharpCode.WpfDesign.AddIn
 			return copy;
 		}
 		
-		internal static IProjectContent GetProjectContent(OpenedFile file)
+		internal static IProjectContent GetProjectContent(IOpenedFile file)
 		{
 			if (ProjectService.OpenSolution != null && file != null) {
 				IProject p = ProjectService.OpenSolution.FindProjectContainingFile(file.FileName);

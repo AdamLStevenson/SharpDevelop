@@ -6,7 +6,7 @@
     <AssemblyName>SourceAnalysis</AssemblyName>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3EAA45A9-735C-4AC7-A799-947B93EA449D}</ProjectGuid>
+    <ProjectGuid>{CE498514-D12D-4B6E-AE0E-FEC29BD43748}</ProjectGuid>
     <OutputPath>..\..\..\..\AddIns\Analysis\SourceAnalysis</OutputPath>
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
     <NoStdLib>False</NoStdLib>
@@ -60,24 +60,29 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Compile Include="Configuration\AssemblyInfo.cs" />
-    <Compile Include="Src\AnalysisProjectOptionsPanel.cs" />
+    <Compile Include="Src\AnalysisProjectOptionsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Src\AnalysisProjectOptions.Designer.cs">
       <DependentUpon>AnalysisProjectOptions.cs</DependentUpon>
     </Compile>
-    <Compile Include="Src\AnalysisProjectOptions.cs" />
+    <Compile Include="Src\AnalysisProjectOptions.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <EmbeddedResource Include="Src\AnalysisProjectOptions.resx">
       <DependentUpon>AnalysisProjectOptions.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Src\StyleCopWrapper.cs" />
     <Compile Include="Src\CheckCurrentProjectCommand.cs" />
-    <Compile Include="Src\AnalysisIdeOptionsPanel.cs" />
+    <Compile Include="Src\AnalysisIdeOptionsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <EmbeddedResource Include="Resources\AnalysisIdeOptionPanel.xfrm" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources" />
     <ProjectReference Include="..\..\..\Libraries\NRefactory\Project\NRefactory.csproj">
       <Project>{3A9AE6AA-BC07-4A2F-972C-581E3AE2F195}</Project>
-      <Name>NRefactory</Name>
+      <Name>NRefactory %28Libraries\NRefactory\NRefactory%29</Name>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Main\Base\Project\ICSharpCode.SharpDevelop.csproj">
@@ -94,6 +99,10 @@
       <Project>{924EE450-603D-49C1-A8E5-4AFAA31CE6F3}</Project>
       <Name>ICSharpCode.SharpDevelop.Dom</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Refactor\ICSharpCode.SharpDevelop.Base\ICSharpCode.SharpDevelop.Base.csproj">
+      <Project>{18E3561D-537C-42E7-984B-7764B4C94AE6}</Project>
+      <Name>ICSharpCode.SharpDevelop.Base</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />

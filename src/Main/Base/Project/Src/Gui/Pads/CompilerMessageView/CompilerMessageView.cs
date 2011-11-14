@@ -38,7 +38,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 		
 		static void InitializeInstance()
 		{
-			WorkbenchSingleton.Workbench.GetPad(typeof(CompilerMessageView)).CreatePad();
+			WorkbenchSingleton.Instance.Workbench.GetPad(typeof(CompilerMessageView)).CreatePad();
 		}
 		
 		//TextEditorControl textEditorControl = new TextEditorControl();

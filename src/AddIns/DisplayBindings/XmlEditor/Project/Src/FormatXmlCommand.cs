@@ -15,7 +15,7 @@ namespace ICSharpCode.XmlEditor
 	{
 		public override void Run()
 		{
-			ITextEditorProvider provider = WorkbenchSingleton.Workbench.ActiveViewContent as ITextEditorProvider;
+			ITextEditorProvider provider = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as ITextEditorProvider;
 			
 			if (provider != null) {
 				XmlView.FormatXml(provider.TextEditor);

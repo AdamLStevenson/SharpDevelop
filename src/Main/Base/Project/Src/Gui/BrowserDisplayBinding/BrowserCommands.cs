@@ -75,7 +75,7 @@ namespace ICSharpCode.SharpDevelop.BrowserDisplayBinding
 	{
 		public override void Run()
 		{
-			WorkbenchSingleton.Workbench.ShowView(new BrowserPane());
+			WorkbenchSingleton.Instance.Workbench.ShowView(new BrowserPane());
 		}
 	}
 }

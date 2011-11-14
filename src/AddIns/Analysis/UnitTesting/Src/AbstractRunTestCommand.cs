@@ -274,7 +274,7 @@ namespace ICSharpCode.UnitTesting
 			ShowPad(context.Workbench.GetPad(typeof(CompilerMessageView)));
 		}
 		
-		protected void ShowPad(PadDescriptor padDescriptor)
+		protected void ShowPad(IPadDescriptor padDescriptor)
 		{
 			context.Workbench.SafeThreadAsyncCall(padDescriptor.BringPadToFront);
 		}

@@ -38,7 +38,7 @@ namespace ResourceEditor
 				fileDialog.Filter = "All files (*.*)|*.*";
 				fileDialog.CheckFileExists = true;
 				
-				if(fileDialog.ShowDialog(ICSharpCode.SharpDevelop.Gui.WorkbenchSingleton.MainWin32Window) == DialogResult.OK) {
+				if(fileDialog.ShowDialog(ICSharpCode.SharpDevelop.Gui.WorkbenchSingleton.Instance.MainWin32Window) == DialogResult.OK) {
 					try {
 						bitmap = new Bitmap(fileDialog.FileName);
 					} catch {

@@ -103,7 +103,7 @@ namespace ICSharpCode.Profiler.AddIn
 		
 		public void Run()
 		{
-			WorkbenchSingleton.Workbench.GetPad(typeof(CompilerMessageView)).BringPadToFront();
+			WorkbenchSingleton.Instance.Workbench.GetPad(typeof(CompilerMessageView)).BringPadToFront();
 			this.controlWindow = new ProfilerControlWindow(this);
 			profiler.Start();
 			this.controlWindow.Show();

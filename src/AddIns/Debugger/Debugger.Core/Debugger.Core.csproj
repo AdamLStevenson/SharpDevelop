@@ -189,23 +189,11 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interop" />
-    <Folder Include="MetaData" />
-    <Folder Include="Mono.Cecil" />
-    <Folder Include="Mono.Cecil\Mono.Cecil" />
-    <Folder Include="Mono.Cecil\Mono.Cecil.Binary" />
-    <Folder Include="Mono.Cecil\Mono.Cecil.Metadata" />
-    <Folder Include="Mono.Cecil\Mono.Cecil.Signatures" />
-    <Folder Include="NRefactory" />
-    <Folder Include="NRefactory\Ast" />
-    <Folder Include="NRefactory\Visitors" />
-    <Folder Include="Tests" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\..\Libraries\NRefactory\Project\NRefactory.csproj">
       <Project>{3A9AE6AA-BC07-4A2F-972C-581E3AE2F195}</Project>
-      <Name>NRefactory</Name>
+      <Name>NRefactory %28Libraries\NRefactory\NRefactory%29</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>

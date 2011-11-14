@@ -235,7 +235,7 @@ namespace ICSharpCode.FormsDesigner.Services
 						// The error might be caused by an assembly that is
 						// not even needed for the designer to load.
 						LoggingService.Error("Error loading assembly " + fileName, e);
-						WorkbenchSingleton.Workbench.GetPad(typeof(CompilerMessageView)).BringPadToFront();
+						WorkbenchSingleton.Instance.Workbench.GetPad(typeof(CompilerMessageView)).BringPadToFront();
 						TaskService.BuildMessageViewCategory.AppendText(
 							StringParser.Parse("${res:FileUtilityService.ErrorWhileLoading}")
 							+ "\r\n" + fileName + "\r\n" + e.Message + "\r\n"

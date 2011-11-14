@@ -30,7 +30,7 @@ namespace ICSharpCode.Svn
 			if (!AddInOptions.UseHistoryDisplayBinding) {
 				return false;
 			}
-			OpenedFile file = content.PrimaryFile;
+			IOpenedFile file = content.PrimaryFile;
 			if (file == null || file.IsUntitled || !File.Exists(file.FileName)) {
 				return false;
 			}

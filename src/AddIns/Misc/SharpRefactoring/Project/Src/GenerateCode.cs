@@ -98,7 +98,7 @@ namespace SharpRefactoring
 			
 			if (!targetClass.IsUserCode()) {
 				IntroduceMethodDialog dialog = new IntroduceMethodDialog(UnknownMethodCall.CallingClass);
-				dialog.Owner = WorkbenchSingleton.MainWindow;
+				dialog.Owner = WorkbenchSingleton.Instance.MainWindow;
 				
 				if (dialog.ShowDialog() != true)
 					return;
@@ -135,7 +135,7 @@ namespace SharpRefactoring
 						targetClass = result as IClass;
 				}
 				// exclude in Unit Test mode
-				if (WorkbenchSingleton.Workbench != null)
+				if (WorkbenchSingleton.Instance.Workbench != null)
 					editor = (FileService.OpenFile(targetClass.CompilationUnit.FileName) as ITextEditorProvider).TextEditor;
 				if (targetClass.ClassType != ClassType.Interface)
 					modifiers |= ModifierEnum.Public;

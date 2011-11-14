@@ -15,7 +15,7 @@ namespace ICSharpCode.Scripting
 		public ScriptingWorkbench(Type consolePadType)
 		{
 			this.consolePadType = consolePadType;
-			workbench = WorkbenchSingleton.Workbench;
+			workbench = WorkbenchSingleton.Instance.Workbench;
 		}		
 		
 		public IViewContent ActiveViewContent {
@@ -24,7 +24,7 @@ namespace ICSharpCode.Scripting
 		
 		public IScriptingConsolePad GetScriptingConsolePad()
 		{
-			PadDescriptor padDescriptor = workbench.GetPad(consolePadType);
+			IPadDescriptor padDescriptor = workbench.GetPad(consolePadType);
 			return padDescriptor.PadContent as IScriptingConsolePad;
 		}
 	}

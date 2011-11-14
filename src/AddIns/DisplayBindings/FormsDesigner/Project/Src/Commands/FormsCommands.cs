@@ -30,7 +30,7 @@ namespace ICSharpCode.FormsDesigner.Commands
 		
 		FormsDesignerViewContent FormDesigner {
 			get {
-				IWorkbenchWindow window = WorkbenchSingleton.Workbench.ActiveWorkbenchWindow;
+				IWorkbenchWindow window = WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow;
 				if (window == null) {
 					return null;
 				}
@@ -67,7 +67,7 @@ namespace ICSharpCode.FormsDesigner.Commands
 
 		FormsDesignerViewContent FormDesigner {
 			get {
-				IWorkbenchWindow window = WorkbenchSingleton.Workbench.ActiveWorkbenchWindow;
+				IWorkbenchWindow window = WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow;
 				if (window == null) {
 					return null;
 				}
@@ -77,7 +77,7 @@ namespace ICSharpCode.FormsDesigner.Commands
 		
 		public override void Run()
 		{
-			IWorkbenchWindow window = WorkbenchSingleton.Workbench.ActiveWorkbenchWindow;
+			IWorkbenchWindow window = WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow;
 			if (window == null) {
 				return;
 			}
@@ -99,7 +99,7 @@ namespace ICSharpCode.FormsDesigner.Commands
 
 		public override void Run()
 		{
-			PadDescriptor padContent = WorkbenchSingleton.Workbench.GetPad(typeof(ICSharpCode.SharpDevelop.Gui.PropertyPad));
+			IPadDescriptor padContent = WorkbenchSingleton.Instance.Workbench.GetPad(typeof(ICSharpCode.SharpDevelop.Gui.PropertyPad));
 			if (padContent != null) {
 				padContent.BringPadToFront();
 			}
@@ -396,7 +396,7 @@ namespace ICSharpCode.FormsDesigner.Commands
 	{
 		FormsDesignerViewContent FormDesigner {
 			get {
-				IWorkbenchWindow window = WorkbenchSingleton.Workbench.ActiveWorkbenchWindow;
+				IWorkbenchWindow window = WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow;
 				if (window == null) {
 					return null;
 				}
@@ -460,7 +460,7 @@ namespace ICSharpCode.FormsDesigner.Commands
 		}
 		FormsDesignerViewContent FormDesigner {
 			get {
-				IWorkbenchWindow window = WorkbenchSingleton.Workbench.ActiveWorkbenchWindow;
+				IWorkbenchWindow window = WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow;
 				if (window == null) {
 					return null;
 				}

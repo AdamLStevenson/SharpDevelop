@@ -52,13 +52,13 @@ namespace CSharpBinding
 			thread.Name = "CSBackgroundCompiler";
 			
 			ParserService.ParserUpdateStepFinished += delegate {
-				if (WorkbenchSingleton.Workbench.ActiveViewContent == null)
+				if (WorkbenchSingleton.Instance.Workbench.ActiveViewContent == null)
 					return;
 				
 				if (ParserService.LoadSolutionProjectsThreadRunning)
 					return;
 				
-				ITextEditorProvider provider = WorkbenchSingleton.Workbench.ActiveViewContent as ITextEditorProvider;
+				ITextEditorProvider provider = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as ITextEditorProvider;
 				
 				if (provider == null)
 					return;

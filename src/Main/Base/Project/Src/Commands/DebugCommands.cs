@@ -119,7 +119,7 @@ namespace ICSharpCode.SharpDevelop.Project.Commands
 	{
 		public override void Run()
 		{
-			var viewContent = WorkbenchSingleton.Workbench.ActiveContent;
+			var viewContent = WorkbenchSingleton.Instance.Workbench.ActiveContent;
 			ITextEditorProvider provider = viewContent as ITextEditorProvider;
 			ITextEditor editor = null;
 			

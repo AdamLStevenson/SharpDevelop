@@ -19,14 +19,14 @@ namespace ICSharpCode.AvalonEdit.AddIn.HiddenDefinition
 		{
 			this.editor = editorView;
 			control = new HiddenDefinitionControl();
-			WorkbenchSingleton.Workbench.ActiveContentChanged += WorkbenchSingleton_Workbench_ActiveContentChanged;
+			WorkbenchSingleton.Instance.Workbench.ActiveContentChanged += WorkbenchSingleton_Workbench_ActiveContentChanged;
 		}
 
 		public BracketSearchResult BracketSearchResult { get; set; }
 		
 		public void Dispose()
 		{
-			WorkbenchSingleton.Workbench.ActiveContentChanged -= WorkbenchSingleton_Workbench_ActiveContentChanged;
+			WorkbenchSingleton.Instance.Workbench.ActiveContentChanged -= WorkbenchSingleton_Workbench_ActiveContentChanged;
 			ClosePopup();
 			popup = null;
 		}

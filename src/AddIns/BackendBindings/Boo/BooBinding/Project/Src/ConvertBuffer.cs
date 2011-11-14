@@ -26,7 +26,7 @@ namespace Grunwald.BooBinding
 		
 		public override void Run()
 		{
-			IWorkbenchWindow window = WorkbenchSingleton.Workbench.ActiveWorkbenchWindow;
+			IWorkbenchWindow window = WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow;
 			
 			if (window != null && window.ActiveViewContent is IEditable) {
 				CompilerErrorCollection errors = new CompilerErrorCollection();

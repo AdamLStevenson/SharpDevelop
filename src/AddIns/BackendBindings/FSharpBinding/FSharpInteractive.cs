@@ -138,11 +138,11 @@ namespace FSharpBinding
 	{
 		public override void Run()
 		{
-			PadDescriptor pad = WorkbenchSingleton.Workbench.GetPad(typeof(FSharpInteractive));
+			IPadDescriptor pad = WorkbenchSingleton.Instance.Workbench.GetPad(typeof(FSharpInteractive));
 			pad.BringPadToFront();
 			FSharpInteractive fsharpInteractive = (FSharpInteractive)pad.PadContent;
 			if (fsharpInteractive.foundCompiler) {
-				ITextEditorProvider editorProvider = WorkbenchSingleton.Workbench.ActiveViewContent as ITextEditorProvider;
+				ITextEditorProvider editorProvider = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as ITextEditorProvider;
 				if (editorProvider != null) {
 					var textEditor = editorProvider.TextEditor;
 					if (textEditor.SelectionLength > 0) {

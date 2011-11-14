@@ -68,7 +68,7 @@ namespace ICSharpCode.UsageDataCollector
 			container.TryAddService(typeof(IAnalyticsMonitor), this);
 			dbFileName = Path.Combine(PropertyService.ConfigDirectory, "usageData.dat");
 			
-			SharpDevelop.Gui.WorkbenchSingleton.WorkbenchUnloaded += delegate { CloseSession(); };
+			SharpDevelop.Gui.WorkbenchSingleton.Instance.WorkbenchUnloaded += delegate { CloseSession(); };
 		}
 		
 		static Guid FindUserId()

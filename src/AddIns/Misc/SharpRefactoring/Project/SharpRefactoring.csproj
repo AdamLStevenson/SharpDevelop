@@ -145,11 +145,7 @@
       <DependentUpon>ExtractMethodForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Src\Gui" />
-    <Folder Include="Src\ContextActions" />
-    <Folder Include="Src\MenuItemFactories" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="Src\Gui\CreatePropertiesDialog.xaml" />
     <Page Include="Src\Gui\InsertCtorDialog.xaml" />
@@ -165,7 +161,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\Libraries\NRefactory\Project\NRefactory.csproj">
       <Project>{3A9AE6AA-BC07-4A2F-972C-581E3AE2F195}</Project>
-      <Name>NRefactory</Name>
+      <Name>NRefactory %28Libraries\NRefactory\NRefactory%29</Name>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\Main\Base\Project\ICSharpCode.SharpDevelop.csproj">
@@ -197,6 +193,10 @@
       <Project>{8035765F-D51F-4A0C-A746-2FD100E19419}</Project>
       <Name>ICSharpCode.SharpDevelop.Widgets</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Refactor\ICSharpCode.SharpDevelop.Base\ICSharpCode.SharpDevelop.Base.csproj">
+      <Project>{18E3561D-537C-42E7-984B-7764B4C94AE6}</Project>
+      <Name>ICSharpCode.SharpDevelop.Base</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

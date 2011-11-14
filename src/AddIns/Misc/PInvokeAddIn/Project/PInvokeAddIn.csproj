@@ -48,7 +48,9 @@
   <ItemGroup>
     <Compile Include="Configuration\AssemblyInfo.cs" />
     <Compile Include="Src\InsertPInvokeSignaturesCommand.cs" />
-    <Compile Include="Src\InsertPInvokeSignaturesForm.cs" />
+    <Compile Include="Src\InsertPInvokeSignaturesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Src\WebReferences\PInvokeService.cs" />
     <Compile Include="Src\PInvokeRepository.cs" />
     <Compile Include="Src\PInvokeCodeGenerator.cs" />
@@ -73,6 +75,10 @@
       <Project>{35CEF10F-2D4C-45F2-9DD1-161E0FEC583C}</Project>
       <Name>ICSharpCode.Core</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Refactor\ICSharpCode.SharpDevelop.Base\ICSharpCode.SharpDevelop.Base.csproj">
+      <Project>{18E3561D-537C-42E7-984B-7764B4C94AE6}</Project>
+      <Name>ICSharpCode.SharpDevelop.Base</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />

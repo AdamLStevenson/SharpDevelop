@@ -55,7 +55,7 @@ namespace ICSharpCode.SharpDevelop
 		
 		static bool IsUntitled(IViewContent viewContent)
 		{
-			OpenedFile file = viewContent.PrimaryFile;
+			IOpenedFile file = viewContent.PrimaryFile;
 			if (file == null)
 				return false;
 			else
@@ -64,7 +64,7 @@ namespace ICSharpCode.SharpDevelop
 		
 		public bool IsValid(object caller, Condition condition)
 		{
-			if (WorkbenchSingleton.Workbench == null) {
+			if (WorkbenchSingleton.Instance.Workbench == null) {
 				return false;
 			}
 			
@@ -72,7 +72,7 @@ namespace ICSharpCode.SharpDevelop
 			nowindowState = condition.Properties.Get("noopenwindowstate", WindowState.None);
 			
 			
-			foreach (IViewContent view in WorkbenchSingleton.Workbench.ViewContentCollection) {
+			foreach (IViewContent view in WorkbenchSingleton.Instance.Workbench.ViewContentCollection) {
 				if (IsStateOk(view)) {
 					return true;
 				}

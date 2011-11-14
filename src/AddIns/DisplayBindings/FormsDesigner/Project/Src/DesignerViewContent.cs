@@ -57,7 +57,7 @@ namespace ICSharpCode.FormsDesigner
 			}
 		}
 		
-		public OpenedFile DesignerCodeFile {
+		public IOpenedFile DesignerCodeFile {
 			get { return this.sourceCodeStorage.DesignerCodeFile; }
 		}
 		
@@ -84,12 +84,12 @@ namespace ICSharpCode.FormsDesigner
 			set { this.DesignerCodeFileDocument.Text = value; }
 		}
 		
-		public ICSharpCode.SharpDevelop.Editor.IDocument GetDocumentForFile(OpenedFile file)
+		public ICSharpCode.SharpDevelop.Editor.IDocument GetDocumentForFile(IOpenedFile file)
 		{
 			return this.sourceCodeStorage[file];
 		}
 		
-		public IEnumerable<KeyValuePair<OpenedFile, IDocument>> SourceFiles {
+		public IEnumerable<KeyValuePair<IOpenedFile, IDocument>> SourceFiles {
 			get { return this.sourceCodeStorage; }
 		}
 		
@@ -155,7 +155,7 @@ namespace ICSharpCode.FormsDesigner
 		
 		bool inMasterLoadOperation;
 		
-		protected override void LoadInternal(OpenedFile file, System.IO.Stream stream)
+		protected override void LoadInternal(IOpenedFile file, System.IO.Stream stream)
 		{
 			LoggingService.Debug("Forms designer: Load " + file.FileName + "; inMasterLoadOperation=" + this.inMasterLoadOperation);
 			
@@ -186,8 +186,8 @@ namespace ICSharpCode.FormsDesigner
 					this.sourceCodeStorage.LoadFile(file, stream);
 					
 					LoggingService.Debug("Forms designer: Determining designer source files for " + file.FileName);
-					OpenedFile newDesignerCodeFile;
-					IEnumerable<OpenedFile> sourceFiles = this.generator.GetSourceFiles(out newDesignerCodeFile);
+					IOpenedFile newDesignerCodeFile;
+					IEnumerable<IOpenedFile> sourceFiles = this.generator.GetSourceFiles(out newDesignerCodeFile);
 					if (sourceFiles == null || newDesignerCodeFile == null) {
 						throw new FormsDesignerLoadException("The designer source files could not be determined.");
 					}
@@ -243,7 +243,7 @@ namespace ICSharpCode.FormsDesigner
 			}
 		}
 		
-		protected override void SaveInternal(OpenedFile file, System.IO.Stream stream)
+		protected override void SaveInternal(IOpenedFile file, System.IO.Stream stream)
 		{
 			LoggingService.Debug("Forms designer: Save " + file.FileName);
 			if (hasUnmergedChanges) {
@@ -256,7 +256,7 @@ namespace ICSharpCode.FormsDesigner
 			}
 		}
 		
-		internal void AddResourceFile(OpenedFile file)
+		internal void AddResourceFile(IOpenedFile file)
 		{
 			this.Files.Add(file);
 		}
@@ -726,7 +726,7 @@ namespace ICSharpCode.FormsDesigner
 				this.UnloadDesigner();
 				
 				// null check is required to support running in unit test mode
-				if (WorkbenchSingleton.Workbench != null) {
+				if (WorkbenchSingleton.Instance.Workbench != null) {
 					this.IsActiveViewContentChanged -= this.IsActiveViewContentChangedHandler;
 				}
 				
@@ -944,7 +944,7 @@ namespace ICSharpCode.FormsDesigner
 
 		void CheckForDesignerCodeFileDeletion(FileCancelEventArgs e)
 		{
-			OpenedFile file;
+			IOpenedFile file;
 			
 			if (e.IsDirectory) {
 				file = this.Files.SingleOrDefault(

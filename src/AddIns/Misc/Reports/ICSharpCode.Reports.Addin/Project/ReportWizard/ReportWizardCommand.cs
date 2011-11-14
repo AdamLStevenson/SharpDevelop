@@ -19,7 +19,7 @@ namespace ICSharpCode.Reports.Addin.ReportWizard
 	public class ReportWizardCommand : AbstractMenuCommand
 	{
 		private const string WizardPath = "/ReportGenerator/ReportGeneratorWizard";
-		private OpenedFile file;
+		private IOpenedFile file;
 		private ReportModel reportModel;
 		private IReportGenerator reportGenerator;
 		private Properties customizer = new Properties();
@@ -27,7 +27,7 @@ namespace ICSharpCode.Reports.Addin.ReportWizard
 		private bool canceled;
 		
 		
-		public ReportWizardCommand(OpenedFile file)
+		public ReportWizardCommand(IOpenedFile file)
 		{
 			this.file = file;
 		}

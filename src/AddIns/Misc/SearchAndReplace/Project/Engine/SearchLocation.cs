@@ -49,12 +49,12 @@ namespace SearchAndReplace
 			switch (Target) {
 				case SearchTarget.CurrentDocument:
 				case SearchTarget.CurrentSelection:
-					ITextEditorProvider vc = WorkbenchSingleton.Workbench.ActiveViewContent as ITextEditorProvider;
+					ITextEditorProvider vc = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as ITextEditorProvider;
 					if (vc != null)
 						files.Add(vc.TextEditor.FileName);
 					break;
 				case SearchTarget.AllOpenFiles:
-					foreach (ITextEditorProvider editor in WorkbenchSingleton.Workbench.ViewContentCollection.OfType<ITextEditorProvider>())
+					foreach (ITextEditorProvider editor in WorkbenchSingleton.Instance.Workbench.ViewContentCollection.OfType<ITextEditorProvider>())
 						files.Add(editor.TextEditor.FileName);
 					break;
 				case SearchTarget.WholeProject:

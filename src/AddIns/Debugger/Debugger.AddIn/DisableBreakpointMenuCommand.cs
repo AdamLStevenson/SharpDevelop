@@ -21,7 +21,7 @@ namespace Debugger.AddIn
 	{
 		public override void Run()
 		{
-			ITextEditorProvider provider = WorkbenchSingleton.Workbench.ActiveWorkbenchWindow.ActiveViewContent as ITextEditorProvider;
+			ITextEditorProvider provider = WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow.ActiveViewContent as ITextEditorProvider;
 			
 			BreakpointBookmark point = null;
 			

@@ -11,12 +11,12 @@ namespace ICSharpCode.SharpDevelop.Commands
 	{
 		public override void Run()
 		{
-			if (WorkbenchSingleton.Workbench.ActiveWorkbenchWindow == null ||
-			   		WorkbenchSingleton.Workbench.WorkbenchWindowCollection.Count == 0) {
+			if (WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow == null ||
+			   		WorkbenchSingleton.Instance.Workbench.WorkbenchWindowCollection.Count == 0) {
 				return;
 			}
-			int index = WorkbenchSingleton.Workbench.WorkbenchWindowCollection.IndexOf(WorkbenchSingleton.Workbench.ActiveWorkbenchWindow);
-			WorkbenchSingleton.Workbench.WorkbenchWindowCollection[(index + 1) % WorkbenchSingleton.Workbench.WorkbenchWindowCollection.Count].SelectWindow();
+			int index = WorkbenchSingleton.Instance.Workbench.WorkbenchWindowCollection.IndexOf(WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow);
+			WorkbenchSingleton.Instance.Workbench.WorkbenchWindowCollection[(index + 1) % WorkbenchSingleton.Instance.Workbench.WorkbenchWindowCollection.Count].SelectWindow();
 		}
 	}
 	
@@ -24,12 +24,12 @@ namespace ICSharpCode.SharpDevelop.Commands
 	{
 		public override void Run()
 		{
-			if (WorkbenchSingleton.Workbench.ActiveWorkbenchWindow == null ||
-					WorkbenchSingleton.Workbench.WorkbenchWindowCollection.Count == 0) {
+			if (WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow == null ||
+					WorkbenchSingleton.Instance.Workbench.WorkbenchWindowCollection.Count == 0) {
 				return;
 			}
-			int index = WorkbenchSingleton.Workbench.WorkbenchWindowCollection.IndexOf(WorkbenchSingleton.Workbench.ActiveWorkbenchWindow);
-			WorkbenchSingleton.Workbench.WorkbenchWindowCollection[(index + WorkbenchSingleton.Workbench.WorkbenchWindowCollection.Count - 1) % WorkbenchSingleton.Workbench.WorkbenchWindowCollection.Count].SelectWindow();
+			int index = WorkbenchSingleton.Instance.Workbench.WorkbenchWindowCollection.IndexOf(WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow);
+			WorkbenchSingleton.Instance.Workbench.WorkbenchWindowCollection[(index + WorkbenchSingleton.Instance.Workbench.WorkbenchWindowCollection.Count - 1) % WorkbenchSingleton.Instance.Workbench.WorkbenchWindowCollection.Count].SelectWindow();
 		}
 	}
 	
@@ -37,7 +37,7 @@ namespace ICSharpCode.SharpDevelop.Commands
 	{
 		public override void Run()
 		{
-			WorkbenchSingleton.Workbench.CloseAllViews();
+			WorkbenchSingleton.Instance.Workbench.CloseAllViews();
 		}
 	}
 	

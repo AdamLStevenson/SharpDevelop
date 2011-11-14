@@ -63,9 +63,9 @@ namespace ICSharpCode.SharpDevelop.Refactoring
 
 		ITextEditor GetCurrentEditor()
 		{
-			if (WorkbenchSingleton.Workbench == null)
+			if (WorkbenchSingleton.Instance.Workbench == null)
 				return null;
-			var activeViewContent = WorkbenchSingleton.Workbench.ActiveViewContent as ITextEditorProvider;
+			var activeViewContent = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as ITextEditorProvider;
 			if (activeViewContent == null)
 				return null;
 			return activeViewContent.TextEditor;

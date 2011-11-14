@@ -33,13 +33,13 @@ namespace ICSharpCode.SharpDevelop.Gui
 		
 		public ToolsPad()
 		{
-			WorkbenchSingleton.Workbench.ActiveViewContentChanged += WorkbenchActiveContentChanged;
+			WorkbenchSingleton.Instance.Workbench.ActiveViewContentChanged += WorkbenchActiveContentChanged;
 			WorkbenchActiveContentChanged(null, null);
 		}
 		
 		void WorkbenchActiveContentChanged(object sender, EventArgs e)
 		{
-			IToolsHost th = WorkbenchSingleton.Workbench.ActiveViewContent as IToolsHost;
+			IToolsHost th = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as IToolsHost;
 			if (th != null && th.ToolsContent != null) {
 				contentControl.SetContent(th.ToolsContent, th);
 			} else {

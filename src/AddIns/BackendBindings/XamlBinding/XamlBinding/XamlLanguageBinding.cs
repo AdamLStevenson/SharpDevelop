@@ -30,7 +30,7 @@ namespace ICSharpCode.XamlBinding
 			// if editor is not an AvalonEdit.TextEditor
 			// GetService returns null
 			if (textView != null) {
-				if (WorkbenchSingleton.Workbench != null) {
+				if (WorkbenchSingleton.Instance.Workbench != null) {
 					if (XamlBindingOptions.UseAdvancedHighlighting) {
 						colorizer = new XamlColorizer(editor, textView);
 						// attach the colorizer

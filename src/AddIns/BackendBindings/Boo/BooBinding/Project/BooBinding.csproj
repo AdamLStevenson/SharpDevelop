@@ -97,7 +97,9 @@
       <Link>Configuration\GlobalAssemblyInfo.cs</Link>
     </Compile>
     <EmbeddedResource Include="Resources\BuildOptions.xfrm" />
-    <Compile Include="Src\BuildOptions.cs" />
+    <Compile Include="Src\BuildOptions.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <None Include="Templates\DefaultAssemblyInfo.boo">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -118,7 +120,6 @@
     <Content Include="Templates\Library.xpt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Folder Include="Src\CodeCompletion" />
     <ProjectReference Include="..\..\..\..\..\Main\Base\Project\ICSharpCode.SharpDevelop.csproj">
       <Project>{2748AD25-9C63-4E12-877B-4DCE96FBED54}</Project>
       <Name>ICSharpCode.SharpDevelop</Name>
@@ -131,15 +132,18 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\..\Libraries\NRefactory\Project\NRefactory.csproj">
       <Project>{3A9AE6AA-BC07-4A2F-972C-581E3AE2F195}</Project>
-      <Name>NRefactory</Name>
+      <Name>NRefactory %28Libraries\NRefactory\NRefactory%29</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Refactor\ICSharpCode.SharpDevelop.Base\ICSharpCode.SharpDevelop.Base.csproj">
+      <Project>{18E3561D-537C-42E7-984B-7764B4C94AE6}</Project>
+      <Name>ICSharpCode.SharpDevelop.Base</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\NRefactoryToBooConverter\Project\NRefactoryToBooConverter.csproj">
       <Project>{DBCF20A1-BA13-4582-BFA9-74DE4D987B73}</Project>
       <Name>NRefactoryToBooConverter</Name>
       <Private>True</Private>
     </ProjectReference>
-    <Folder Include="Src\Designer" />
     <Content Include="Templates\Empty.xft">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -155,8 +159,6 @@
       <Name>FormsDesigner</Name>
       <Private>False</Private>
     </ProjectReference>
-    <Folder Include="Configuration" />
-    <Folder Include="Resources" />
     <ProjectReference Include="..\..\..\..\..\Main\ICSharpCode.SharpDevelop.Dom\Project\ICSharpCode.SharpDevelop.Dom.csproj">
       <Project>{924EE450-603D-49C1-A8E5-4AFAA31CE6F3}</Project>
       <Name>ICSharpCode.SharpDevelop.Dom</Name>

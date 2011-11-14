@@ -11,7 +11,7 @@ namespace ICSharpCode.SharpDevelop.Editor.Commands
 	{
 		public override void Run()
 		{
-			IViewContent viewContent = WorkbenchSingleton.Workbench.ActiveViewContent;
+			IViewContent viewContent = WorkbenchSingleton.Instance.Workbench.ActiveViewContent;
 			if (viewContent == null || !(viewContent is ITextEditorProvider)) {
 				return;
 			}

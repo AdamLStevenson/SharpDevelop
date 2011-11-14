@@ -19,7 +19,7 @@ namespace ICSharpCode.CodeCoverage
 		
 		static CodeCoverageService()
 		{
-			WorkbenchSingleton.Workbench.ViewOpened += ViewOpened;
+			WorkbenchSingleton.Instance.Workbench.ViewOpened += ViewOpened;
 		}
 		
 		/// <summary>
@@ -108,14 +108,14 @@ namespace ICSharpCode.CodeCoverage
 		static void ShowCodeCoverage()
 		{
 			// Highlight any open files.
-			foreach (IViewContent view in WorkbenchSingleton.Workbench.ViewContentCollection) {
+			foreach (IViewContent view in WorkbenchSingleton.Instance.Workbench.ViewContentCollection) {
 				ShowCodeCoverage(view);
 			}
 		}
 		
 		static void HideCodeCoverage()
 		{
-			foreach (IViewContent view in WorkbenchSingleton.Workbench.ViewContentCollection) {
+			foreach (IViewContent view in WorkbenchSingleton.Instance.Workbench.ViewContentCollection) {
 				ITextEditorProvider editorProvider = view as ITextEditorProvider;
 				if (editorProvider != null) {
 					codeCoverageHighlighter.RemoveMarkers(editorProvider.TextEditor.Document);

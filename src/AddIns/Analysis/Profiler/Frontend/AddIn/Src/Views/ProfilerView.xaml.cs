@@ -108,7 +108,7 @@ namespace ICSharpCode.Profiler.AddIn.Views
 					() => {
 						var tasks = errors.Select(error => new Task(null, error.ErrorText, error.Column, error.Line, (error.IsWarning) ? TaskType.Warning : TaskType.Error)).ToList();
 						if (tasks.Count > 0) {
-							WorkbenchSingleton.Workbench.GetPad(typeof(ErrorListPad)).BringPadToFront();
+							WorkbenchSingleton.Instance.Workbench.GetPad(typeof(ErrorListPad)).BringPadToFront();
 							TaskService.ClearExceptCommentTasks();
 							TaskService.AddRange(tasks);
 						}

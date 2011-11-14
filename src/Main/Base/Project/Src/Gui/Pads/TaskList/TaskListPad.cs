@@ -69,9 +69,9 @@ namespace ICSharpCode.SharpDevelop.Gui
 			TaskService.Removed += new TaskEventHandler(TaskServiceRemoved);
 			TaskService.InUpdateChanged += new EventHandler(TaskServiceInUpdateChanged);
 			
-			WorkbenchSingleton.Workbench.ActiveViewContentChanged += new EventHandler(WorkbenchActiveViewContentChanged);
+			WorkbenchSingleton.Instance.Workbench.ActiveViewContentChanged += new EventHandler(WorkbenchActiveViewContentChanged);
 			
-			if (WorkbenchSingleton.Workbench.ActiveViewContent != null) {
+			if (WorkbenchSingleton.Instance.Workbench.ActiveViewContent != null) {
 				UpdateItems();
 				WorkbenchActiveViewContentChanged(null, null);
 			}
@@ -94,7 +94,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 			if (isInitialized)
 				UpdateItems();
 			
-			ITextEditorProvider provider = WorkbenchSingleton.Workbench.ActiveViewContent as ITextEditorProvider;
+			ITextEditorProvider provider = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as ITextEditorProvider;
 			
 			if (provider != null) {
 				// ensure we don't attach multiple times to the same editor
@@ -195,7 +195,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 				case 1:
 					return ProjectService.CurrentProject != null && ProjectService.CurrentProject.FindFile(item.FileName) != null;
 				case 2:
-					return WorkbenchSingleton.Workbench.ActiveViewContent != null && WorkbenchSingleton.Workbench.ActiveViewContent.PrimaryFileName == FileName.Create(item.FileName);
+					return WorkbenchSingleton.Instance.Workbench.ActiveViewContent != null && WorkbenchSingleton.Instance.Workbench.ActiveViewContent.PrimaryFileName == FileName.Create(item.FileName);
 				case 3:
 					return current != null && itemClass != null && current.Namespace == itemClass.Namespace;
 				case 4:
@@ -207,12 +207,12 @@ namespace ICSharpCode.SharpDevelop.Gui
 		
 		IClass GetCurrentClass()
 		{
-			if (WorkbenchSingleton.Workbench.ActiveViewContent == null)
+			if (WorkbenchSingleton.Instance.Workbench.ActiveViewContent == null)
 				return null;
 			
-			ParseInformation parseInfo = ParserService.GetParseInformation(WorkbenchSingleton.Workbench.ActiveViewContent.PrimaryFileName);
+			ParseInformation parseInfo = ParserService.GetParseInformation(WorkbenchSingleton.Instance.Workbench.ActiveViewContent.PrimaryFileName);
 			if (parseInfo != null) {
-				IPositionable positionable = WorkbenchSingleton.Workbench.ActiveViewContent as IPositionable;
+				IPositionable positionable = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as IPositionable;
 				if (positionable != null) {
 					IClass c = parseInfo.CompilationUnit.GetInnermostClass(positionable.Line, positionable.Column);
 					if (c != null) return c;

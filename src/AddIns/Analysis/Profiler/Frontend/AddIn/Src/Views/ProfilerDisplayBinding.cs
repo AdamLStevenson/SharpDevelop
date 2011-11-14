@@ -24,7 +24,7 @@ namespace ICSharpCode.Profiler.AddIn.Views
 			return true; // definition in .addin does extension-based filtering
 		}
 		
-		public ICSharpCode.SharpDevelop.Gui.IViewContent CreateContentForFile(OpenedFile file)
+		public ICSharpCode.SharpDevelop.Gui.IViewContent CreateContentForFile(IOpenedFile file)
 		{
 			ProfilingDataSQLiteProvider provider;
 			try {

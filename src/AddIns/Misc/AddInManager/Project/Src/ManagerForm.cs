@@ -31,7 +31,7 @@ namespace ICSharpCode.AddInManager
 				#if STANDALONE
 				instance.Show();
 				#else
-				instance.Show(ICSharpCode.SharpDevelop.Gui.WorkbenchSingleton.MainWin32Window);
+				instance.Show(ICSharpCode.SharpDevelop.Gui.WorkbenchSingleton.Instance.MainWin32Window);
 				#endif
 			} else {
 				instance.Activate();

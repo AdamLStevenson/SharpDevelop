@@ -62,7 +62,7 @@ namespace ICSharpCode.SharpDevelop.Services
 			form.lblExceptionText.Text = message;
 			form.exceptionView.Text = stacktrace;
 			
-			form.Show(WorkbenchSingleton.MainWin32Window);
+			form.Show(WorkbenchSingleton.Instance.MainWin32Window);
 		}
 		
 		void ExceptionViewDoubleClick(object sender, EventArgs e)

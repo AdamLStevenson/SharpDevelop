@@ -21,7 +21,7 @@ namespace ICSharpCode.WpfDesign.AddIn
 		
 		void ViewXaml(object sender,RoutedEventArgs e)
 		{
-			WorkbenchSingleton.Workbench.ActiveWorkbenchWindow.SwitchView(0);
+			WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow.SwitchView(0);
 		}
 	}
 }

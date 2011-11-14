@@ -22,7 +22,7 @@ namespace ICSharpCode.Profiler.AddIn.Views
 	{
 		ProfilingDataProvider provider;
 		ProfilerView dataView;
-		OpenedFile file;
+		IOpenedFile file;
 		
 		/// <summary>
 		/// Returns the ProfilerView of this instance.
@@ -44,7 +44,7 @@ namespace ICSharpCode.Profiler.AddIn.Views
 		/// <summary>
 		/// Creates a new WpfViewer object
 		/// </summary>
-		public WpfViewer(OpenedFile file, ProfilingDataSQLiteProvider provider)
+		public WpfViewer(IOpenedFile file, ProfilingDataSQLiteProvider provider)
 		{
 			// HACK : OpenedFile architecture does not allow to keep files open
 			//        but it is necessary for the ProfilerView to keep the session file open.

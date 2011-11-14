@@ -16,6 +16,6 @@ namespace ICSharpCode.SharpDevelop.Editor
 		/// </summary>
 		/// <param name="file">The <see cref="OpenedFile"/> to get the document for.</param>
 		/// <returns>The edited document for the specified file, or <c>null</c> if this view does not provide a document for the specified file.</returns>
-		IDocument GetDocumentForFile(OpenedFile file);
+		IDocument GetDocumentForFile(IOpenedFile file);
 	}
 }

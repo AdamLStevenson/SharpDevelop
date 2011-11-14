@@ -92,7 +92,7 @@ namespace ICSharpCode.SharpDevelop.Sda
 					if (ICSharpCode.SharpDevelop.Gui.WorkbenchSingleton.InvokeRequired)
 						box.ShowDialog();
 					else
-						box.ShowDialog(ICSharpCode.SharpDevelop.Gui.WorkbenchSingleton.MainWin32Window);
+						box.ShowDialog(ICSharpCode.SharpDevelop.Gui.WorkbenchSingleton.Instance.MainWin32Window);
 				}
 			} catch (Exception ex) {
 				LoggingService.Warn("Error showing ExceptionBox", ex);

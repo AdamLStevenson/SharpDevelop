@@ -40,7 +40,7 @@ namespace Debugger.AddIn.Tooltips
 		/*void DebuggerPopup_KeyDown(object sender, KeyEventArgs e)
 		{
 			LoggingService.Debug("Unhandled popup key down: " + e.Key);
-			RaiseEventPair(WorkbenchSingleton.MainWindow, PreviewKeyDownEvent, KeyDownEvent,
+			RaiseEventPair(WorkbenchSingleton.Instance.MainWindow, PreviewKeyDownEvent, KeyDownEvent,
 			                           new KeyEventArgs(e.KeyboardDevice, e.InputSource, e.Timestamp, e.Key));
 		}
 		

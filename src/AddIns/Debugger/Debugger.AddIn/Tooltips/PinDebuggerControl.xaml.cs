@@ -108,7 +108,7 @@ namespace Debugger.AddIn.Tooltips
 		
 		void Pin()
 		{
-			var provider = WorkbenchSingleton.Workbench.ActiveContent as ITextEditorProvider;
+			var provider = WorkbenchSingleton.Instance.Workbench.ActiveContent as ITextEditorProvider;
 			if(provider != null) {
 				var pinLayer = PinningBinding.GetPinlayer(provider.TextEditor);
 				if (pinLayer != null)
@@ -118,7 +118,7 @@ namespace Debugger.AddIn.Tooltips
 		
 		void Unpin()
 		{
-			var provider = WorkbenchSingleton.Workbench.ActiveContent as ITextEditorProvider;
+			var provider = WorkbenchSingleton.Instance.Workbench.ActiveContent as ITextEditorProvider;
 			if(provider != null) {
 				var pinLayer = PinningBinding.GetPinlayer(provider.TextEditor);
 				if (pinLayer != null)

@@ -15,7 +15,7 @@ namespace ICSharpCode.SharpDevelop.Bookmarks
 	{
 		public override void Run()
 		{
-			ITextEditorProvider provider = WorkbenchSingleton.Workbench.ActiveViewContent as ITextEditorProvider;
+			ITextEditorProvider provider = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as ITextEditorProvider;
 			if (provider != null) {
 				ITextEditor editor = provider.TextEditor;
 				IBookmarkMargin margin = editor.GetService(typeof(IBookmarkMargin)) as IBookmarkMargin;

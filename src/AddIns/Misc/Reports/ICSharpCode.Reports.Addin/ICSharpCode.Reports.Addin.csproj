@@ -154,7 +154,9 @@
     <Compile Include="Project\ReportItems\BaseDataItem.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Project\ReportItems\GroupFooter.cs" />
+    <Compile Include="Project\ReportItems\GroupFooter.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Project\ReportItems\BaseImageItem.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -179,7 +181,9 @@
     <Compile Include="Project\ReportItems\ErrorItem.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Project\ReportItems\GroupHeader.cs" />
+    <Compile Include="Project\ReportItems\GroupHeader.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Project\ReportItems\TypeProviders\AbstractItemTypeProvider.cs" />
     <Compile Include="Project\ReportItems\TypeProviders\CircleItemTypeProvider.cs" />
     <Compile Include="Project\ReportItems\TypeProviders\DataItemTypeProvider.cs" />
@@ -315,6 +319,10 @@
       <Name>ICSharpCode.SharpDevelop.Widgets</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Refactor\ICSharpCode.SharpDevelop.Base\ICSharpCode.SharpDevelop.Base.csproj">
+      <Project>{18E3561D-537C-42E7-984B-7764B4C94AE6}</Project>
+      <Name>ICSharpCode.SharpDevelop.Base</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\DisplayBindings\Data\ICSharpCode.Data.Core.UI\ICSharpCode.Data.Core.UI.csproj">
       <Project>{BAD94D6E-4159-4CB6-B991-486F412D9BB6}</Project>
       <Name>ICSharpCode.Data.Core.UI</Name>
@@ -358,8 +366,6 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Project\ReportItems\TypeProviders" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
 </Project>

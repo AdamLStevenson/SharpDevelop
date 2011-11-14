@@ -21,7 +21,7 @@ namespace ICSharpCode.SharpDevelop.Editor.AvalonEdit
 		public bool IsValid(object caller, Condition condition)
 		{
 			string textcontent = condition.Properties["textcontent"];
-			IViewContent content = WorkbenchSingleton.Workbench.ActiveViewContent;
+			IViewContent content = WorkbenchSingleton.Instance.Workbench.ActiveViewContent;
 			if (content is ITextEditorProvider) {
 				var ctrl = (content as ITextEditorProvider).TextEditor.GetService(typeof(ICSharpCode.AvalonEdit.TextEditor)) as ICSharpCode.AvalonEdit.TextEditor;
 				if (ctrl != null && ctrl.SyntaxHighlighting != null) {

@@ -20,13 +20,13 @@ namespace ICSharpCode.WpfDesign.AddIn
 		
 		public OutlineViewPad()
 		{
-			WorkbenchSingleton.Workbench.ActiveViewContentChanged += WorkbenchActiveViewContentChanged;
+			WorkbenchSingleton.Instance.Workbench.ActiveViewContentChanged += WorkbenchActiveViewContentChanged;
 			WorkbenchActiveViewContentChanged(null, null);
 		}
 
 		void WorkbenchActiveViewContentChanged(object sender, EventArgs e)
 		{
-			WpfViewContent wpfView = WorkbenchSingleton.Workbench.ActiveViewContent as WpfViewContent;
+			WpfViewContent wpfView = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as WpfViewContent;
             host.ViewContent = wpfView;
 			if (wpfView != null) {
 				host.Child = wpfView.Outline;

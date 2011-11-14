@@ -48,11 +48,11 @@ namespace ICSharpCode.SharpDevelop.Editor
 		RepoChangeWatcher(string repositoryRoot)
 		{
 			this.watcher = new FileSystemWatcher(repositoryRoot);
+
+            if (WorkbenchSingleton.Instance.Workbench != null)
+                watcher.SynchronizingObject = WorkbenchSingleton.Instance.Workbench.SynchronizingObject;
 			
-			if (WorkbenchSingleton.Workbench != null)
-				watcher.SynchronizingObject = WorkbenchSingleton.Workbench.SynchronizingObject;
-			
-			WorkbenchSingleton.MainWindow.Activated += MainWindowActivated;
+			WorkbenchSingleton.Instance.MainWindow.Activated += MainWindowActivated;
 			
 			watcher.Created += FileChanged;
 			watcher.Deleted += FileChanged;
@@ -81,7 +81,7 @@ namespace ICSharpCode.SharpDevelop.Editor
 			if (!alreadyCalled) {
 				alreadyCalled = true;
 				LoggingService.Info(e.Name + " changed!" + e.ChangeType);
-				if (WorkbenchSingleton.Workbench.IsActiveWindow) {
+				if (WorkbenchSingleton.Instance.Workbench.IsActiveWindow) {
 					WorkbenchSingleton.CallLater(
 						TimeSpan.FromSeconds(2),
 						() => { MainWindowActivated(this, EventArgs.Empty); }
@@ -111,7 +111,7 @@ namespace ICSharpCode.SharpDevelop.Editor
 			lock (watchers) {
 				actions -= action;
 				if (actions == null && !disposed) {
-					WorkbenchSingleton.MainWindow.Activated -= MainWindowActivated;
+					WorkbenchSingleton.Instance.MainWindow.Activated -= MainWindowActivated;
 					watchers.Remove(watcher.Path);
 					this.watcher.Dispose();
 					disposed = true;

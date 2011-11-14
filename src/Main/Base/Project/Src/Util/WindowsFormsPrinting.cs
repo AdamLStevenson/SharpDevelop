@@ -21,7 +21,7 @@ namespace ICSharpCode.SharpDevelop.Util
 					using (PrintDialog ppd = new PrintDialog()) {
 						ppd.Document  = pdoc;
 						ppd.AllowSomePages = true;
-						if (ppd.ShowDialog(ICSharpCode.SharpDevelop.Gui.WorkbenchSingleton.MainWin32Window) == DialogResult.OK) { // fixed by Roger Rubin
+						if (ppd.ShowDialog(ICSharpCode.SharpDevelop.Gui.WorkbenchSingleton.Instance.MainWin32Window) == DialogResult.OK) { // fixed by Roger Rubin
 							pdoc.Print();
 						}
 					}
@@ -38,7 +38,7 @@ namespace ICSharpCode.SharpDevelop.Util
 					PrintPreviewDialog ppd = new PrintPreviewDialog();
 					ppd.TopMost   = true;
 					ppd.Document  = pdoc;
-					ppd.Show(WorkbenchSingleton.MainWin32Window);
+					ppd.Show(WorkbenchSingleton.Instance.MainWin32Window);
 				} else {
 					MessageService.ShowError("${res:ICSharpCode.SharpDevelop.Commands.Print.CreatePrintDocumentError}");
 				}

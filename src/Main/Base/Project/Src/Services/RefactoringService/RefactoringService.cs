@@ -409,7 +409,7 @@ namespace ICSharpCode.SharpDevelop.Refactoring
 		{
 			List<ProjectItem> resultList = new List<ProjectItem>();
 			if (ProjectService.OpenSolution == null) {
-				foreach (IViewContent vc in WorkbenchSingleton.Workbench.ViewContentCollection) {
+				foreach (IViewContent vc in WorkbenchSingleton.Instance.Workbench.ViewContentCollection) {
 					string name = vc.PrimaryFileName;
 					if (!string.IsNullOrEmpty(name) && ParserService.CreateParser(name) != null) {
 						FileProjectItem tempItem = new FileProjectItem(null, ItemType.Compile);

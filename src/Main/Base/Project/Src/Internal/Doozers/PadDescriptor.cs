@@ -7,25 +7,12 @@ using ICSharpCode.SharpDevelop.Gui;
 
 namespace ICSharpCode.SharpDevelop
 {
-	/// <summary>
-	/// Indicates the default position for a pad.
-	/// This is a bit-flag enum, Hidden can be combined with the directions.
-	/// </summary>
-	[Flags]
-	public enum DefaultPadPositions
-	{
-		None = 0,
-		Right = 1,
-		Left = 2,
-		Bottom = 4,
-		Top = 8,
-		Hidden = 16
-	}
+	
 	
 	/// <summary>
 	/// Describes a pad.
 	/// </summary>
-	public class PadDescriptor : IDisposable
+    public class PadDescriptor : IPadDescriptor
 	{
 		string @class;
 		string title;
@@ -176,7 +163,7 @@ namespace ICSharpCode.SharpDevelop
 		{
 			CreatePad();
 			if (padContent == null) return;
-			WorkbenchSingleton.Workbench.WorkbenchLayout.ActivatePad(this);
+            WorkbenchSingleton.Instance.Workbench.WorkbenchLayout.ActivatePad(this);
 		}
 		
 		public override string ToString()

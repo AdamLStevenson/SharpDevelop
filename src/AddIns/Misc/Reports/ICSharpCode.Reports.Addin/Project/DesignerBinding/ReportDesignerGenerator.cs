@@ -52,7 +52,7 @@ namespace ICSharpCode.Reports.Addin
 		}
 		
 		
-		public IEnumerable<OpenedFile> GetSourceFiles(out OpenedFile designerCodeFile)
+		public IEnumerable<IOpenedFile> GetSourceFiles(out IOpenedFile designerCodeFile)
 		{
 			designerCodeFile = this.viewContent.PrimaryFile;
 			return new [] {designerCodeFile};

@@ -14,7 +14,7 @@ namespace ICSharpCode.WpfDesign.AddIn.Commands
 	{
 		public override void Run()
 		{
-			WorkbenchSingleton.Workbench.ActiveWorkbenchWindow.SwitchView(0);
+			WorkbenchSingleton.Instance.Workbench.ActiveWorkbenchWindow.SwitchView(0);
 		}
 	}
 }

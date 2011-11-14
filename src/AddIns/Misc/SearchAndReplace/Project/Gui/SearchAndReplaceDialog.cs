@@ -32,7 +32,7 @@ namespace SearchAndReplace
 		{
 			if (Instance == null) {
 				Instance = new SearchAndReplaceDialog(searchAndReplaceMode);
-				Instance.Show(WorkbenchSingleton.MainWin32Window);
+				Instance.Show(WorkbenchSingleton.Instance.MainWin32Window);
 			} else {
 				if (searchAndReplaceMode == SearchAndReplaceMode.Search) {
 					Instance.searchButton.PerformClick();

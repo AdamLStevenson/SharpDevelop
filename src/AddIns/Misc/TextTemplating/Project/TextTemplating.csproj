@@ -132,10 +132,11 @@
       <Name>ICSharpCode.SharpDevelop.Dom</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Refactor\ICSharpCode.SharpDevelop.Base\ICSharpCode.SharpDevelop.Base.csproj">
+      <Project>{18E3561D-537C-42E7-984B-7764B4C94AE6}</Project>
+      <Name>ICSharpCode.SharpDevelop.Base</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Templates" />
-    <Folder Include="Resources" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
 </Project>

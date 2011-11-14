@@ -12,7 +12,7 @@ namespace ICSharpCode.PackageManagement
 		public string SelectFolder()
 		{
 			using (var dialog = new FolderBrowserDialog()) {
-				IWin32Window owner = WorkbenchSingleton.MainWin32Window;
+				IWin32Window owner = WorkbenchSingleton.Instance.MainWin32Window;
 				if (dialog.ShowDialog(owner) == DialogResult.OK) {
 					return dialog.SelectedPath;
 				}

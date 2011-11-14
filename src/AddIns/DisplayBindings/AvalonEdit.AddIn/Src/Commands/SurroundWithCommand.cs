@@ -21,7 +21,7 @@ namespace ICSharpCode.AvalonEdit.AddIn.Commands
 		/// </summary>
 		public override void Run()
 		{
-			ICodeEditorProvider provider = WorkbenchSingleton.Workbench.ActiveViewContent as ICodeEditorProvider;
+			ICodeEditorProvider provider = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as ICodeEditorProvider;
 			
 			if (provider == null)
 				return;

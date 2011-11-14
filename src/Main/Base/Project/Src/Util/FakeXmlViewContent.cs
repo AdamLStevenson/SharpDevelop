@@ -52,7 +52,7 @@ namespace ICSharpCode.SharpDevelop.Util
 				Disposed(this, EventArgs.Empty);
 		}
 		
-		void IViewContent.Save(OpenedFile file, Stream stream)
+		void IViewContent.Save(IOpenedFile file, Stream stream)
 		{
 			if (document != null)
 				document.Save(stream, SaveOptions.DisableFormatting);
@@ -60,7 +60,7 @@ namespace ICSharpCode.SharpDevelop.Util
 				stream.Write(fileData, 0, fileData.Length);
 		}
 		
-		void IViewContent.Load(OpenedFile file, Stream stream)
+		void IViewContent.Load(IOpenedFile file, Stream stream)
 		{
 			document = null;
 			fileData = null;
@@ -135,11 +135,11 @@ namespace ICSharpCode.SharpDevelop.Util
 			}
 		}
 		
-		System.Collections.Generic.IList<OpenedFile> IViewContent.Files {
+		System.Collections.Generic.IList<IOpenedFile> IViewContent.Files {
 			get { return new [] { PrimaryFile }; }
 		}
 		
-		public OpenedFile PrimaryFile { get; set; }
+		public IOpenedFile PrimaryFile { get; set; }
 		
 		ICSharpCode.Core.FileName IViewContent.PrimaryFileName {
 			get { return PrimaryFile.FileName; }
@@ -188,22 +188,22 @@ namespace ICSharpCode.SharpDevelop.Util
 			throw new NotImplementedException();
 		}
 		
-		bool IViewContent.SupportsSwitchFromThisWithoutSaveLoad(OpenedFile file, IViewContent newView)
+		bool IViewContent.SupportsSwitchFromThisWithoutSaveLoad(IOpenedFile file, IViewContent newView)
 		{
 			return false;
 		}
 		
-		bool IViewContent.SupportsSwitchToThisWithoutSaveLoad(OpenedFile file, IViewContent oldView)
+		bool IViewContent.SupportsSwitchToThisWithoutSaveLoad(IOpenedFile file, IViewContent oldView)
 		{
 			return false;
 		}
 		
-		void IViewContent.SwitchFromThisWithoutSaveLoad(OpenedFile file, IViewContent newView)
+		void IViewContent.SwitchFromThisWithoutSaveLoad(IOpenedFile file, IViewContent newView)
 		{
 			throw new NotImplementedException();
 		}
 		
-		void IViewContent.SwitchToThisWithoutSaveLoad(OpenedFile file, IViewContent oldView)
+		void IViewContent.SwitchToThisWithoutSaveLoad(IOpenedFile file, IViewContent oldView)
 		{
 			throw new NotImplementedException();
 		}

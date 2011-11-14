@@ -31,7 +31,7 @@ namespace ICSharpCode.FormsDesigner.Services
 		
 		// Culture name (or empty string) => Resources
 		readonly Dictionary<string, ResourceStorage> resources = new Dictionary<string, ResourceStorage>();
-		readonly Dictionary<OpenedFile, ResourceStorage> resourceByFile = new Dictionary<OpenedFile, ResourceStorage>();
+		readonly Dictionary<IOpenedFile, ResourceStorage> resourceByFile = new Dictionary<IOpenedFile, ResourceStorage>();
 		
 		ResourceStorage GetResourceStorage(CultureInfo culture)
 		{
@@ -75,12 +75,12 @@ namespace ICSharpCode.FormsDesigner.Services
 			this.resourceByFile.Clear();
 		}
 		
-		public void Load(OpenedFile file, Stream stream)
+		public void Load(IOpenedFile file, Stream stream)
 		{
 			resourceByFile[file].Load(stream);
 		}
 		
-		public void Save(OpenedFile file, Stream stream)
+		public void Save(IOpenedFile file, Stream stream)
 		{
 			resourceByFile[file].Save(stream, this);
 		}
@@ -265,7 +265,7 @@ namespace ICSharpCode.FormsDesigner.Services
 				ProjectService.AddProjectItem(project, newFileProjectItem);
 				FileService.FireFileCreated(resourceFileName, false);
 
-				PadDescriptor pd = WorkbenchSingleton.Workbench.GetPad(typeof(ProjectBrowserPad));
+				IPadDescriptor pd = WorkbenchSingleton.Instance.Workbench.GetPad(typeof(ProjectBrowserPad));
 				FileNode formFileNode = ((ProjectBrowserPad)pd.PadContent).ProjectBrowserControl.FindFileNode(formFileName);
 				if (formFileNode != null) {
 					LoggingService.Info("FormFileNode found, adding subitem");

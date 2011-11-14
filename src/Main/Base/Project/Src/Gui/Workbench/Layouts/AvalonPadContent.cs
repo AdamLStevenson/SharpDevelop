@@ -14,7 +14,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 {
 	sealed class AvalonPadContent : DockableContent, IDisposable
 	{
-		PadDescriptor descriptor;
+		IPadDescriptor descriptor;
 		IPadContent padInstance;
 		AvalonDockLayout layout;
 		TextBlock placeholder;
@@ -23,7 +23,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 			get { return padInstance; }
 		}
 		
-		public AvalonPadContent(AvalonDockLayout layout, PadDescriptor descriptor)
+		public AvalonPadContent(AvalonDockLayout layout, IPadDescriptor descriptor)
 		{
 			this.descriptor = descriptor;
 			this.layout = layout;

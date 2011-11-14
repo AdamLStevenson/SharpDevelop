@@ -17,7 +17,7 @@ namespace ICSharpCode.WixBinding
 		IWorkbench workbench;
 		
 		public ViewSetupFilesCommand()
-			: this(new PackageFilesViewFactory(), WorkbenchSingleton.Workbench)
+			: this(new PackageFilesViewFactory(), WorkbenchSingleton.Instance.Workbench)
 		{
 		}
 		

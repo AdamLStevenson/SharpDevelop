@@ -93,7 +93,7 @@ namespace Hornung.ResourceToolkit.Commands
 				return;
 			}
 			
-			IWorkbench workbench = WorkbenchSingleton.Workbench;
+			IWorkbench workbench = WorkbenchSingleton.Instance.Workbench;
 			if (workbench != null) {
 				UnusedResourceKeysViewContent vc = new UnusedResourceKeysViewContent(unusedKeys);
 				workbench.ShowView(vc);

@@ -47,7 +47,7 @@ namespace ICSharpCode.SharpDevelop.Commands
 			}
 			
 			if (oldItem != editIndex && oldItem != resetIndex) {
-				WorkbenchSingleton.Workbench.WorkbenchLayout.StoreConfiguration();
+				WorkbenchSingleton.Instance.Workbench.WorkbenchLayout.StoreConfiguration();
 			}
 			
 			if (comboBox.SelectedIndex == editIndex) {
@@ -115,7 +115,7 @@ namespace ICSharpCode.SharpDevelop.Commands
 				frm.StartPosition = FormStartPosition.CenterParent;
 				frm.ShowInTaskbar = false;
 				
-				if (frm.ShowDialog(WorkbenchSingleton.MainWin32Window) == DialogResult.OK) {
+				if (frm.ShowDialog(WorkbenchSingleton.Instance.MainWin32Window) == DialogResult.OK) {
 					IList<string> oldNames = new List<string>(CustomLayoutNames);
 					IList<string> newNames = ed.GetList();
 					// add newly added layouts

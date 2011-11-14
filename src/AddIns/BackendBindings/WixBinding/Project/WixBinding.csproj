@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.40607</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{e1b288a2-08ee-4318-8bbb-8ab72c69e33e}</ProjectGuid>
+    <ProjectGuid>{E1B288A2-08EE-4318-8BBB-8AB72C69E33E}</ProjectGuid>
     <RootNamespace>ICSharpCode.WixBinding</RootNamespace>
     <AssemblyName>WixBinding</AssemblyName>
     <OutputTarget>Library</OutputTarget>
@@ -81,16 +81,24 @@
     <Compile Include="Src\WixFileName.cs" />
     <Compile Include="Src\WixProjectBinding.cs" />
     <Compile Include="Src\Project\WixProject.cs" />
-    <Compile Include="Src\Gui\CompilerParametersPanel.cs" />
+    <Compile Include="Src\Gui\CompilerParametersPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Configuration\AssemblyInfo.cs" />
     <Compile Include="..\..\..\..\Main\GlobalAssemblyInfo.cs">
       <Link>Configuration\GlobalAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Src\Gui\ApplicationSettingsPanel.cs" />
+    <Compile Include="Src\Gui\ApplicationSettingsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <EmbeddedResource Include="Resources\ApplicationSettingsPanel.xfrm" />
     <EmbeddedResource Include="Resources\CompilerParametersPanel.xfrm" />
-    <Compile Include="Src\Gui\PreprocessorVariablesPanel.cs" />
-    <Compile Include="Src\Gui\NameValueListEditor.cs" />
+    <Compile Include="Src\Gui\PreprocessorVariablesPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Src\Gui\NameValueListEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Src\Gui\SemicolonSeparatedNameValueListBinding.cs" />
     <Compile Include="Src\Project\WixLibraryProjectItem.cs" />
     <Compile Include="Src\Project\WixProjectNodeBuilder.cs" />
@@ -99,7 +107,9 @@
     <Compile Include="Src\Commands\AddWixLibraryToProject.cs" />
     <Compile Include="Src\WixDocument.cs" />
     <Compile Include="Src\WixNamespaceManager.cs" />
-    <Compile Include="Src\Gui\SetupDialogListView.cs" />
+    <Compile Include="Src\Gui\SetupDialogListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Src\Gui\SetupDialogListPad.cs" />
     <Compile Include="Src\Commands\OpenDialogCommand.cs" />
     <Compile Include="Src\Commands\ViewDialogXmlCommand.cs" />
@@ -119,7 +129,9 @@
     <Compile Include="Src\IWixDialogDesigner.cs" />
     <Compile Include="Src\WixPropertyParser.cs" />
     <Compile Include="Src\Gui\SetupDialogControlsSideTab.cs" />
-    <Compile Include="Src\Gui\RadioButtonGroupBox.cs" />
+    <Compile Include="Src\Gui\RadioButtonGroupBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Src\WixDialogException.cs" />
     <Compile Include="Src\WixDocumentLineSegment.cs" />
     <Compile Include="Src\IWixPackageFilesView.cs" />
@@ -139,7 +151,9 @@
     <Compile Include="Src\Commands\ViewSetupFilesCommand.cs" />
     <Compile Include="Src\Commands\ViewSetupDialogsCommand.cs" />
     <Compile Include="Src\Gui\PackageFilesView.cs" />
-    <Compile Include="Src\Gui\WixPackageFilesControl.cs" />
+    <Compile Include="Src\Gui\WixPackageFilesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Src\Gui\WorkbenchTextFileReader.cs" />
     <Compile Include="Src\WixDirectoryElement.cs" />
     <Compile Include="Src\Gui\WixDirectoryTreeNode.cs" />
@@ -151,8 +165,12 @@
     <Compile Include="Src\Gui\WixComponentTreeNode.cs" />
     <Compile Include="Src\Gui\WixFileTreeNode.cs" />
     <Compile Include="Src\Gui\AddChildElementsMenuBuilder.cs" />
-    <Compile Include="Src\Gui\WixPackageFilesTreeView.cs" />
-    <Compile Include="Src\Commands\AddElementCommand.cs" />
+    <Compile Include="Src\Gui\WixPackageFilesTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Src\Commands\AddElementCommand.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Src\Commands\RemoveElementCommand.cs" />
     <Compile Include="Src\WixComponentElement.cs" />
     <Compile Include="Src\WixDirectoryRefElement.cs" />
@@ -164,14 +182,18 @@
     <Compile Include="Src\IDirectoryReader.cs" />
     <Compile Include="Src\Commands\AddDirectoryCommand.cs" />
     <Compile Include="Src\PropertyGrid\GuidEditor.cs" />
-    <Compile Include="Src\PropertyGrid\GuidEditorListBox.cs" />
+    <Compile Include="Src\PropertyGrid\GuidEditorListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Src\PropertyGrid\RelativeFileNameEditor.cs" />
     <Compile Include="Src\PropertyGrid\WixDropDownEditor.cs" />
     <Compile Include="Src\WixPackageFilesDiff.cs" />
     <Compile Include="Src\WixPackageFilesDiffResult.cs" />
     <Compile Include="Src\DirectoryReader.cs" />
     <Compile Include="Src\Commands\ShowDiffCommand.cs" />
-    <Compile Include="Src\Gui\WixPackageFilesDiffControl.cs" />
+    <Compile Include="Src\Gui\WixPackageFilesDiffControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Src\Commands\HideDiffCommand.cs" />
     <Compile Include="Src\ExcludedNames.cs" />
     <Content Include="Templates\DefaultLicense.rtf">
@@ -212,12 +234,13 @@
       <Name>ICSharpCode.Core</Name>
       <Private>False</Private>
     </ProjectReference>
-    <Folder Include="Configuration" />
     <Content Include="..\..\..\..\Tools\wix\wix.targets">
       <Link>wix.targets</Link>
     </Content>
-    <Folder Include="Resources" />
-    <Folder Include="Src\Commands" />
+    <ProjectReference Include="..\..\..\..\Refactor\ICSharpCode.SharpDevelop.Base\ICSharpCode.SharpDevelop.Base.csproj">
+      <Project>{18E3561D-537C-42E7-984B-7764B4C94AE6}</Project>
+      <Name>ICSharpCode.SharpDevelop.Base</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\DisplayBindings\AvalonEdit.AddIn\AvalonEdit.AddIn.csproj">
       <Project>{0162E499-42D0-409B-AA25-EED21F75336B}</Project>
       <Name>AvalonEdit.AddIn</Name>
@@ -236,7 +259,7 @@
     </Content>
     <ProjectReference Include="..\..\..\..\Libraries\NRefactory\Project\NRefactory.csproj">
       <Project>{3A9AE6AA-BC07-4A2F-972C-581E3AE2F195}</Project>
-      <Name>NRefactory</Name>
+      <Name>NRefactory %28Libraries\NRefactory\NRefactory%29</Name>
       <Private>False</Private>
     </ProjectReference>
     <Content Include="Templates\EmptyWixProject.xpt">
@@ -250,7 +273,6 @@
       <Name>ICSharpCode.SharpDevelop.Dom</Name>
       <Private>False</Private>
     </ProjectReference>
-    <Folder Include="Src\PropertyGrid" />
     <ProjectReference Include="..\..\..\..\Main\ICSharpCode.SharpDevelop.Widgets\Project\ICSharpCode.SharpDevelop.Widgets.csproj">
       <Project>{8035765F-D51F-4A0C-A746-2FD100E19419}</Project>
       <Name>ICSharpCode.SharpDevelop.Widgets</Name>

@@ -100,7 +100,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 			}
 		}
 		
-		public virtual ICSharpCode.SharpDevelop.Editor.IDocument GetDocumentForFile(OpenedFile file)
+		public virtual ICSharpCode.SharpDevelop.Editor.IDocument GetDocumentForFile(IOpenedFile file)
 		{
 			return null;
 		}

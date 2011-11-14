@@ -17,7 +17,7 @@ namespace ICSharpCode.WpfDesign.AddIn
 			return Path.GetExtension(fileName).Equals(".xaml", StringComparison.OrdinalIgnoreCase);
 		}
 		
-		public IViewContent CreateContentForFile(OpenedFile file)
+		public IViewContent CreateContentForFile(IOpenedFile file)
 		{
 			return new WpfViewContent(file);
 		}

@@ -56,15 +56,15 @@ namespace ICSharpCode.SharpDevelop
 		/// Initializes the NavigationService.
 		/// </summary>
 		/// <remarks>Must be called after the Workbench has been initialized and after the ProjectService has been initialized.</remarks>
-		/// <exception cref="InvalidOperationException">The <see cref="WorkbenchSingleton"/> has not yet been initialized and <see cref="WorkbenchSingleton.Workbench">Workbench</see> is <value>null</value></exception>
+		/// <exception cref="InvalidOperationException">The <see cref="WorkbenchSingleton"/> has not yet been initialized and <see cref="WorkbenchSingleton.Instance.Workbench">Workbench</see> is <value>null</value></exception>
 		public static void InitializeService()
 		{
 			if (!serviceInitialized) {
-				if (WorkbenchSingleton.Workbench == null) {
+				if (WorkbenchSingleton.Instance.Workbench == null) {
 					throw new InvalidOperationException("Initializing the NavigationService requires that the WorkbenchSingleton has already created a Workbench.");
 				}
 				// trap changes in the secondary tab via the workbench's ActiveViewContentChanged event
-				WorkbenchSingleton.Workbench.ActiveViewContentChanged += ActiveViewContentChanged;
+				WorkbenchSingleton.Instance.Workbench.ActiveViewContentChanged += ActiveViewContentChanged;
 				
 				// ignore files opened as part of loading a solution.
 				ProjectService.SolutionLoading += ProjectService_SolutionLoading;
@@ -216,10 +216,10 @@ namespace ICSharpCode.SharpDevelop
 		// Unit test covered but the test does not yet verify the results.
 		public static INavigationPoint Log()
 		{
-			if (WorkbenchSingleton.Workbench == null) {
+			if (WorkbenchSingleton.Instance.Workbench == null) {
 				return null;
 			}
-			IViewContent view = WorkbenchSingleton.Workbench.ActiveViewContent;
+			IViewContent view = WorkbenchSingleton.Instance.Workbench.ActiveViewContent;
 			if (view == null) {
 				return null;
 			}
@@ -394,7 +394,7 @@ namespace ICSharpCode.SharpDevelop
 		/// </summary>
 		static void ActiveViewContentChanged(object sender, EventArgs e)
 		{
-			IViewContent vc = WorkbenchSingleton.Workbench.ActiveViewContent;
+			IViewContent vc = WorkbenchSingleton.Instance.Workbench.ActiveViewContent;
 			if (vc == null) return;
 			LoggingService.DebugFormatted("NavigationService\n\tActiveViewContent: {0}\n\t          Subview: {1}",
 			                              vc.TitleName,

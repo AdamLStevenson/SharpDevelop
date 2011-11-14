@@ -15,7 +15,7 @@ namespace ICSharpCode.SettingsEditor
 			return true;
 		}
 		
-		public IViewContent CreateContentForFile(OpenedFile file)
+		public IViewContent CreateContentForFile(IOpenedFile file)
 		{
 			return new SettingsViewContent(file);
 		}

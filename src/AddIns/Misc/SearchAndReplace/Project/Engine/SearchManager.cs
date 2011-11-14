@@ -390,7 +390,7 @@ namespace SearchAndReplace
 			if (fileName != null) {
 				textEditorProvider = FileService.OpenFile(fileName, switchToOpenedView) as ITextEditorProvider;
 			} else {
-				textEditorProvider = WorkbenchSingleton.Workbench.ActiveViewContent as ITextEditorProvider;
+				textEditorProvider = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as ITextEditorProvider;
 			}
 
 			if (textEditorProvider != null) {
@@ -401,7 +401,7 @@ namespace SearchAndReplace
 		
 		public static ITextEditor GetActiveTextEditor()
 		{
-			ITextEditorProvider provider = WorkbenchSingleton.Workbench.ActiveViewContent as ITextEditorProvider;
+			ITextEditorProvider provider = WorkbenchSingleton.Instance.Workbench.ActiveViewContent as ITextEditorProvider;
 			if (provider != null) {
 				return provider.TextEditor;
 			} else {

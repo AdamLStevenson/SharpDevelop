@@ -81,11 +81,15 @@
     <Compile Include="Src\DesignerLoader\AbstractCodeDomDesignerLoader.cs" />
     <Compile Include="Src\DesignerLoader\NRefactoryDesignerLoader.cs" />
     <Compile Include="Src\DesignerSourceCodeStorage.cs" />
-    <Compile Include="Src\Gui\ImageResourceEditorDialog.cs" />
+    <Compile Include="Src\Gui\ImageResourceEditorDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Src\Gui\ImageResourceEditorDialog.Designer.cs">
       <DependentUpon>ImageResourceEditorDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Src\Gui\OptionPanels\LocalizationModelOptionsPanel.cs" />
+    <Compile Include="Src\Gui\OptionPanels\LocalizationModelOptionsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Src\SecondaryDisplayBinding.cs" />
     <Compile Include="Src\DesignerViewContent.cs" />
     <Compile Include="Src\FormKeyHandler.cs" />
@@ -137,7 +141,9 @@
     <Compile Include="..\..\..\..\Main\GlobalAssemblyInfo.cs">
       <Link>Configuration\GlobalAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Src\Gui\OptionPanels\GeneralOptions.cs" />
+    <Compile Include="Src\Gui\OptionPanels\GeneralOptions.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <EmbeddedResource Include="Resources\WindowsFormsGeneralOptions.xfrm" />
     <EmbeddedResource Include="Src\Gui\ImageResourceEditorDialog.resx">
       <DependentUpon>ImageResourceEditorDialog.cs</DependentUpon>
@@ -155,7 +161,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\Libraries\NRefactory\Project\NRefactory.csproj">
       <Project>{3A9AE6AA-BC07-4A2F-972C-581E3AE2F195}</Project>
-      <Name>NRefactory</Name>
+      <Name>NRefactory %28Libraries\NRefactory\NRefactory%29</Name>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\Main\Base\Project\ICSharpCode.SharpDevelop.csproj">
@@ -183,6 +189,10 @@
       <Project>{8035765F-D51F-4A0C-A746-2FD100E19419}</Project>
       <Name>ICSharpCode.SharpDevelop.Widgets</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Refactor\ICSharpCode.SharpDevelop.Base\ICSharpCode.SharpDevelop.Base.csproj">
+      <Project>{18E3561D-537C-42E7-984B-7764B4C94AE6}</Project>
+      <Name>ICSharpCode.SharpDevelop.Base</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />

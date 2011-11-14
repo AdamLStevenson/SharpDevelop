@@ -29,7 +29,7 @@ namespace ICSharpCode.SharpDevelop
 			return double.NegativeInfinity;
 		}
 		
-		public IViewContent CreateContentForFile(OpenedFile file)
+		public IViewContent CreateContentForFile(IOpenedFile file)
 		{
 			var codons = DisplayBindingService.GetCodonsPerFileName(file.FileName);
 			DisplayBindingDescriptor bestMatch = null;

@@ -135,7 +135,7 @@ namespace ICSharpCode.Svn
 			CheckNotDisposed();
 			if (!allowInteractiveAuthorization) {
 				allowInteractiveAuthorization = true;
-				SvnUI.Bind(client, WorkbenchSingleton.MainWin32Window);
+				SvnUI.Bind(client, WorkbenchSingleton.Instance.MainWin32Window);
 			}
 		}
 		

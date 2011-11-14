@@ -40,7 +40,7 @@ namespace ICSharpCode.WpfDesign.AddIn.ImageSourceEditor
 			}
 			ChooseImageDialog cid = new ChooseImageDialog();
 			cid.SelectedFileName = fileName;
-			cid.Owner = WorkbenchSingleton.MainWindow;
+			cid.Owner = WorkbenchSingleton.Instance.MainWindow;
 			if (cid.ShowDialog() == true) {
 				fileName = cid.SelectedFileName;
 				if (fileName == null) {

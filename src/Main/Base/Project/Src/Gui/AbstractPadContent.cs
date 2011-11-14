@@ -26,16 +26,16 @@ namespace ICSharpCode.SharpDevelop.Gui
 		
 		public void BringToFront()
 		{
-			PadDescriptor d = this.PadDescriptor;
+			IPadDescriptor d = this.PadDescriptor;
 			if (d != null)
 				d.BringPadToFront();
 		}
 		
-		protected virtual PadDescriptor PadDescriptor {
+		protected virtual IPadDescriptor PadDescriptor {
 			get {
-				if (WorkbenchSingleton.Workbench == null || WorkbenchSingleton.Workbench.WorkbenchLayout == null)
+				if (WorkbenchSingleton.Instance.Workbench == null || WorkbenchSingleton.Instance.Workbench.WorkbenchLayout == null)
 					return null;
-				return WorkbenchSingleton.Workbench.GetPad(GetType());
+				return WorkbenchSingleton.Instance.Workbench.GetPad(GetType());
 			}
 		}
 	}

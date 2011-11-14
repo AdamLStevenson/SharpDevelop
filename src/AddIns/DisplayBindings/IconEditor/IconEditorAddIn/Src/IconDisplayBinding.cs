@@ -14,7 +14,7 @@ namespace ICSharpCode.IconEditorAddIn
 			return true; // definition in .addin does extension-based filtering
 		}
 		
-		public IViewContent CreateContentForFile(OpenedFile file)
+		public IViewContent CreateContentForFile(IOpenedFile file)
 		{
 			return new IconViewContent(file);
 		}

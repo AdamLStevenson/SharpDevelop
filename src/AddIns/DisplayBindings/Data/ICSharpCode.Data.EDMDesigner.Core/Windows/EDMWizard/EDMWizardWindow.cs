@@ -38,7 +38,7 @@ namespace ICSharpCode.Data.EDMDesigner.Core.Windows.EDMWizard
         private string _modelNamespace = string.Empty;
         private string _objectContextName = string.Empty;
         private string _projectStandardNamespace = string.Empty;
-        private OpenedFile _file = null;
+        private IOpenedFile _file = null;
         private XDocument _edmxDocument = null;
 
         #endregion
@@ -68,7 +68,7 @@ namespace ICSharpCode.Data.EDMDesigner.Core.Windows.EDMWizard
             }
         }
 
-        public OpenedFile File
+        public IOpenedFile File
         {
             get { return _file; }
         }
@@ -138,7 +138,7 @@ namespace ICSharpCode.Data.EDMDesigner.Core.Windows.EDMWizard
 
         #region Constructor
 
-        public EDMWizardWindow(OpenedFile file, string projectStandardNamespace)
+        public EDMWizardWindow(IOpenedFile file, string projectStandardNamespace)
         {
             Title = "Entity Framework Wizard";
             Width = 640;
