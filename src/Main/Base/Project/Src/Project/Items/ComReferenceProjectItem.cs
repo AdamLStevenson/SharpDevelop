@@ -11,7 +11,7 @@ namespace ICSharpCode.SharpDevelop.Project
 	{
 		
 		public ComReferenceProjectItem(IProject project, TypeLibrary library)
-			: base(project, ItemType.COMReference)
+            : base(project, ICSharpCode.SharpDevelop.Project.ItemType.COMReference)
 		{
 			this.Include = library.Name;
 			

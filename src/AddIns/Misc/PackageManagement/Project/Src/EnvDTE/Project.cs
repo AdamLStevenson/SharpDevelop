@@ -105,7 +105,7 @@ namespace ICSharpCode.PackageManagement.EnvDTE
 			return false;
 		}
 		
-		internal IEnumerable<SD.ProjectItem> GetReferences()
+		internal IEnumerable<SD.IProjectItem> GetReferences()
 		{
 			return MSBuildProject.GetItemsOfType(ItemType.Reference);
 		}
@@ -126,18 +126,18 @@ namespace ICSharpCode.PackageManagement.EnvDTE
 			projectService.AddProjectItem(MSBuildProject, fileProjectItem);
 		}
 		
-		FileProjectItem CreateFileProjectItem(string include)
+		IFileProjectItem CreateFileProjectItem(string include)
 		{
-			ItemType itemType = GetDefaultItemType(include);
+			IItemType itemType = GetDefaultItemType(include);
 			return CreateFileProjectItem(itemType, include);
 		}
 		
-		ItemType GetDefaultItemType(string include)
+		IItemType GetDefaultItemType(string include)
 		{
 			return MSBuildProject.GetDefaultItemType(include);
 		}
 		
-		FileProjectItem CreateFileProjectItem(ItemType itemType, string include)
+		FileProjectItem CreateFileProjectItem(IItemType itemType, string include)
 		{
 			var fileProjectItem = new FileProjectItem(MSBuildProject, itemType);
 			fileProjectItem.Include = include;

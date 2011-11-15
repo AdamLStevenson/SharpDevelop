@@ -12,12 +12,12 @@ namespace ICSharpCode.SharpDevelop.Project
 	/// <summary>
 	/// Description of ProjectSection.
 	/// </summary>
-	public class ProjectSection
+	public class ProjectSection:IProjectSection
 	{
 		string name;
 		string sectionType;
 		
-		List<SolutionItem> items = new List<SolutionItem>();
+		List<ISolutionItem> items = new List<ISolutionItem>();
 		
 		public string Name {
 			get {
@@ -31,7 +31,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			}
 		}
 		
-		public List<SolutionItem> Items {
+		public List<ISolutionItem> Items {
 			get {
 				return items;
 			}

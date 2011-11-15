@@ -8,7 +8,7 @@ using ICSharpCode.Core;
 namespace ICSharpCode.SharpDevelop.Project
 {
 	[Serializable]
-	public class BuildError
+	public class BuildError:IBuildError
 	{
 		public BuildError()
 		{

@@ -67,7 +67,7 @@ namespace CSharpBinding
 			            PropertyStorageLocations.ConfigurationSpecific, false);
 		}
 		
-		public override ItemType GetDefaultItemType(string fileName)
+		public override IItemType GetDefaultItemType(string fileName)
 		{
 			if (string.Equals(Path.GetExtension(fileName), ".cs", StringComparison.OrdinalIgnoreCase))
 				return ItemType.Compile;
@@ -75,7 +75,7 @@ namespace CSharpBinding
 				return base.GetDefaultItemType(fileName);
 		}
 		
-		public override void StartBuild(ProjectBuildOptions options, IBuildFeedbackSink feedbackSink)
+		public override void StartBuild(IProjectBuildOptions options, IBuildFeedbackSink feedbackSink)
 		{
 			if (this.MinimumSolutionVersion == Solution.SolutionVersionVS2005) {
 				MSBuildEngine.StartBuild(this,
@@ -92,7 +92,7 @@ namespace CSharpBinding
 		static readonly CompilerVersion msbuild35 = new CompilerVersion(new Version(3, 5), "C# 3.0");
 		static readonly CompilerVersion msbuild40 = new CompilerVersion(new Version(4, 0), "C# 4.0");
 		
-		public override CompilerVersion CurrentCompilerVersion {
+		public override ICompilerVersion CurrentCompilerVersion {
 			get {
 				switch (MinimumSolutionVersion) {
 					case Solution.SolutionVersionVS2005:
@@ -107,7 +107,7 @@ namespace CSharpBinding
 			}
 		}
 		
-		public override IEnumerable<CompilerVersion> GetAvailableCompilerVersions()
+		public override IEnumerable<ICompilerVersion> GetAvailableCompilerVersions()
 		{
 			return new[] { msbuild20, msbuild35, msbuild40 };
 		}

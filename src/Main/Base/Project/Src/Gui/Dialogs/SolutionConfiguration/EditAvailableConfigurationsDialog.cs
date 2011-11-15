@@ -14,7 +14,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 {
 	public partial class EditAvailableConfigurationsDialog
 	{
-		Solution solution;
+		ISolution solution;
 		IProject project;
 		bool editPlatforms;
 		
@@ -113,7 +113,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 			}
 		}
 		
-		static void Remove(Solution solution, string name, bool isPlatform)
+		static void Remove(ISolution solution, string name, bool isPlatform)
 		{
 			if (isPlatform) {
 				solution.RemoveSolutionPlatform(name);

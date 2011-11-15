@@ -26,19 +26,19 @@ namespace ICSharpCode.SharpDevelop.Tests.StringTagProvider
 		{
 		}
 		
-		public ReadOnlyCollection<ProjectItem> Items {
+		public ReadOnlyCollection<IProjectItem> Items {
 			get {
 				throw new NotImplementedException();
 			}
 		}
 		
-		public ICollection<ItemType> AvailableFileItemTypes {
+		public ICollection<IItemType> AvailableFileItemTypes {
 			get {
 				throw new NotImplementedException();
 			}
 		}
 		
-		public List<ProjectSection> ProjectSections {
+		public List<IProjectSection> ProjectSections {
 			get {
 				throw new NotImplementedException();
 			}
@@ -160,7 +160,7 @@ namespace ICSharpCode.SharpDevelop.Tests.StringTagProvider
 			}
 		}
 		
-		public Solution ParentSolution {
+		public ISolution ParentSolution {
 			get {
 				throw new NotImplementedException();
 			}
@@ -198,12 +198,12 @@ namespace ICSharpCode.SharpDevelop.Tests.StringTagProvider
 			set { name = value; }
 		}
 		
-		public IEnumerable<ProjectItem> GetItemsOfType(ItemType type)
+		public IEnumerable<IProjectItem> GetItemsOfType(IItemType type)
 		{
 			throw new NotImplementedException();
 		}
 		
-		public ItemType GetDefaultItemType(string fileName)
+		public IItemType GetDefaultItemType(string fileName)
 		{
 			throw new NotImplementedException();
 		}
@@ -223,7 +223,7 @@ namespace ICSharpCode.SharpDevelop.Tests.StringTagProvider
 			throw new NotImplementedException();
 		}
 		
-		public FileProjectItem FindFile(string fileName)
+		public IFileProjectItem FindFile(string fileName)
 		{
 			throw new NotImplementedException();
 		}
@@ -233,12 +233,12 @@ namespace ICSharpCode.SharpDevelop.Tests.StringTagProvider
 			throw new NotImplementedException();
 		}
 		
-		public ParseProjectContent CreateProjectContent()
+		public IParseProjectContent CreateProjectContent()
 		{
 			throw new NotImplementedException();
 		}
 		
-		public ProjectItem CreateProjectItem(IProjectItemBackendStore item)
+		public IProjectItem CreateProjectItem(IProjectItemBackendStore item)
 		{
 			throw new NotImplementedException();
 		}
@@ -248,17 +248,17 @@ namespace ICSharpCode.SharpDevelop.Tests.StringTagProvider
 			throw new NotImplementedException();
 		}
 		
-		public ICollection<IBuildable> GetBuildDependencies(ProjectBuildOptions buildOptions)
+		public ICollection<IBuildable> GetBuildDependencies(IProjectBuildOptions buildOptions)
 		{
 			throw new NotImplementedException();
 		}
 		
-		public void StartBuild(ProjectBuildOptions buildOptions, IBuildFeedbackSink feedbackSink)
+		public void StartBuild(IProjectBuildOptions buildOptions, IBuildFeedbackSink feedbackSink)
 		{
 			throw new NotImplementedException();
 		}
 		
-		public ProjectBuildOptions CreateProjectBuildOptions(BuildOptions options, bool isRootBuildable)
+		public IProjectBuildOptions CreateProjectBuildOptions(IBuildOptions options, bool isRootBuildable)
 		{
 			throw new NotImplementedException();
 		}

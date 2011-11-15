@@ -55,9 +55,11 @@ namespace ICSharpCode.SharpDevelop.Dom
 		/// <summary>
 		/// Gets the default imports of the project content. Can return null.
 		/// </summary>
-		IUsing DefaultImports {
-			get;
-		}
+        IUsing DefaultImports
+        {
+            get;
+            set;
+        }
 		
 		/// <summary>
 		/// Gets the project for this project content. Returns null for reflection project contents.

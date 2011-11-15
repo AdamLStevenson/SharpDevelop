@@ -10,7 +10,7 @@ namespace ICSharpCode.SharpDevelop.Project
 	/// <summary>
 	/// Default implementation for ISolutionFolderContainer. Thread-safe.
 	/// </summary>
-	public abstract class AbstractSolutionFolder : LocalizedObject, ISolutionFolder
+	public abstract class AbstractSolutionFolder : LocalizedObject, IAbstractSolutionFolder
 	{
 		readonly object syncRoot = new object();
 		
@@ -35,8 +35,9 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// any solution; or are added to a solution folder that is not added to any solution.
 		/// </summary>
 		[Browsable(false)]
-		public virtual Solution ParentSolution {
-			get {
+		public virtual ISolution ParentSolution {
+			get
+            {
 				lock (syncRoot) {
 					if (parent != null)
 						return parent.ParentSolution;

@@ -331,7 +331,7 @@ namespace ICSharpCode.SharpDevelop.Project.Dialogs
 				if (!createNewSolution) {
 					cinfo.Solution = ProjectService.OpenSolution;
 					cinfo.SolutionPath = Path.GetDirectoryName(cinfo.Solution.FileName);
-					cinfo.SolutionName = cinfo.Solution.Name;
+					cinfo.SolutionName = ((IAbstractSolutionFolder)cinfo.Solution).Name;
 				} else {
 					cinfo.SolutionPath = NewSolutionDirectory;
 				}

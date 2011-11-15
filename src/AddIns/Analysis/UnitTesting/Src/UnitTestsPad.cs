@@ -174,12 +174,12 @@ namespace ICSharpCode.UnitTesting
 		/// test framework then the project will be removed from the
 		/// test tree.
 		/// </summary>
-		protected void ProjectItemRemoved(ProjectItem projectItem)
+		protected void ProjectItemRemoved(IProjectItem projectItem)
 		{
 			treeView.ProjectItemRemoved(projectItem);
 		}
 		
-		protected void ProjectItemAdded(ProjectItem projectItem)
+		protected void ProjectItemAdded(IProjectItem projectItem)
 		{
 			treeView.ProjectItemAdded(projectItem);
 		}

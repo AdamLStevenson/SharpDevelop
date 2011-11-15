@@ -66,7 +66,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		string openedImage = null;
 		FileNodeStatus fileNodeStatus = FileNodeStatus.None;
 		SpecialFolder  specialFolder  = SpecialFolder.None;
-		ProjectItem projectItem = null;
+		IProjectItem projectItem = null;
 		
 		public override bool Visible {
 			get {
@@ -98,7 +98,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			}
 		}
 		
-		public ProjectItem ProjectItem {
+		public IProjectItem ProjectItem {
 			get {
 				return projectItem;
 			}

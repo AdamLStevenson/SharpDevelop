@@ -157,7 +157,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			
 			foreach (ISolutionFolderContainer container in OpenSolution.SolutionFolderContainers) {
 				for (int i = 0; i < container.SolutionItems.Items.Count;) {
-					SolutionItem item = container.SolutionItems.Items[i];
+					ISolutionItem item = container.SolutionItems.Items[i];
 					if (FileUtility.IsBaseDirectory(fileName, Path.Combine(OpenSolution.Directory, item.Name))) {
 						container.SolutionItems.Items.RemoveAt(i);
 					} else {
@@ -212,7 +212,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// Adds a project item to the project, raising the ProjectItemAdded event.
 		/// Make sure you call project.Save() after adding new items!
 		/// </summary>
-		public static void AddProjectItem(IProject project, ProjectItem item)
+		public static void AddProjectItem(IProject project, IProjectItem item)
 		{
 			if (project == null) throw new ArgumentNullException("project");
 			if (item == null)    throw new ArgumentNullException("item");
@@ -228,7 +228,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// Make sure you call project.Save() after removing items!
 		/// No action (not even raising the event) is taken when the item was already removed form the project.
 		/// </summary>
-		public static void RemoveProjectItem(IProject project, ProjectItem item)
+		public static void RemoveProjectItem(IProject project, IProjectItem item)
 		{
 			if (project == null) throw new ArgumentNullException("project");
 			if (item == null)    throw new ArgumentNullException("item");
@@ -412,7 +412,7 @@ namespace ICSharpCode.SharpDevelop.Project
 				return;
 			}
 			solution.AddFolder(project);
-			ProjectSection configSection = solution.GetSolutionConfigurationsSection();
+			IProjectSection configSection = solution.GetSolutionConfigurationsSection();
 			foreach (string configuration in project.ConfigurationNames) {
 				foreach (string platform in project.PlatformNames) {
 					string key;

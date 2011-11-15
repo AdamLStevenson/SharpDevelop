@@ -17,7 +17,7 @@ namespace ICSharpCode.SettingsEditor
 {
 	public class SettingsCodeGeneratorTool : ICustomTool
 	{
-		public void GenerateCode(FileProjectItem item, CustomToolContext context)
+		public void GenerateCode(IFileProjectItem item, CustomToolContext context)
 		{
 			XmlDocument doc = new XmlDocument();
 			doc.Load(item.FileName);

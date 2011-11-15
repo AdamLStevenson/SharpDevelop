@@ -133,21 +133,21 @@ namespace ICSharpCode.SharpDevelop.Project
 				get { return wrappedBuildable.Name; }
 			}
 			
-			public Solution ParentSolution {
+			public ISolution ParentSolution {
 				get { return wrappedBuildable.ParentSolution; }
 			}
 			
-			public ProjectBuildOptions CreateProjectBuildOptions(BuildOptions options, bool isRootBuildable)
+			public IProjectBuildOptions CreateProjectBuildOptions(IBuildOptions options, bool isRootBuildable)
 			{
 				return null;
 			}
 			
-			public ICollection<IBuildable> GetBuildDependencies(ProjectBuildOptions buildOptions)
+			public ICollection<IBuildable> GetBuildDependencies(IProjectBuildOptions buildOptions)
 			{
 				return new IBuildable[0];
 			}
 			
-			public void StartBuild(ProjectBuildOptions buildOptions, IBuildFeedbackSink feedbackSink)
+			public void StartBuild(IProjectBuildOptions buildOptions, IBuildFeedbackSink feedbackSink)
 			{
 			}
 		}
@@ -200,19 +200,19 @@ namespace ICSharpCode.SharpDevelop.Project
 				get { return wrapped.Name; }
 			}
 			
-			public Solution ParentSolution {
+			public ISolution ParentSolution {
 				get { return wrapped.ParentSolution; }
 			}
 			
-			public ProjectBuildOptions CreateProjectBuildOptions(BuildOptions options, bool isRootBuildable)
+			public IProjectBuildOptions CreateProjectBuildOptions(IBuildOptions options, bool isRootBuildable)
 			{
 				return wrapped.CreateProjectBuildOptions(options, isRootBuildable);
 			}
 			
-			Dictionary<ProjectBuildOptions, ICollection<IBuildable>> cachedBuildDependencies = new Dictionary<ProjectBuildOptions, ICollection<IBuildable>>();
+			Dictionary<IProjectBuildOptions, ICollection<IBuildable>> cachedBuildDependencies = new Dictionary<IProjectBuildOptions, ICollection<IBuildable>>();
 			ICollection<IBuildable> cachedBuildDependenciesForNullOptions;
 				
-			public ICollection<IBuildable> GetBuildDependencies(ProjectBuildOptions buildOptions)
+			public ICollection<IBuildable> GetBuildDependencies(IProjectBuildOptions buildOptions)
 			{
 				List<IBuildable> result = new List<IBuildable>();
 				foreach (IBuildable b in wrapped.GetBuildDependencies(buildOptions)) {
@@ -241,7 +241,7 @@ namespace ICSharpCode.SharpDevelop.Project
 				return lastCompilationPass.Index > comparisonPass.Index;
 			}
 			
-			public void StartBuild(ProjectBuildOptions buildOptions, IBuildFeedbackSink feedbackSink)
+			public void StartBuild(IProjectBuildOptions buildOptions, IBuildFeedbackSink feedbackSink)
 			{
 				IProject p = wrapped as IProject;
 				if (p == null) {
@@ -297,7 +297,7 @@ namespace ICSharpCode.SharpDevelop.Project
 					get { return sink.ProgressMonitor; }
 				}
 				
-				public void ReportError(BuildError error)
+				public void ReportError(IBuildError error)
 				{
 					sink.ReportError(error);
 				}

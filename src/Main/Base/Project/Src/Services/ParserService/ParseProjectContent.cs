@@ -15,7 +15,7 @@ using ICSharpCode.SharpDevelop.Project;
 
 namespace ICSharpCode.SharpDevelop
 {
-	public sealed class ParseProjectContent : DefaultProjectContent
+    public sealed class ParseProjectContent : DefaultProjectContent, IParseProjectContent
 	{
 		public ParseProjectContent(IProject project)
 		{
@@ -49,9 +49,9 @@ namespace ICSharpCode.SharpDevelop
 			return string.Format("[{0}: {1}]", GetType().Name, project.Name);
 		}
 		
-		internal void Initialize1(IProgressMonitor progressMonitor)
+		public void Initialize1(IProgressMonitor progressMonitor)
 		{
-			ICollection<ProjectItem> items = project.Items;
+			ICollection<IProjectItem> items = project.Items;
 			ProjectService.ProjectItemAdded   += OnProjectItemAdded;
 			ProjectService.ProjectItemRemoved += OnProjectItemRemoved;
 			UpdateDefaultImports(items);
@@ -216,7 +216,7 @@ namespace ICSharpCode.SharpDevelop
 		
 		int languageDefaultImportCount = -1;
 		
-		void UpdateDefaultImports(ICollection<ProjectItem> items)
+		void UpdateDefaultImports(ICollection<IProjectItem> items)
 		{
 			if (languageDefaultImportCount < 0) {
 				languageDefaultImportCount = (DefaultImports != null) ? DefaultImports.Usings.Count : 0;
@@ -238,7 +238,7 @@ namespace ICSharpCode.SharpDevelop
 			}
 		}
 		
-		internal int GetInitializationWorkAmount()
+		public int GetInitializationWorkAmount()
 		{
 			return project.Items.Count;
 		}
@@ -250,7 +250,7 @@ namespace ICSharpCode.SharpDevelop
 			Initialize2(progressMonitor);
 		}
 		
-		internal void Initialize2(IProgressMonitor progressMonitor)
+		public void Initialize2(IProgressMonitor progressMonitor)
 		{
 			if (!initializing) return;
 			try {

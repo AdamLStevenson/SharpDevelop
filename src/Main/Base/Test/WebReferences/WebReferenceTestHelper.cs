@@ -66,7 +66,7 @@ namespace ICSharpCode.SharpDevelop.Tests.WebReferences
 			                                   });
 		}
 		
-		public static ProjectItem GetProjectItem(List<ProjectItem> items, string include, ItemType itemType) {
+		public static ProjectItem GetProjectItem(List<ProjectItem> items, string include, IItemType itemType) {
 			foreach (ProjectItem item in items) {
 				if (item.ItemType == itemType) {
 					if (item.Include == include) {
@@ -77,7 +77,7 @@ namespace ICSharpCode.SharpDevelop.Tests.WebReferences
 			return null;
 		}
 		
-		public static FileProjectItem GetFileProjectItem(List<ProjectItem> items, string include, ItemType itemType) {
+		public static FileProjectItem GetFileProjectItem(List<ProjectItem> items, string include, IItemType itemType) {
 			foreach (ProjectItem item in items) {
 				if (item.ItemType == itemType) {
 					if (item.Include == include) {
@@ -88,7 +88,7 @@ namespace ICSharpCode.SharpDevelop.Tests.WebReferences
 			return null;
 		}
 		
-		public static ProjectItem GetProjectItem(List<ProjectItem> items, ItemType itemType)
+		public static ProjectItem GetProjectItem(List<ProjectItem> items, IItemType itemType)
 		{
 			foreach (ProjectItem item in items) {
 				if (item.ItemType == itemType) {

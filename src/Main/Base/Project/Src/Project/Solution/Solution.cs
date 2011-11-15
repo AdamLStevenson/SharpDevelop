@@ -14,7 +14,7 @@ using ICSharpCode.SharpDevelop.Gui;
 
 namespace ICSharpCode.SharpDevelop.Project
 {
-	public class Solution : SolutionFolder, IDisposable, IBuildable
+	public class Solution : SolutionFolderContainer, ISolution
 	{
 		public const int SolutionVersionVS2005 = 9;
 		public const int SolutionVersionVS2008 = 10;
@@ -50,7 +50,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			// Try all project's in the solution.
 			IProject linkedProject = null;
 			foreach (IProject project in Projects) {
-				FileProjectItem file = project.FindFile(fileName);
+				IFileProjectItem file = project.FindFile(fileName);
 				if (file != null) {
 					if (file.IsLink)
 						linkedProject = project;
@@ -166,9 +166,9 @@ namespace ICSharpCode.SharpDevelop.Project
 			return null;
 		}
 		
-		public SolutionFolder CreateFolder(string folderName)
+		public ISolutionFolderContainer CreateFolder(string folderName)
 		{
-			return new SolutionFolder(folderName, folderName, "{" + Guid.NewGuid().ToString().ToUpperInvariant() + "}");
+			return new SolutionFolderContainer(folderName, folderName, "{" + Guid.NewGuid().ToString().ToUpperInvariant() + "}");
 		}
 		#endregion
 		
@@ -203,7 +203,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		SolutionPreferences preferences;
 		
 		[Browsable(false)]
-		public SolutionPreferences Preferences {
+		public ISolutionPreferences Preferences {
 			get {
 				return preferences;
 			}
@@ -228,24 +228,24 @@ namespace ICSharpCode.SharpDevelop.Project
 		
 		#region ISolutionFolderContainer implementations
 		[Browsable(false)]
-		public override Solution ParentSolution {
+		public override ISolution ParentSolution {
 			get { return this; }
 		}
 		
-		public override ProjectSection SolutionItems {
+		public override IProjectSection SolutionItems {
 			get {
-				foreach (SolutionFolder folder in Folders) {
+				foreach (SolutionFolderContainer folder in Folders) {
 					if (folder.Name == "Solution Items") {
 						return folder.SolutionItems;
 					}
 				}
 				
-				SolutionFolder newFolder = CreateFolder("Solution Items");
+				ISolutionFolderContainer newFolder = CreateFolder("Solution Items");
 				return newFolder.SolutionItems;
 			}
 		}
 		
-		internal void BeforeAddFolderToSolution(ISolutionFolder folder)
+		public void BeforeAddFolderToSolution(ISolutionFolder folder)
 		{
 			IProject project = folder as IProject;
 			if (project != null && !isLoading) {
@@ -265,7 +265,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			guidDictionary[folder.IdGuid] = folder;
 		}
 		
-		internal void AfterAddFolderToSolution(ISolutionFolder folder)
+		public void AfterAddFolderToSolution(ISolutionFolder folder)
 		{
 			IProject project = folder as IProject;
 			if (project != null && !isLoading) {
@@ -355,8 +355,8 @@ namespace ICSharpCode.SharpDevelop.Project
 					// Web projects can have sections
 					SaveProjectSections(project.ProjectSections, projectSection);
 					
-				} else if (currentFolder is SolutionFolder) {
-					SolutionFolder folder = (SolutionFolder)currentFolder;
+				} else if (currentFolder is SolutionFolderContainer) {
+					SolutionFolderContainer folder = (SolutionFolderContainer)currentFolder;
 					
 					SaveProjectSections(folder.Sections, projectSection);
 					
@@ -430,7 +430,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			changeWatcher.Enable();
 		}
 		
-		static void SaveProjectSections(IEnumerable<ProjectSection> sections, StringBuilder projectSection)
+		static void SaveProjectSections(IEnumerable<IProjectSection> sections, StringBuilder projectSection)
 		{
 			foreach (ProjectSection section in sections) {
 				projectSection.Append("\tProjectSection(");
@@ -525,7 +525,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			
 			ProjectSection nestedProjectsSection = null;
 			IList<ProjectLoadInformation> projectsToLoad = new List<ProjectLoadInformation>();
-			IList<IList<ProjectSection>> readProjectSections = new List<IList<ProjectSection>>();
+			IList<IList<IProjectSection>> readProjectSections = new List<IList<IProjectSection>>();
 			
 			// process the solution file contents
 			while (true) {
@@ -546,14 +546,14 @@ namespace ICSharpCode.SharpDevelop.Project
 					}
 					
 					if (projectGuid == FolderGuid) {
-						SolutionFolder newFolder = SolutionFolder.ReadFolder(sr, title, location, guid);
+                        SolutionFolderContainer newFolder = SolutionFolderContainer.ReadFolder(sr, title, location, guid);
 						newSolution.AddFolder(newFolder);
 					} else {
 						ProjectLoadInformation loadInfo = new ProjectLoadInformation(newSolution, location, title);
 						loadInfo.TypeGuid = projectGuid;
 						loadInfo.Guid = guid;
 						projectsToLoad.Add(loadInfo);
-						IList<ProjectSection> currentProjectSections = new List<ProjectSection>();
+						IList<IProjectSection> currentProjectSections = new List<IProjectSection>();
 						ReadProjectSections(sr, currentProjectSections);
 						readProjectSections.Add(currentProjectSections);
 					}
@@ -576,11 +576,11 @@ namespace ICSharpCode.SharpDevelop.Project
 			// load projects
 			for(int i=0; i<projectsToLoad.Count; i++) {
 				ProjectLoadInformation loadInfo = projectsToLoad[i];
-				IList<ProjectSection> projectSections = readProjectSections[i];
+				IList<IProjectSection> projectSections = readProjectSections[i];
 				loadInfo.ProjectSections = projectSections;
 				
 				// set the target platform
-				SolutionItem projectConfig = newSolution.GetProjectConfiguration(loadInfo.Guid);
+				ISolutionItem projectConfig = newSolution.GetProjectConfiguration(loadInfo.Guid);
 				loadInfo.Platform = AbstractProject.GetPlatformNameFromKey(projectConfig.Location);
 				
 				loadInfo.ProgressMonitor = progressMonitor;
@@ -601,7 +601,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		
 		#region Configuration/Platform management
 		#region Section management
-		public ProjectSection GetSolutionConfigurationsSection()
+		public IProjectSection GetSolutionConfigurationsSection()
 		{
 			foreach (ProjectSection sec in this.Sections) {
 				if (sec.Name == "SolutionConfigurationPlatforms")
@@ -626,7 +626,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			return newSec;
 		}
 		
-		public ProjectSection GetProjectConfigurationsSection()
+		public IProjectSection GetProjectConfigurationsSection()
 		{
 			foreach (ProjectSection sec in Sections) {
 				if (sec.Name == "ProjectConfigurationPlatforms")
@@ -680,9 +680,9 @@ namespace ICSharpCode.SharpDevelop.Project
 			return newSec;
 		}
 		
-		public SolutionItem GetProjectConfiguration(string guid) {
-			ProjectSection projectConfigSection = GetProjectConfigurationsSection();
-			SolutionItem foundItem = projectConfigSection.Items.Find(item => item.Name.StartsWith(guid));
+		public ISolutionItem GetProjectConfiguration(string guid) {
+			IProjectSection projectConfigSection = GetProjectConfigurationsSection();
+			ISolutionItem foundItem = projectConfigSection.Items.Find(item => item.Name.StartsWith(guid));
 			if (foundItem != null)
 				return foundItem;
 			LoggingService.Warn("No configuration for project "+guid + "using default.");
@@ -691,8 +691,8 @@ namespace ICSharpCode.SharpDevelop.Project
 		
 		public bool FixSolutionConfiguration(IEnumerable<IProject> projects)
 		{
-			ProjectSection solSec = GetSolutionConfigurationsSection();
-			ProjectSection prjSec = GetProjectConfigurationsSection();
+			IProjectSection solSec = GetSolutionConfigurationsSection();
+			IProjectSection prjSec = GetProjectConfigurationsSection();
 			bool changed = false;
 			SortedSet<string> configurations = new SortedSet<string>();
 
@@ -746,7 +746,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// </summary>
 		internal void RemoveProjectConfigurations(string projectGuid)
 		{
-			ProjectSection prjSec = GetProjectConfigurationsSection();
+			IProjectSection prjSec = GetProjectConfigurationsSection();
 			prjSec.Items.RemoveAll(
 				item => {
 					if (item.Name.Contains(".")) {
@@ -812,71 +812,13 @@ namespace ICSharpCode.SharpDevelop.Project
 			return MSBuildInternals.FixPlatformNameForSolution(platformName);
 		}
 		
-		internal sealed class ProjectConfigurationPlatformMatching
-		{
-			public readonly IProject Project;
-			public string Configuration;
-			public string Platform;
-			public SolutionItem SolutionItem;
-			
-			public ProjectConfigurationPlatformMatching(IProject project, string configuration, string platform, SolutionItem solutionItem)
-			{
-				this.Project = project;
-				this.Configuration = configuration;
-				this.Platform = platform;
-				this.SolutionItem = solutionItem;
-			}
-			
-			public void SetSolutionConfigurationPlatform(ProjectSection section, string newConfiguration, string newPlatform)
-			{
-				if (this.SolutionItem == null)
-					return;
-				string oldName = this.SolutionItem.Name;
-				this.SolutionItem.Name = this.Project.IdGuid + "." + newConfiguration + "|" + newPlatform + ".Build.0";
-				string newName = this.SolutionItem.Name;
-				if (StripBuild0(ref oldName) && StripBuild0(ref newName)) {
-					oldName += ".ActiveCfg";
-					newName += ".ActiveCfg";
-					foreach (SolutionItem item in section.Items) {
-						if (item.Name == oldName)
-							item.Name = newName;
-					}
-				}
-			}
-			
-			public void SetProjectConfigurationPlatform(ProjectSection section, string newConfiguration, string newPlatform)
-			{
-				this.Configuration = newConfiguration;
-				this.Platform = newPlatform;
-				if (this.SolutionItem == null)
-					return;
-				this.SolutionItem.Location = newConfiguration + "|" + newPlatform;
-				string thisName = this.SolutionItem.Name;
-				if (StripBuild0(ref thisName)) {
-					thisName += ".ActiveCfg";
-					foreach (SolutionItem item in section.Items) {
-						if (item.Name == thisName)
-							item.Location = this.SolutionItem.Location;
-					}
-				}
-			}
-			
-			internal static bool StripBuild0(ref string s)
-			{
-				if (s.EndsWith(".Build.0")) {
-					s = s.Substring(0, s.Length - ".Build.0".Length);
-					return true;
-				} else {
-					return false;
-				}
-			}
-		}
 		
-		internal List<ProjectConfigurationPlatformMatching>
+		
+		public List<IProjectConfigurationPlatformMatching>
 			GetActiveConfigurationsAndPlatformsForProjects(string solutionConfiguration, string solutionPlatform)
 		{
-			List<ProjectConfigurationPlatformMatching> results = new List<ProjectConfigurationPlatformMatching>();
-			ProjectSection prjSec = GetProjectConfigurationsSection();
+			List<IProjectConfigurationPlatformMatching> results = new List<IProjectConfigurationPlatformMatching>();
+			IProjectSection prjSec = GetProjectConfigurationsSection();
 			Dictionary<string, SolutionItem> dict = new Dictionary<string, SolutionItem>(StringComparer.OrdinalIgnoreCase);
 			foreach (SolutionItem item in prjSec.Items) {
 				dict[item.Name] = item;
@@ -1010,9 +952,9 @@ namespace ICSharpCode.SharpDevelop.Project
 		void AddSolutionConfigurationPlatform(string newConfiguration, string newPlatform,
 		                                      string copyFrom, bool createInProjects, bool addPlatform)
 		{
-			List<ProjectConfigurationPlatformMatching> matchings;
+			List<IProjectConfigurationPlatformMatching> matchings;
 			if (string.IsNullOrEmpty(copyFrom)) {
-				matchings = new List<ProjectConfigurationPlatformMatching>();
+				matchings = new List<IProjectConfigurationPlatformMatching>();
 			} else {
 				if (addPlatform) {
 					matchings = GetActiveConfigurationsAndPlatformsForProjects(newConfiguration, copyFrom);
@@ -1026,8 +968,8 @@ namespace ICSharpCode.SharpDevelop.Project
 				// get old project configuration and platform
 				string projectConfiguration, projectPlatform;
 				
-				ProjectConfigurationPlatformMatching matching = matchings.Find(
-					delegate(ProjectConfigurationPlatformMatching m) { return m.Project == project; });
+				IProjectConfigurationPlatformMatching matching = matchings.Find(
+					delegate(IProjectConfigurationPlatformMatching m) { return m.Project == project; });
 				if (matching != null) {
 					projectConfiguration = matching.Configuration;
 					projectPlatform = matching.Platform;
@@ -1090,11 +1032,11 @@ namespace ICSharpCode.SharpDevelop.Project
 		public void RemoveSolutionConfiguration(string name)
 		{
 			GetSolutionConfigurationsSection().Items.RemoveAll(
-				delegate(SolutionItem item) {
+				delegate(ISolutionItem item) {
 					return AbstractProject.GetConfigurationNameFromKey(item.Name) == name;
 				});
 			GetProjectConfigurationsSection().Items.RemoveAll(
-				delegate(SolutionItem item) {
+				delegate(ISolutionItem item) {
 					return AbstractProject.GetConfigurationNameFromKey(GetKeyFromProjectConfItem(item.Name)) == name;
 				});
 		}
@@ -1102,11 +1044,11 @@ namespace ICSharpCode.SharpDevelop.Project
 		public void RemoveSolutionPlatform(string name)
 		{
 			GetSolutionConfigurationsSection().Items.RemoveAll(
-				delegate(SolutionItem item) {
+				delegate(ISolutionItem item) {
 					return AbstractProject.GetPlatformNameFromKey(item.Name) == name;
 				});
 			GetProjectConfigurationsSection().Items.RemoveAll(
-				delegate(SolutionItem item) {
+				delegate(ISolutionItem item) {
 					return AbstractProject.GetPlatformNameFromKey(GetKeyFromProjectConfItem(item.Name)) == name;
 				});
 		}
@@ -1203,7 +1145,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		#endregion
 		
 		#region Building
-		ICollection<IBuildable> IBuildable.GetBuildDependencies(ProjectBuildOptions buildOptions)
+		ICollection<IBuildable> IBuildable.GetBuildDependencies(IProjectBuildOptions buildOptions)
 		{
 			List<IBuildable> result = new List<IBuildable>();
 			foreach (IProject p in this.Projects)
@@ -1211,13 +1153,13 @@ namespace ICSharpCode.SharpDevelop.Project
 			return result;
 		}
 		
-		void IBuildable.StartBuild(ProjectBuildOptions buildOptions, IBuildFeedbackSink feedbackSink)
+		void IBuildable.StartBuild(IProjectBuildOptions buildOptions, IBuildFeedbackSink feedbackSink)
 		{
 			// building a solution finishes immediately: we only care for the dependencies
 			feedbackSink.Done(true);
 		}
 		
-		ProjectBuildOptions IBuildable.CreateProjectBuildOptions(BuildOptions options, bool isRootBuildable)
+		IProjectBuildOptions IBuildable.CreateProjectBuildOptions(IBuildOptions options, bool isRootBuildable)
 		{
 			return null;
 		}

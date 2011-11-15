@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ICSharpCode.SharpDevelop.Project
 {
-	public class SolutionItem
+	public class SolutionItem:ISolutionItem
 	{
 		string    name;
 		string    location;

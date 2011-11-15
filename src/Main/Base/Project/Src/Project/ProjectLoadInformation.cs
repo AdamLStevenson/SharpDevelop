@@ -11,12 +11,12 @@ namespace ICSharpCode.SharpDevelop.Project
 	/// </summary>
 	public class ProjectLoadInformation
 	{
-		public Solution ParentSolution { get; private set; }
+		public ISolution ParentSolution { get; private set; }
 		public string FileName { get; private set; }
 		public string Platform { get; internal set; }
 		public string ProjectName { get; private set; }
 		public string TypeGuid { get; set; }
-		public IList<ProjectSection> ProjectSections {get; set;}
+		public IList<IProjectSection> ProjectSections {get; set;}
 		internal string Guid { get; set; }
 		
 		Gui.IProgressMonitor progressMonitor = new Gui.DummyProgressMonitor();
@@ -34,7 +34,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			}
 		}
 		
-		public ProjectLoadInformation(Solution parentSolution, string fileName, string projectName)
+		public ProjectLoadInformation(ISolution parentSolution, string fileName, string projectName)
 		{
 			if (parentSolution == null)
 				throw new ArgumentNullException("parentSolution");

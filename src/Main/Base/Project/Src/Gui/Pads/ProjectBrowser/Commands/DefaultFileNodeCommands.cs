@@ -220,7 +220,7 @@ namespace ICSharpCode.SharpDevelop.Project.Commands
 				}
 			}
 			
-			ItemType type = fileNode.Project.GetDefaultItemType(fileNode.FileName);
+			IItemType type = fileNode.Project.GetDefaultItemType(fileNode.FileName);
 			
 			FileProjectItem newItem = new FileProjectItem(fileNode.Project, type);
 			newItem.Include = FileUtility.GetRelativePath(fileNode.Project.Directory, fileNode.FileName);
@@ -244,10 +244,7 @@ namespace ICSharpCode.SharpDevelop.Project.Commands
 					IncludeDirectoryNode((DirectoryNode)directoryNode.Parent, false);
 				}
 			}
-			FileProjectItem newItem = new FileProjectItem(
-				directoryNode.Project, ItemType.Folder,
-				FileUtility.GetRelativePath(directoryNode.Project.Directory, directoryNode.Directory)
-			);
+			IFileProjectItem newItem = new FileProjectItem(directoryNode.Project, ItemType.Folder, FileUtility.GetRelativePath(directoryNode.Project.Directory, directoryNode.Directory));
 			ProjectService.AddProjectItem(directoryNode.Project, newItem);
 			directoryNode.ProjectItem = newItem;
 			directoryNode.FileNodeStatus = FileNodeStatus.InProject;

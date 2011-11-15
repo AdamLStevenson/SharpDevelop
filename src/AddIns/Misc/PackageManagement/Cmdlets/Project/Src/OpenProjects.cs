@@ -22,7 +22,10 @@ namespace ICSharpCode.PackageManagement.Cmdlets
 		
 		public IEnumerable<Project> GetAllProjects()
 		{
-			foreach (IProject project in solution.GetMSBuildProjects()) {
+            IEnumerable<IProject> oProjects =  solution.GetMSBuildProjects();
+
+            foreach (IProject project in oProjects)
+            {
 				yield return CreateProject(project);
 			}
 		}

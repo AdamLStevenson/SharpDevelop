@@ -39,7 +39,9 @@ namespace ICSharpCode.SharpDevelop.Project
 			if (options == null)
 				throw new ArgumentNullException("options");
 			WorkbenchSingleton.AssertMainThread();
-			if (guiBuildCancellation != null) {
+
+			if (guiBuildCancellation != null)
+            {
 				BuildResults results = new BuildResults();
 				WorkbenchSingleton.StatusBar.SetMessage(Core.ResourceService.GetString("MainWindow.CompilerMessages.MSBuildAlreadyRunning"));
 				BuildError error = new BuildError(null, Core.ResourceService.GetString("MainWindow.CompilerMessages.MSBuildAlreadyRunning"));
@@ -49,7 +51,9 @@ namespace ICSharpCode.SharpDevelop.Project
 				if (options.Callback != null) {
 					options.Callback(results);
 				}
-			} else {
+			}
+            else
+            {
 				guiBuildCancellation = new CancellationTokenSource();
 				IProgressMonitor progressMonitor = WorkbenchSingleton.StatusBar.CreateProgressMonitor(guiBuildCancellation.Token);
 				guiBuildTrackedFeature = AnalyticsMonitorService.TrackFeature("ICSharpCode.SharpDevelop.Project.BuildEngine.Build");
@@ -106,7 +110,7 @@ namespace ICSharpCode.SharpDevelop.Project
 				get { return progressMonitor; }
 			}
 			
-			public void ReportError(BuildError error)
+			public void ReportError(IBuildError error)
 			{
 				WorkbenchSingleton.SafeThreadAsyncCall(
 					delegate {
@@ -172,7 +176,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			if (options == null)
 				throw new ArgumentNullException("options");
 			
-			Solution solution = project.ParentSolution;
+			ISolution solution = project.ParentSolution;
 			if (solution == null)
 				throw new ArgumentException("project.ParentSolution must not be null", "project");
 			
@@ -215,7 +219,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			readonly BuildEngine engine;
 			internal readonly IBuildable project;
 			/// <summary>The build options used for this node. Might be null.</summary>
-			internal ProjectBuildOptions options;
+			internal IProjectBuildOptions options;
 			internal BuildNode[] dependencies;
 			/// <summary>specifies whether the node has been constructed completely (all dependencies initialized)</summary>
 			internal bool nodeComplete;
@@ -286,7 +290,7 @@ namespace ICSharpCode.SharpDevelop.Project
 				}
 			}
 			
-			public void ReportError(BuildError error)
+			public void ReportError(IBuildError error)
 			{
 				if (error.IsWarning) {
 					if (perNodeProgressMonitor.Status != OperationStatus.Error)
@@ -590,7 +594,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		BuildNode nodeWithOutputLock;
 		Queue<BuildNode> nodesWaitingForOutputLock = new Queue<BuildNode>();
 		
-		void ReportError(BuildNode source, BuildError error)
+		void ReportError(BuildNode source, IBuildError error)
 		{
 			if (!error.IsWarning)
 				source.hasErrors = true;

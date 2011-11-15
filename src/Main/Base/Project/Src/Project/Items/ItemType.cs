@@ -11,55 +11,52 @@ namespace ICSharpCode.SharpDevelop.Project
 	/// - we don't want to use strings everywhere.
 	/// Basically this is something like a typedef for C# (without implicit conversions).
 	/// </summary>
-	public struct ItemType : IEquatable<ItemType>, IComparable<ItemType>
+	public struct ItemType : IItemType
 	{
 		// ReferenceProjectItem
-		public static readonly ItemType Reference = new ItemType("Reference");
-		public static readonly ItemType ProjectReference = new ItemType("ProjectReference");
-		public static readonly ItemType COMReference = new ItemType("COMReference");
+		public static readonly IItemType Reference = new ItemType("Reference");
+		public static readonly IItemType ProjectReference = new ItemType("ProjectReference");
+		public static readonly IItemType COMReference = new ItemType("COMReference");
 		
-		public static readonly ReadOnlyCollectionWrapper<ItemType> ReferenceItemTypes
-			= new ReadOnlyCollectionWrapper<ItemType>(new ItemType[] { Reference, ProjectReference, COMReference });
+		public static readonly ReadOnlyCollectionWrapper<IItemType> ReferenceItemTypes
+			= new ReadOnlyCollectionWrapper<IItemType>(new IItemType[] { Reference, ProjectReference, COMReference });
 		
 		/// <summary>
 		/// Item type for imported VB namespaces
 		/// </summary>
-		public static readonly ItemType Import = new ItemType("Import");
+		public static readonly IItemType Import = new ItemType("Import");
 		
-		public static readonly ItemType WebReferenceUrl = new ItemType("WebReferenceUrl");
+		public static readonly IItemType WebReferenceUrl = new ItemType("WebReferenceUrl");
 		
 		// FileProjectItem
-		public static readonly ItemType Compile = new ItemType("Compile");
-		public static readonly ItemType EmbeddedResource = new ItemType("EmbeddedResource");
-		public static readonly ItemType None = new ItemType("None");
-		public static readonly ItemType Content = new ItemType("Content");
-		public static readonly ItemType ApplicationDefinition = new ItemType("ApplicationDefinition");
-		public static readonly ItemType Page = new ItemType("Page");
-		public static readonly ItemType BootstrapperFile = new ItemType("BootstrapperFile");
-		public static readonly ItemType Header = new ItemType("Header");
+		public static readonly IItemType Compile = new ItemType("Compile");
+		public static readonly IItemType EmbeddedResource = new ItemType("EmbeddedResource");
+		public static readonly IItemType None = new ItemType("None");
+		public static readonly IItemType Content = new ItemType("Content");
+		public static readonly IItemType ApplicationDefinition = new ItemType("ApplicationDefinition");
+		public static readonly IItemType Page = new ItemType("Page");
+		public static readonly IItemType BootstrapperFile = new ItemType("BootstrapperFile");
+		public static readonly IItemType Header = new ItemType("Header");
 		
 		// vcxproj-only (c++ project) items
-		public static readonly ItemType ClCompile = new ItemType("ClCompile");
-		public static readonly ItemType ClInclude = new ItemType("ClInclude");
+		public static readonly IItemType ClCompile = new ItemType("ClCompile");
+		public static readonly IItemType ClInclude = new ItemType("ClInclude");
 		
 		/// <summary>
 		/// Gets a collection of item types that are used for files.
 		/// </summary>
-		public static readonly ReadOnlyCollectionWrapper<ItemType> DefaultFileItems
-			= new ReadOnlyCollectionWrapper<ItemType>(new ItemType[] { Compile, EmbeddedResource, None, Content });
+		public static readonly ReadOnlyCollectionWrapper<IItemType> DefaultFileItems
+			= new ReadOnlyCollectionWrapper<IItemType>(new IItemType[] { Compile, EmbeddedResource, None, Content });
 		
-		public static readonly ItemType Resource = new ItemType("Resource");
-		public static readonly ItemType Folder = new ItemType("Folder");
-		public static readonly ItemType WebReferences = new ItemType("WebReferences");
+		public static readonly IItemType Resource = new ItemType("Resource");
+		public static readonly IItemType Folder = new ItemType("Folder");
+		public static readonly IItemType WebReferences = new ItemType("WebReferences");
 		
 		/// <summary>
 		/// Gets a collection of item types that are known not to be used for files.
 		/// </summary>
-		public static readonly ReadOnlyCollectionWrapper<ItemType> NonFileItemTypes
-			= new ReadOnlyCollectionWrapper<ItemType>(
-				new List<ItemType>(ReferenceItemTypes) {
-					Folder, WebReferences, Import 
-				});
+		public static readonly ReadOnlyCollectionWrapper<IItemType> NonFileItemTypes
+			= new ReadOnlyCollectionWrapper<IItemType>(new List<IItemType>(ReferenceItemTypes) {Folder, WebReferences, Import});
 		
 		readonly string itemName;
 		
@@ -88,9 +85,9 @@ namespace ICSharpCode.SharpDevelop.Project
 				return false;
 		}
 		
-		public bool Equals(ItemType other)
+		public bool Equals(IItemType other)
 		{
-			return this.itemName == other.itemName;
+			return this.itemName == other.ItemName;
 		}
 		
 		public override int GetHashCode()
@@ -107,11 +104,14 @@ namespace ICSharpCode.SharpDevelop.Project
 		{
 			return !(lhs.Equals(rhs)); // use operator == and negate result
 		}
+
+   
+
 		#endregion
 		
-		public int CompareTo(ItemType other)
+		public int CompareTo(IItemType other)
 		{
-			return itemName.CompareTo(other.itemName);
+			return itemName.CompareTo(other.ItemName);
 		}
 	}
 }

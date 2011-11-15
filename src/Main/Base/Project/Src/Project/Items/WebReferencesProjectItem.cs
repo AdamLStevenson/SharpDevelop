@@ -9,7 +9,8 @@ namespace ICSharpCode.SharpDevelop.Project
 {
 	public sealed class WebReferencesProjectItem : FileProjectItem
 	{
-		public WebReferencesProjectItem(IProject project) : base(project, ItemType.WebReferences)
+        public WebReferencesProjectItem(IProject project)
+            : base(project, ICSharpCode.SharpDevelop.Project.ItemType.WebReferences)
 		{
 		}
 		

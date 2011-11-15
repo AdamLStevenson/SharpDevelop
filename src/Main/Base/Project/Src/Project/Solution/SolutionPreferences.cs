@@ -7,7 +7,7 @@ using ICSharpCode.Core;
 
 namespace ICSharpCode.SharpDevelop.Project
 {
-	public sealed class SolutionPreferences : IMementoCapable
+    public sealed class SolutionPreferences : IMementoCapable, ISolutionPreferences
 	{
 		Solution solution;
 		Properties properties = new Properties();

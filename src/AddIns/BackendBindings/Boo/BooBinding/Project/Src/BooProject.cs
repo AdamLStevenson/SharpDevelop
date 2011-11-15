@@ -74,7 +74,7 @@ namespace Grunwald.BooBinding
 			((IProjectItemListProvider)this).AddProjectItem(new ReferenceProjectItem(this, assembly));
 		}
 		
-		public override ItemType GetDefaultItemType(string fileName)
+		public override IItemType GetDefaultItemType(string fileName)
 		{
 			if (string.Equals(Path.GetExtension(fileName), ".boo", StringComparison.OrdinalIgnoreCase))
 				return ItemType.Compile;
@@ -84,15 +84,15 @@ namespace Grunwald.BooBinding
 		
 		internal static IProjectContent BooCompilerPC;
 		
-		protected override ParseProjectContent CreateProjectContent()
+		protected override IParseProjectContent CreateProjectContent()
 		{
 			if (BooCompilerPC == null) {
 				ReferenceProjectItem booCompilerItem = new ReferenceProjectItem(this, typeof(Boo.Lang.Compiler.AbstractAstAttribute).Assembly.Location);
 				BooCompilerPC = AssemblyParserService.GetProjectContentForReference(booCompilerItem);
 			}
 			
-			ParseProjectContent pc = base.CreateProjectContent();
-			pc.DefaultImports = new DefaultUsing(pc);
+			IParseProjectContent pc = base.CreateProjectContent();
+			    pc.DefaultImports = new DefaultUsing(pc);
 			pc.DefaultImports.Usings.Add("Boo.Lang");
 			pc.DefaultImports.Usings.Add("Boo.Lang.Builtins");
 			pc.DefaultImports.Usings.Add("Boo.Lang.Extensions");

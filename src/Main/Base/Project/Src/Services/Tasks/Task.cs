@@ -104,7 +104,7 @@ namespace ICSharpCode.SharpDevelop
 		/// <summary>
 		/// Contains a reference to the build error.
 		/// </summary>
-		public BuildError BuildError { get; private set; }
+		public IBuildError BuildError { get; private set; }
 		
 		/// <summary>
 		/// Creates a new Task instance.
@@ -132,7 +132,7 @@ namespace ICSharpCode.SharpDevelop
 			TaskService.Remove(this);
 		}
 		
-		public Task(BuildError error)
+		public Task(IBuildError error)
 		{
 			if (error == null)
 				throw new ArgumentNullException("error");

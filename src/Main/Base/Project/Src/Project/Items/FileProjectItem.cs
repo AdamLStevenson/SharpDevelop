@@ -16,18 +16,14 @@ using ICSharpCode.SharpDevelop.Widgets.DesignTimeSupport;
 
 namespace ICSharpCode.SharpDevelop.Project
 {
-	public enum CopyToOutputDirectory {
-		Never,
-		Always,
-		PreserveNewest
-	}
 	
-	public class FileProjectItem : ProjectItem
+
+    public class FileProjectItem : ProjectItem, IFileProjectItem
 	{
 		/// <summary>
 		/// Creates a new FileProjectItem with the specified include.
 		/// </summary>
-		public FileProjectItem(IProject project, ItemType itemType, string include)
+		public FileProjectItem(IProject project, IItemType itemType, string include)
 			: base(project, itemType, include)
 		{
 		}
@@ -35,7 +31,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// <summary>
 		/// Creates a new FileProjectItem including a dummy file.
 		/// </summary>
-		public FileProjectItem(IProject project, ItemType itemType)
+		public FileProjectItem(IProject project, IItemType itemType)
 			: base(project, itemType)
 		{
 		}
@@ -75,11 +71,11 @@ namespace ICSharpCode.SharpDevelop.Project
 				if (item != null && item.Project != null) {
 					return new DropDownEditorListBox(editorService, GetNames(item.Project.AvailableFileItemTypes));
 				} else {
-					return new DropDownEditorListBox(editorService, GetNames(ItemType.DefaultFileItems));
+					return new DropDownEditorListBox(editorService, GetNames(ICSharpCode.SharpDevelop.Project.ItemType.DefaultFileItems));
 				}
 			}
 			
-			static IEnumerable<string> GetNames(IEnumerable<ItemType> itemTypes)
+			static IEnumerable<string> GetNames(IEnumerable<IItemType> itemTypes)
 			{
 				return itemTypes.Select(it => it.ItemName);
 			}

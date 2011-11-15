@@ -16,7 +16,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		
 		string UnevaluatedInclude { get; set; }
 		string EvaluatedInclude { get; set; }
-		ItemType ItemType { get; set; }
+		IItemType ItemType { get; set; }
 		
 		string GetEvaluatedMetadata(string name);
 		string GetMetadata(string name);

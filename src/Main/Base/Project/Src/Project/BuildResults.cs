@@ -7,28 +7,15 @@ using System.Collections.ObjectModel;
 
 namespace ICSharpCode.SharpDevelop.Project
 {
-	public enum BuildResultCode
-	{
-		None,
-		/// <summary>Build finished successful.</summary>
-		Success,
-		/// <summary>A build error occurred, see BuildResults.Error collection</summary>
-		Error,
-		/// <summary>A project build file is not valid</summary>
-		BuildFileError,
-		/// <summary>Build was not executed because another build is running</summary>
-		MSBuildAlreadyRunning,
-		/// <summary>Build was cancelled.</summary>
-		Cancelled
-	}
+	
 	
 	/// <summary>
 	/// Class wrapping the results of a build run.
 	/// </summary>
-	public class BuildResults
+	public class BuildResults:IBuildResults
 	{
-		List<BuildError> errors = new List<BuildError>();
-		ReadOnlyCollection<BuildError> readOnlyErrors;
+		List<IBuildError> errors = new List<IBuildError>();
+		ReadOnlyCollection<IBuildError> readOnlyErrors;
 		
 		List<IBuildable> builtProjects = new List<IBuildable>();
 		ReadOnlyCollection<IBuildable> readOnlyBuiltProjects;
@@ -40,7 +27,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// Adds a build error/warning to the results.
 		/// This method is thread-safe.
 		/// </summary>
-		public void Add(BuildError error)
+		public void Add(IBuildError error)
 		{
 			if (error == null)
 				throw new ArgumentNullException("error");
@@ -72,7 +59,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// Gets the list of build errors or warnings.
 		/// This property is thread-safe.
 		/// </summary>
-		public ReadOnlyCollection<BuildError> Errors {
+		public ReadOnlyCollection<IBuildError> Errors {
 			get {
 				lock (errors) {
 					if (readOnlyErrors == null) {

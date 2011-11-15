@@ -19,7 +19,7 @@ namespace ICSharpCode.Data.EDMDesigner.Core.IO
     {
         #region ICustomTool Member
 
-        public void GenerateCode(FileProjectItem item, CustomToolContext context)
+        public void GenerateCode(IFileProjectItem item, CustomToolContext context)
         {
             LanguageOption languageToGenerateCode = LanguageOption.GenerateCSharpCode;
 

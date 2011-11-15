@@ -99,11 +99,9 @@ namespace ICSharpCode.SharpDevelop.Gui
 		{
 			inUpdate = true;
 			
-			Dictionary<IProject, Solution.ProjectConfigurationPlatformMatching> matchingDict =
-				new Dictionary<IProject, Solution.ProjectConfigurationPlatformMatching>();
-			foreach (Solution.ProjectConfigurationPlatformMatching matching in
-			         solution.GetActiveConfigurationsAndPlatformsForProjects(configurationComboBox.Text,
-			                                                                 platformComboBox.Text))
+			Dictionary<IProject, ProjectConfigurationPlatformMatching> matchingDict = new Dictionary<IProject, ProjectConfigurationPlatformMatching>();
+
+			foreach (ProjectConfigurationPlatformMatching matching in solution.GetActiveConfigurationsAndPlatformsForProjects(configurationComboBox.Text, platformComboBox.Text))
 			{
 				matchingDict[matching.Project] = matching;
 			}
@@ -111,9 +109,9 @@ namespace ICSharpCode.SharpDevelop.Gui
 			foreach (DataGridViewRow row in grid.Rows) {
 				IProject p = (IProject)row.Tag;
 				
-				Solution.ProjectConfigurationPlatformMatching matching;
+				ProjectConfigurationPlatformMatching matching;
 				if (!matchingDict.TryGetValue(p, out matching)) {
-					matching = new Solution.ProjectConfigurationPlatformMatching(p, p.ActiveConfiguration, p.ActivePlatform, null);
+					matching = new ProjectConfigurationPlatformMatching(p, p.ActiveConfiguration, p.ActivePlatform, null);
 				}
 				DataGridViewComboBoxCell c1 = (DataGridViewComboBoxCell)row.Cells[1];
 				c1.Tag = matching;
@@ -168,7 +166,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 			if (!inUpdate && e.RowIndex >= 0) {
 				DataGridViewRow row = grid.Rows[e.RowIndex];
 				DataGridViewCell cell = row.Cells[e.ColumnIndex];
-				Solution.ProjectConfigurationPlatformMatching matching = cell.Tag as Solution.ProjectConfigurationPlatformMatching;
+				ProjectConfigurationPlatformMatching matching = cell.Tag as ProjectConfigurationPlatformMatching;
 				if (matching != null) {
 					if (e.ColumnIndex == configurationColumn.Index) {
 						matching.Configuration = cell.Value.ToString();
@@ -216,7 +214,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 			if (gridEditingControl.SelectedItem == EditTag.Instance) {
 				DataGridViewComboBoxCell cell = grid.CurrentCell as DataGridViewComboBoxCell;
 				if (cell == null) return;
-				Solution.ProjectConfigurationPlatformMatching matching = cell.Tag as Solution.ProjectConfigurationPlatformMatching;
+				ProjectConfigurationPlatformMatching matching = cell.Tag as ProjectConfigurationPlatformMatching;
 				if (matching != null) {
 					inUpdate = true;
 					using (Form dlg = new EditAvailableConfigurationsDialog(matching.Project,

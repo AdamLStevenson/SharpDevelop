@@ -36,11 +36,11 @@ namespace ICSharpCode.SharpDevelop.Internal.Templates
 				}
 			}
 			
-			internal bool AddContents(Solution solution, ProjectCreateInformation projectCreateInformation, string defaultLanguage, ISolutionFolderContainer parentFolder)
+			internal bool AddContents(ISolution solution, ProjectCreateInformation projectCreateInformation, string defaultLanguage, ISolutionFolderContainer parentFolder)
 			{
 				// Create sub projects
 				foreach (SolutionFolderDescriptor folderDescriptor in solutionFoldersDescriptors) {
-					SolutionFolder folder = solution.CreateFolder(folderDescriptor.name);
+					ISolutionFolderContainer folder = solution.CreateFolder(folderDescriptor.name);
 					parentFolder.AddFolder(folder);
 					folderDescriptor.AddContents(solution, projectCreateInformation, defaultLanguage, folder);
 				}

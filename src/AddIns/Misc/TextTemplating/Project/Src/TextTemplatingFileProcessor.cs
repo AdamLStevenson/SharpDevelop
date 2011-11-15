@@ -10,12 +10,12 @@ namespace ICSharpCode.TextTemplating
 	public abstract class TextTemplatingFileProcessor
 	{
 		ITextTemplatingHost host;
-		FileProjectItem templateFile;
+		IFileProjectItem templateFile;
 		ITextTemplatingCustomToolContext context;
 
 		public TextTemplatingFileProcessor(
 			ITextTemplatingHost host,
-			FileProjectItem templateFile,
+			IFileProjectItem templateFile,
 			ITextTemplatingCustomToolContext context)
 		{
 			this.host = host;
@@ -27,7 +27,7 @@ namespace ICSharpCode.TextTemplating
 			get { return host; }
 		}
 		
-		protected FileProjectItem TemplateFile {
+		protected IFileProjectItem TemplateFile {
 			get { return templateFile; }
 		}
 		

@@ -20,14 +20,14 @@ namespace ICSharpCode.WpfDesign.AddIn
 		/// Add files to the current project at the project node.
 		/// </summary>
 		/// <param name="fileNames">list of files that have to be added.</param>
-		internal static IEnumerable<FileProjectItem> AddFiles(string[] fileNames, ItemType itemType)
+		internal static IEnumerable<IFileProjectItem> AddFiles(string[] fileNames, IItemType itemType)
 		{
 			IProject project=ProjectService.CurrentProject;	
 			Debug.Assert(project!=null);				
 			
-			List<FileProjectItem> resultItems = new List<FileProjectItem>();
+			List<IFileProjectItem> resultItems = new List<IFileProjectItem>();
 			foreach (string file in fileNames) {
-				FileProjectItem item = project.FindFile(file);
+				IFileProjectItem item = project.FindFile(file);
 				if (item != null)
 					continue; // file already belongs to the project
 				string relFileName = FileUtility.GetRelativePath(project.Directory,file);

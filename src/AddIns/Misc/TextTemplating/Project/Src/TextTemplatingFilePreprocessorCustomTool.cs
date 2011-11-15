@@ -8,14 +8,14 @@ namespace ICSharpCode.TextTemplating
 {
 	public class TextTemplatingFilePreprocessorCustomTool : TextTemplatingCustomTool
 	{
-		public override void GenerateCode(FileProjectItem item, CustomToolContext context)
+		public override void GenerateCode(IFileProjectItem item, CustomToolContext context)
 		{
 			var processor = CreateTextTemplatingFilePreprocessor(item, context);
 			processor.PreprocessTemplate();
 		}
 		
 		protected virtual ITextTemplatingFilePreprocessor CreateTextTemplatingFilePreprocessor(
-			FileProjectItem templateFile,
+			IFileProjectItem templateFile,
 			CustomToolContext context)
 		{
 			var host = CreateTextTemplatingHost(context.Project);

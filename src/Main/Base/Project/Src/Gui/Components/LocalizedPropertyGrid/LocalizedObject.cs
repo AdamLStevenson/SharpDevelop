@@ -14,7 +14,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 	/// The main task of this class is to instantiate our own property descriptor
 	/// of type GlobalizedPropertyDescriptor.
 	/// </summary>
-	public class LocalizedObject : ICustomTypeDescriptor
+	public class LocalizedObject : ICustomTypeDescriptor, ILocalizedObject
 	{
 		PropertyDescriptorCollection globalizedProps;
 		

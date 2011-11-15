@@ -1,6 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+# SharpDevelop 4.2.0.8268-alpha
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Main", "Main", "{256F5C28-532C-44C0-8AB8-D8EC5E492E01}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSharpCode.SharpDevelop.BuildWorker35", "src\Main\ICSharpCode.SharpDevelop.BuildWorker35\ICSharpCode.SharpDevelop.BuildWorker35.csproj", "{B5F54272-49F0-40DB-845A-8D837875D3BA}"
@@ -429,11 +430,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSharpCode.Decompiler", "s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSharpCode.NRefactory", "src\Libraries\NewNRefactory\ICSharpCode.NRefactory\ICSharpCode.NRefactory.csproj", "{3B2A5653-EC97-4001-BB9B-D90F1AF2C371}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ILSpyAddIn", "src\AddIns\DisplayBindings\ILSpyAddIn\ILSpyAddIn.csproj", "{8AA421C8-D7AF-4957-9F43-5135328ACB24}"
-	ProjectSection(ProjectDependencies) = postProject
-		{35CEF10F-2D4C-45F2-9DD1-161E0FEC583C} = {35CEF10F-2D4C-45F2-9DD1-161E0FEC583C}
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSharpCode.NRefactory.CSharp", "src\Libraries\NewNRefactory\ICSharpCode.NRefactory.CSharp\ICSharpCode.NRefactory.CSharp.csproj", "{53DCA265-3C3C-42F9-B647-F72BA678122B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Analysis", "Analysis", "{F355E45F-F54F-4B42-8916-9A633A392789}"
@@ -467,11 +463,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeMaps", "src\AddIns\Anal
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MachineSpecifications", "src\AddIns\Analysis\MachineSpecifications\MachineSpecifications\MachineSpecifications.csproj", "{D1DA3B8F-7313-4BDA-8880-461C5F007751}"
 EndProject
-Project("{00000000-0000-0000-0000-000000000000}") = "Tools", "src\Tools\Tools.build", "{3DF4060F-5EE0-41CF-8096-F27355FD5511}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Refactor", "Refactor", "{41ED21EE-A7F3-4839-911F-7A25BE9119E4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSharpCode.SharpDevelop.Base", "src\Refactor\ICSharpCode.SharpDevelop.Base\ICSharpCode.SharpDevelop.Base.csproj", "{18E3561D-537C-42E7-984B-7764B4C94AE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ILSpyAddIn", "src\AddIns\DisplayBindings\ILSpyAddIn\ILSpyAddIn.csproj", "{8AA421C8-D7AF-4957-9F43-5135328ACB24}"
+	ProjectSection(ProjectDependencies) = postProject
+		{35CEF10F-2D4C-45F2-9DD1-161E0FEC583C} = {35CEF10F-2D4C-45F2-9DD1-161E0FEC583C}
+	EndProjectSection
+EndProject
+Project("{00000000-0000-0000-0000-000000000000}") = "Tools", "src\Tools\Tools.build", "{3DF4060F-5EE0-41CF-8096-F27355FD5511}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1917,6 +1918,8 @@ Global
 		{18E3561D-537C-42E7-984B-7764B4C94AE6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{18E3561D-537C-42E7-984B-7764B4C94AE6}.Release|Win32.ActiveCfg = Release|Any CPU
 		{18E3561D-537C-42E7-984B-7764B4C94AE6}.Release|x86.ActiveCfg = Release|Any CPU
+		{8AA421C8-D7AF-4957-9F43-5135328ACB24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AA421C8-D7AF-4957-9F43-5135328ACB24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

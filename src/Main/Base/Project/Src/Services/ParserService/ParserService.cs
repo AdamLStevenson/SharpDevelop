@@ -100,7 +100,7 @@ namespace ICSharpCode.SharpDevelop
 			List<IProjectContent> linkResults = new List<IProjectContent>();
 			lock (projectContents) {
 				foreach (KeyValuePair<IProject, IProjectContent> projectContent in projectContents) {
-					FileProjectItem file = projectContent.Key.FindFile(fileName);
+					IFileProjectItem file = projectContent.Key.FindFile(fileName);
 					if (file != null) {
 						// Prefer normal files over linked files.
 						// The order matters because GetParseInformation() will return the ICompilationUnit
@@ -895,11 +895,11 @@ namespace ICSharpCode.SharpDevelop
 		
 		internal static void OnSolutionLoaded()
 		{
-			List<ParseProjectContent> createdContents = new List<ParseProjectContent>();
+			List<IParseProjectContent> createdContents = new List<IParseProjectContent>();
 			foreach (IProject project in ProjectService.OpenSolution.Projects) {
 				try {
 					LoggingService.Debug("Creating project content for " + project.Name);
-					ParseProjectContent newContent = project.CreateProjectContent();
+					IParseProjectContent newContent = project.CreateProjectContent();
 					if (newContent != null) {
 						lock (projectContents) {
 							projectContents[project] = newContent;
@@ -939,7 +939,7 @@ namespace ICSharpCode.SharpDevelop
 		/// <remarks>Can return null.</remarks>
 		internal static IProjectContent CreateProjectContentForAddedProject(IProject project)
 		{
-			ParseProjectContent newContent = project.CreateProjectContent();
+			IParseProjectContent newContent = project.CreateProjectContent();
 			if (newContent != null) {
 				lock (projectContents) {
 					projectContents[project] = newContent;

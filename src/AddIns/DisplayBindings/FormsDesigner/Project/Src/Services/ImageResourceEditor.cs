@@ -101,7 +101,7 @@ namespace ICSharpCode.FormsDesigner.Services
 						
 						// Ensure the resource generator is turned on for the selected resource file.
 						if (project != null) {
-							FileProjectItem fpi = project.FindFile(projectResource.ResourceFile);
+							IFileProjectItem fpi = project.FindFile(projectResource.ResourceFile);
 							if (fpi == null) {
 								throw new InvalidOperationException("The selected resource file '" + projectResource.ResourceFile + "' was not found in the project.");
 							}

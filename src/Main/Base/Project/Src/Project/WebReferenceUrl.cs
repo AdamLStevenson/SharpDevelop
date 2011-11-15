@@ -115,7 +115,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		}
 		
 		public WebReferenceUrl(IProject project)
-			: base(project, ItemType.WebReferenceUrl)
+			: base(project, ICSharpCode.SharpDevelop.Project.ItemType.WebReferenceUrl)
 		{
 			UrlBehavior = "Static";
 		}

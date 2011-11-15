@@ -294,7 +294,7 @@ namespace ICSharpCode.FormsDesigner.Services
 			string sourceFileName = null;
 			if (project != null && formFileName != null) {
 				// Try to find the source file name by using the project dependencies first.
-				FileProjectItem sourceItem = project.FindFile(formFileName);
+				IFileProjectItem sourceItem = project.FindFile(formFileName);
 				if (sourceItem != null && sourceItem.DependentUpon != null && sourceItem.DependentUpon.Length > 0) {
 					sourceFileName = Path.GetFileNameWithoutExtension(sourceItem.DependentUpon);
 				}

@@ -9,7 +9,7 @@ namespace ICSharpCode.TextTemplating
 {
 	public interface ITextTemplatingCustomToolContext
 	{
-		FileProjectItem EnsureOutputFileIsInProject(FileProjectItem baseItem, string outputFileName);
+		IFileProjectItem EnsureOutputFileIsInProject(IFileProjectItem baseItem, string outputFileName);
 		
 		void ClearTasksExceptCommentTasks();
 		void AddTask(Task task);

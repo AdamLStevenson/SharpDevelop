@@ -22,7 +22,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// Reports an build error by adding it to the error list.
 		/// This member is thread-safe.
 		/// </summary>
-		void ReportError(BuildError error);
+		void ReportError(IBuildError error);
 		
 		/// <summary>
 		/// Reports a build message.

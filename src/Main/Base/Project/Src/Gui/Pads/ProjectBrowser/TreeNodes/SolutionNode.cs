@@ -11,14 +11,14 @@ namespace ICSharpCode.SharpDevelop.Project
 {
 	public class SolutionNode : AbstractProjectBrowserTreeNode, ISolutionFolderNode
 	{
-		Solution solution;
+		ISolution solution;
 		public ISolutionFolder Folder {
 			get {
 				return solution;
 			}
 		}
 		
-		public override Solution Solution {
+		public override ISolution Solution {
 			get {
 				return solution;
 			}
@@ -29,7 +29,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			}
 		}
 		
-		public SolutionNode(Solution solution)
+		public SolutionNode(ISolution solution)
 		{
 			sortOrder = -1;
 			this.solution = solution;
@@ -45,13 +45,14 @@ namespace ICSharpCode.SharpDevelop.Project
 		
 		public override void BeforeLabelEdit()
 		{
-			Text = solution.Name;
+            // TODO: ALS
+			Text = ((IAbstractSolutionFolder)solution).Name;
 		}
 		
 		public override void AfterLabelEdit(string newName)
 		{
 			try {
-				if (solution.Name == newName)
+                if (((IAbstractSolutionFolder)solution).Name == newName)
 					return;
 				if (!FileService.CheckFileName(newName))
 					return;
@@ -60,7 +61,7 @@ namespace ICSharpCode.SharpDevelop.Project
 					return;
 				}
 				solution.FileName = newFileName;
-				solution.Name = newName;
+                ((IAbstractSolutionFolder)solution).Name = newName;
 			} finally {
 				UpdateText();
 			}
@@ -68,7 +69,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		
 		void UpdateText()
 		{
-			Text = ResourceService.GetString("ICSharpCode.SharpDevelop.Commands.ProjectBrowser.SolutionNodeText") + " " + solution.Name;
+			Text = ResourceService.GetString("ICSharpCode.SharpDevelop.Commands.ProjectBrowser.SolutionNodeText") + " " + ((IAbstractSolutionFolder)solution).Name;
 			if (Solution.ReadOnly) {
 				Text += StringParser.Parse(" (${res:Global.ReadOnly})");
 			}
@@ -86,7 +87,7 @@ namespace ICSharpCode.SharpDevelop.Project
 				node = null;
 			}
 			if (node == null) {
-				SolutionFolder newSolutionFolder = solution.CreateFolder(folderName);
+				ISolutionFolderContainer newSolutionFolder = solution.CreateFolder(folderName);
 				solution.AddFolder(newSolutionFolder);
 				solution.Save();
 				

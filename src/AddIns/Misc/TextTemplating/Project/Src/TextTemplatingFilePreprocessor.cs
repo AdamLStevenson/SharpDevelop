@@ -14,7 +14,7 @@ namespace ICSharpCode.TextTemplating
 	{
 		public TextTemplatingFilePreprocessor(
 			ITextTemplatingHost host,
-			FileProjectItem templateFile,
+			IFileProjectItem templateFile,
 			ITextTemplatingCustomToolContext context)
 			: base(host, templateFile, context)
 		{

@@ -22,7 +22,7 @@ namespace ICSharpCode.SharpDevelop.Project.Converter
 			}
 		}
 		
-		public static UpgradeViewContent Show(Solution solution)
+		public static UpgradeViewContent Show(ISolution solution)
 		{
 			foreach (UpgradeViewContent vc in WorkbenchSingleton.Instance.Workbench.ViewContentCollection.OfType<UpgradeViewContent>()) {
 				if (vc.Solution == solution) {
@@ -37,7 +37,7 @@ namespace ICSharpCode.SharpDevelop.Project.Converter
 		
 		UpgradeView upgradeView;
 		
-		public UpgradeViewContent(Solution solution)
+		public UpgradeViewContent(ISolution solution)
 		{
 			if (solution == null)
 				throw new ArgumentNullException("solution");
@@ -45,7 +45,7 @@ namespace ICSharpCode.SharpDevelop.Project.Converter
 			upgradeView = new UpgradeView(solution);
 		}
 		
-		public Solution Solution {
+		public ISolution Solution {
 			get { return upgradeView.Solution; }
 		}
 		

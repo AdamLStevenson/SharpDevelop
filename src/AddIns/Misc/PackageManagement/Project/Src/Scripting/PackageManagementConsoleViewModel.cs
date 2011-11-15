@@ -151,7 +151,7 @@ namespace ICSharpCode.PackageManagement.Scripting
 			DefaultProject = projects.FirstOrDefault();
 		}
 		
-		void AddProjects(Solution solution)
+		void AddProjects(ISolution solution)
 		{
 			foreach (IProject project in solution.Projects) {
 				projects.Add(project);

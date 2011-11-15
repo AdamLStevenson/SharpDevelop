@@ -13,6 +13,7 @@ using ICSharpCode.Core;
 using ICSharpCode.SharpDevelop.Project.Converter;
 using ICSharpCode.SharpDevelop.Util;
 
+
 namespace ICSharpCode.SharpDevelop.Project
 {
 	public enum OutputType {
@@ -205,7 +206,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			}
 		}
 		
-		protected override ParseProjectContent CreateProjectContent()
+		protected override IParseProjectContent CreateProjectContent()
 		{
 			ParseProjectContent newProjectContent = new ParseProjectContent(this);
 			return newProjectContent;
@@ -423,7 +424,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			}
 		}
 		
-		public override ItemType GetDefaultItemType(string fileName)
+		public override IItemType GetDefaultItemType(string fileName)
 		{
 			string extension = Path.GetExtension(fileName);
 			if (".resx".Equals(extension, StringComparison.OrdinalIgnoreCase)
@@ -439,7 +440,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		
 		public override void ProjectCreationComplete()
 		{
-			TargetFramework fx = this.CurrentTargetFramework;
+			ITargetFramework fx = this.CurrentTargetFramework;
 			if (fx != null && (fx.IsBasedOn(TargetFramework.Net35) || fx.IsBasedOn(TargetFramework.Net35Client))) {
 				AddDotnet35References();
 			}
@@ -495,7 +496,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		
 		void RemoveReference(string name)
 		{
-			ProjectItem reference = GetItemsOfType(ItemType.Reference).FirstOrDefault(r => string.Equals(r.Include, name, StringComparison.OrdinalIgnoreCase));
+			IProjectItem reference = GetItemsOfType(ItemType.Reference).FirstOrDefault(r => string.Equals(r.Include, name, StringComparison.OrdinalIgnoreCase));
 			if (reference != null)
 				ProjectService.RemoveProjectItem(this, reference);
 		}
@@ -517,7 +518,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		static readonly CompilerVersion msbuild35 = new CompilerVersion(new Version(3, 5), "MSBuild 3.5");
 		static readonly CompilerVersion msbuild40 = new CompilerVersion(new Version(4, 0), "MSBuild 4.0");
 		
-		public virtual CompilerVersion CurrentCompilerVersion {
+		public virtual ICompilerVersion CurrentCompilerVersion {
 			get {
 				switch (MinimumSolutionVersion) {
 					case Solution.SolutionVersionVS2005:
@@ -532,7 +533,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			}
 		}
 		
-		public virtual TargetFramework CurrentTargetFramework {
+		public virtual ITargetFramework CurrentTargetFramework {
 			get {
 				string fxVersion = this.TargetFrameworkVersion;
 				string fxProfile = this.TargetFrameworkProfile;
@@ -549,16 +550,16 @@ namespace ICSharpCode.SharpDevelop.Project
 			}
 		}
 		
-		public virtual IEnumerable<CompilerVersion> GetAvailableCompilerVersions()
+		public virtual IEnumerable<ICompilerVersion> GetAvailableCompilerVersions()
 		{
 			return new[] { msbuild20, msbuild35, msbuild40 };
 		}
 		
-		public virtual void UpgradeProject(CompilerVersion newVersion, TargetFramework newFramework)
+		public virtual void UpgradeProject(ICompilerVersion newVersion, ITargetFramework newFramework)
 		{
 			if (!this.ReadOnly) {
 				lock (SyncRoot) {
-					TargetFramework oldFramework = this.CurrentTargetFramework;
+					ITargetFramework oldFramework = this.CurrentTargetFramework;
 					if (newVersion != null && GetAvailableCompilerVersions().Contains(newVersion)) {
 						SetToolsVersion(newVersion.MSBuildVersion.Major + "." + newVersion.MSBuildVersion.Minor);
 					}
@@ -617,7 +618,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			return appConfigFileName;
 		}
 		
-		void UpdateAppConfig(TargetFramework newFramework)
+		void UpdateAppConfig(ITargetFramework newFramework)
 		{
 			// When changing the target framework, update any existing app.config
 			// Also, for applications (not libraries), create an app.config is it is required for the target framework

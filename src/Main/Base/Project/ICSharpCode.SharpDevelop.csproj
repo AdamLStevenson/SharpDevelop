@@ -321,7 +321,6 @@
     <Compile Include="Src\Internal\Templates\File\FileDescriptionTemplate.cs" />
     <Compile Include="Src\Internal\Templates\File\FileTemplate.cs" />
     <Compile Include="Src\Internal\Templates\TextTemplate.cs" />
-    <Compile Include="Src\Internal\Templates\File\INewFileCreator.cs" />
     <Compile Include="Src\Project\BuildEngine.cs" />
     <Compile Include="Src\Project\ContextSpecificProperties.cs" />
     <Compile Include="Src\Project\Converter\IUpgradableProject.cs" />
@@ -330,9 +329,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Src\Project\Converter\UpgradeViewContent.cs" />
-    <Compile Include="Src\Project\IBuildFeedbackSink.cs" />
-    <Compile Include="Src\Project\IProjectChangeWatcher.cs" />
-    <Compile Include="Src\Project\IProjectItemBackendStore.cs" />
+    <Compile Include="Src\Project\MockProjectChangeWatcher.cs" />
     <Compile Include="Src\Project\MSBuildEngine\MSBuildAdditionalLogger.cs" />
     <Compile Include="Src\Project\MSBuildEngine\MSBuildLoggerFilter.cs" />
     <Compile Include="Src\Project\MSBuildEngine\SDConsoleLogger.cs" />
@@ -343,6 +340,7 @@
     <Compile Include="Src\Project\MSBuildFileProject.cs" />
     <Compile Include="Src\Project\MSBuildItemWrapper.cs" />
     <Compile Include="Src\Project\ProjectChangeWatcher.cs" />
+    <Compile Include="Src\Project\ProjectConfigurationPlatformMatching.cs" />
     <Compile Include="Src\Project\ProjectLoadInformation.cs" />
     <Compile Include="Src\Project\ProjectStartException.cs" />
     <Compile Include="Src\Project\ProjectLoadException.cs" />
@@ -562,7 +560,6 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Src\Project\Items\FileProjectItem.cs" />
-    <Compile Include="Src\Project\IProject.cs" />
     <Compile Include="Src\Project\Items\ProjectItem.cs" />
     <Compile Include="Src\Project\Items\ReferenceProjectItem.cs" />
     <Compile Include="Src\Project\Solution\Solution.cs" />
@@ -629,12 +626,10 @@
     <Compile Include="Src\Gui\Pads\ClassBrowser\Nodes\ReferenceFolderNode.cs" />
     <Compile Include="Src\Gui\Pads\ClassBrowser\Nodes\BaseTypesNode.cs" />
     <Compile Include="Src\Gui\Pads\ClassBrowser\Nodes\DerivedTypesNode.cs" />
-    <Compile Include="Src\Project\Solution\SolutionFolder.cs" />
+    <Compile Include="Src\Project\Solution\SolutionFolderContainer.cs" />
     <Compile Include="Src\Project\Solution\SolutionItem.cs" />
     <Compile Include="Src\Project\Solution\ProjectSection.cs" />
     <Compile Include="Src\Gui\Pads\ProjectBrowser\TreeNodes\SolutionFolderNode.cs" />
-    <Compile Include="Src\Project\Solution\ISolutionFolderContainer.cs" />
-    <Compile Include="Src\Project\Solution\ISolutionFolder.cs" />
     <Compile Include="Src\Project\Solution\AbstractSolutionFolder.cs" />
     <Compile Include="Src\Gui\Pads\ProjectBrowser\TreeNodes\SolutionItemNode.cs" />
     <Compile Include="Src\Gui\ContentInterfaces\IUndoHandler.cs" />

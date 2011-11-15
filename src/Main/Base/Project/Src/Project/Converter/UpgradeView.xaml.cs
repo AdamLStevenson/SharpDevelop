@@ -17,10 +17,10 @@ namespace ICSharpCode.SharpDevelop.Project.Converter
 	/// </summary>
 	internal partial class UpgradeView : UserControl
 	{
-		readonly Solution solution;
+		readonly ISolution solution;
 		readonly List<Entry> entries;
 		
-		public UpgradeView(Solution solution)
+		public UpgradeView(ISolution solution)
 		{
 			if (solution == null)
 				throw new ArgumentNullException("solution");
@@ -39,7 +39,7 @@ namespace ICSharpCode.SharpDevelop.Project.Converter
 			set { upgradeDescription.Visibility = value ? Visibility.Visible : Visibility.Collapsed; }
 		}
 		
-		public Solution Solution {
+		public ISolution Solution {
 			get { return solution; }
 		}
 		
@@ -78,14 +78,14 @@ namespace ICSharpCode.SharpDevelop.Project.Converter
 		{
 			if (listView.SelectedItems.Count > 0) {
 				// Fetch list of available compiler versions
-				HashSet<CompilerVersion> availableVersionsSet = new HashSet<CompilerVersion>();
-				HashSet<CompilerVersion> currentVersions = new HashSet<CompilerVersion>();
+				HashSet<ICompilerVersion> availableVersionsSet = new HashSet<ICompilerVersion>();
+				HashSet<ICompilerVersion> currentVersions = new HashSet<ICompilerVersion>();
 				foreach (Entry entry in listView.SelectedItems) {
 					if (entry.CompilerVersion != null)
 						currentVersions.Add(entry.CompilerVersion);
 					availableVersionsSet.AddRange(entry.Project.GetAvailableCompilerVersions());
 				}
-				List<CompilerVersion> availableVersions = availableVersionsSet.OrderBy(n => n.MSBuildVersion).ThenBy(n => n.DisplayName).ToList();
+				List<ICompilerVersion> availableVersions = availableVersionsSet.OrderBy(n => n.MSBuildVersion).ThenBy(n => n.DisplayName).ToList();
 				if (currentVersions.Count != 1) {
 					availableVersions.Insert(0, new UnchangedCompilerVersion());
 				}
@@ -122,7 +122,7 @@ namespace ICSharpCode.SharpDevelop.Project.Converter
 		void UpdateTargetFrameworkComboBox()
 		{
 			// Determine the available target frameworks
-			List<TargetFramework> availableFrameworks;
+			List<ITargetFramework> availableFrameworks;
 			bool doNotChangeAllowed;
 			CompilerVersion selectedCompiler = newVersionComboBox.SelectedValue as CompilerVersion;
 			if (selectedCompiler == null || selectedCompiler is UnchangedCompilerVersion) {
@@ -138,7 +138,7 @@ namespace ICSharpCode.SharpDevelop.Project.Converter
 				if (supportedTargetFrameworks.Any()) {
 					availableFrameworks = supportedTargetFrameworks.Aggregate((a, b) => a.Intersect(b)).ToList();
 				} else {
-					availableFrameworks = new List<TargetFramework>();
+					availableFrameworks = new List<ITargetFramework>();
 				}
 				doNotChangeAllowed = true;
 			} else {
@@ -159,7 +159,7 @@ namespace ICSharpCode.SharpDevelop.Project.Converter
 			}
 			
 			// detect whether all projects use a single framework
-			TargetFramework frameworkUsedByAllProjects = null;
+			ITargetFramework frameworkUsedByAllProjects = null;
 			bool frameworkUsedByAllProjectsInitialized = false;
 			foreach (Entry entry in listView.SelectedItems) {
 				if (!frameworkUsedByAllProjectsInitialized) {
@@ -294,8 +294,8 @@ namespace ICSharpCode.SharpDevelop.Project.Converter
 				return this.Name;
 			}
 			
-			public CompilerVersion CompilerVersion;
-			public TargetFramework TargetFramework;
+			public ICompilerVersion CompilerVersion;
+			public ITargetFramework TargetFramework;
 			
 			public string CompilerVersionName {
 				get { return CompilerVersion != null ? CompilerVersion.DisplayName : null; }

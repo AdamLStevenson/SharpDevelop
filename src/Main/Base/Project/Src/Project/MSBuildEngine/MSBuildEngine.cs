@@ -89,7 +89,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			MSBuildLoggerFilters = AddInTree.BuildItems<IMSBuildLoggerFilter>(LoggerFiltersPath, null, false);
 		}
 		
-		public static void StartBuild(IProject project, ProjectBuildOptions options, IBuildFeedbackSink feedbackSink, IEnumerable<string> additionalTargetFiles)
+		public static void StartBuild(IProject project, IProjectBuildOptions options, IBuildFeedbackSink feedbackSink, IEnumerable<string> additionalTargetFiles)
 		{
 			if (project == null)
 				throw new ArgumentNullException("project");
@@ -110,11 +110,11 @@ namespace ICSharpCode.SharpDevelop.Project
 		
 		readonly string projectFileName;
 		readonly int projectMinimumSolutionVersion;
-		ProjectBuildOptions options;
+		IProjectBuildOptions options;
 		IBuildFeedbackSink feedbackSink;
 		List<string> additionalTargetFiles;
 		
-		private MSBuildEngine(IProject project, ProjectBuildOptions options, IBuildFeedbackSink feedbackSink)
+		private MSBuildEngine(IProject project, IProjectBuildOptions options, IBuildFeedbackSink feedbackSink)
 		{
 			this.projectFileName = project.FileName;
 			this.projectMinimumSolutionVersion = project.MinimumSolutionVersion;

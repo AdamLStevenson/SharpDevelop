@@ -18,7 +18,7 @@ namespace ResourceEditor
 	{
 		protected bool createInternalClass = true;
 		
-		public void GenerateCode(FileProjectItem item, CustomToolContext context)
+		public void GenerateCode(IFileProjectItem item, CustomToolContext context)
 		{
 			/*context.GenerateCodeDomAsync(item, context.GetOutputFileName(item, ".Designer"),
 			                             delegate {

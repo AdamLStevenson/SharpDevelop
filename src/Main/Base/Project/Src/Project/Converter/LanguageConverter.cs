@@ -116,7 +116,7 @@ namespace ICSharpCode.SharpDevelop.Project.Converter
 			if (targetProjectItems == null)
 				throw new ArgumentNullException("targetProjectItems");
 			
-			ICollection<ProjectItem> sourceItems = sourceProject.Items;
+			ICollection<IProjectItem> sourceItems = sourceProject.Items;
 			double totalWork = 0;
 			foreach (ProjectItem item in sourceItems) {
 				totalWork += GetRequiredWork(item);

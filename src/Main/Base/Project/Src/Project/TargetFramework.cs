@@ -5,7 +5,7 @@ using System;
 
 namespace ICSharpCode.SharpDevelop.Project
 {
-	public class TargetFramework
+	public class TargetFramework:ITargetFramework
 	{
 		public readonly static TargetFramework Net20 = new TargetFramework("v2.0", ".NET Framework 2.0") {
 			SupportedRuntimeVersion = "v2.0.50727",
@@ -89,11 +89,11 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// <summary>
 		/// Gets the previous release of this target framework.
 		/// </summary>
-		public TargetFramework BasedOn { get; set; }
-		
-		public bool IsBasedOn(TargetFramework potentialBase)
+        public ITargetFramework BasedOn { get; set; }
+
+        public bool IsBasedOn(ITargetFramework potentialBase)
 		{
-			TargetFramework tmp = this;
+            ITargetFramework tmp = this;
 			while (tmp != null) {
 				if (tmp == potentialBase)
 					return true;

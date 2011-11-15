@@ -74,7 +74,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		}
 		
 		public ProjectReferenceProjectItem(IProject project, IProject referenceTo)
-			: base(project, ItemType.ProjectReference)
+			: base(project, ICSharpCode.SharpDevelop.Project.ItemType.ProjectReference)
 		{
 			this.Include = FileUtility.GetRelativePath(project.Directory, referenceTo.FileName);
 			ProjectGuid = referenceTo.IdGuid;

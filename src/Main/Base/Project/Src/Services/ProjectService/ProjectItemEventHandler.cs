@@ -7,15 +7,15 @@ namespace ICSharpCode.SharpDevelop.Project
 {
 	public class ProjectItemEventArgs : ProjectEventArgs
 	{
-		ProjectItem projectItem;
+		IProjectItem projectItem;
 		
-		public ProjectItem ProjectItem {
+		public IProjectItem ProjectItem {
 			get {
 				return projectItem;
 			}
 		}
 		
-		public ProjectItemEventArgs(IProject project, ProjectItem projectItem) : base(project)
+		public ProjectItemEventArgs(IProject project, IProjectItem projectItem) : base(project)
 		{
 			this.projectItem = projectItem;
 		}

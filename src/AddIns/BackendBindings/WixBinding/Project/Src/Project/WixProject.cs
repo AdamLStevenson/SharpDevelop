@@ -91,7 +91,7 @@ namespace ICSharpCode.WixBinding
 		/// <summary>
 		/// Adds the ability to creates Wix Library and Wix Object project items.
 		/// </summary>
-		public override ProjectItem CreateProjectItem(IProjectItemBackendStore item)
+		public override IProjectItem CreateProjectItem(IProjectItemBackendStore item)
 		{
 			switch (item.ItemType.ItemName) {
 				case WixItemType.LibraryName:
@@ -202,7 +202,7 @@ namespace ICSharpCode.WixBinding
 		/// <c>Compile</c> if the file is a WiX source file (.wxs)
 		/// or a WiX include file (.wxi), otherwise the default implementation
 		/// in MSBuildBasedProject is called.</returns>
-		public override ItemType GetDefaultItemType(string fileName)
+		public override IItemType GetDefaultItemType(string fileName)
 		{
 			if (WixFileName.IsWixFileName(fileName)) {
 				return ItemType.Compile;

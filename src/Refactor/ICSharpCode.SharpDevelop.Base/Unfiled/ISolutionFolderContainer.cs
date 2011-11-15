@@ -3,33 +3,56 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace ICSharpCode.SharpDevelop.Project
 {
 	/// <summary>
 	/// Description of ISolutionFolderContainer.
 	/// </summary>
-	public interface ISolutionFolderContainer
+	public interface ISolutionFolderContainer:IAbstractSolutionFolder
 	{
-		Solution ParentSolution {
+        [Browsable(false)]
+        string TypeGuid
+        {
+            get;
+            set;
+        }
+
+        [Browsable(false)]
+        bool IsEmpty
+        {
+            get;
+        }
+		
+		#region ISolutionFolderContainer implementation
+		
+		
+		[Browsable(false)]
+		List<IProjectSection> Sections {
 			get;
 		}
 		
-		List<ProjectSection> Sections {
-			get;
-		}
-		
+		[Browsable(false)]
 		List<ISolutionFolder> Folders {
 			get;
 		}
 		
-		ProjectSection SolutionItems {
+		[Browsable(false)]
+		IProjectSection SolutionItems {
 			get;
 		}
 		
 		void AddFolder(ISolutionFolder folder);
+		
 		void RemoveFolder(ISolutionFolder folder);
 		
 		bool IsAncestorOf(ISolutionFolder folder);
+		#endregion
+		
+		
+
+
+        
 	}
 }

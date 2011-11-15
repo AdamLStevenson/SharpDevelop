@@ -136,7 +136,7 @@ namespace ICSharpCode.SharpDevelop.Project.Commands
 			AbstractProjectBrowserTreeNode node = ProjectBrowserPad.Instance.ProjectBrowserControl.SelectedNode;
 			ISolutionFolderNode solutionFolderNode = node as ISolutionFolderNode;
 			if (node != null) {
-				SolutionFolder newSolutionFolder = solutionFolderNode.Solution.CreateFolder(ResourceService.GetString("ProjectComponent.NewFolderString"));
+				ISolutionFolderContainer newSolutionFolder = solutionFolderNode.Solution.CreateFolder(ResourceService.GetString("ProjectComponent.NewFolderString"));
 				solutionFolderNode.Container.AddFolder(newSolutionFolder);
 				solutionFolderNode.Solution.Save();
 				

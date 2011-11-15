@@ -28,7 +28,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// The returned collection is guaranteed not to change - adding new items or removing existing items
 		/// will create a new collection.
 		/// </summary>
-		ReadOnlyCollection<ProjectItem> Items {
+		ReadOnlyCollection<IProjectItem> Items {
 			get;
 		}
 		
@@ -36,25 +36,26 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// Gets all items in the project that have the specified item type.
 		/// This member is thread-safe.
 		/// </summary>
-		IEnumerable<ProjectItem> GetItemsOfType(ItemType type);
+		IEnumerable<IProjectItem> GetItemsOfType(IItemType type);
 		
 		/// <summary>
 		/// Gets the default item type the specified file should have.
 		/// </summary>
 		/// <param name="fileName">The full path to the file to determine the item type for</param>
-		ItemType GetDefaultItemType(string fileName);
+		IItemType GetDefaultItemType(string fileName);
 		
 		/// <summary>
 		/// Gets the list of available file item types. This member is thread-safe.
 		/// </summary>
-		ICollection<ItemType> AvailableFileItemTypes {
+		ICollection<IItemType> AvailableFileItemTypes {
 			get;
 		}
 		
 		/// <summary>
 		/// Gets a list of project sections stored in the solution file for this project.
 		/// </summary>
-		List<ProjectSection> ProjectSections {
+        List<IProjectSection> ProjectSections
+        {
 			get;
 		}
 		
@@ -218,7 +219,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// This member is thread-safe.
 		/// </summary>
 		/// <param name="fileName">The <b>fully qualified</b> file name of the file</param>
-		FileProjectItem FindFile(string fileName);
+        IFileProjectItem FindFile(string fileName);
 		
 		/// <summary>
 		/// Gets if the project can be started.
@@ -241,12 +242,12 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// This method should only be called by ParserService.LoadSolutionProjectsInternal()!
 		/// Return null if you don't want to create any project content.
 		/// </summary>
-		ParseProjectContent CreateProjectContent();
+		IParseProjectContent CreateProjectContent();
 		
 		/// <summary>
 		/// Creates a new ProjectItem for the passed MSBuild item.
 		/// </summary>
-		ProjectItem CreateProjectItem(IProjectItemBackendStore item);
+		IProjectItem CreateProjectItem(IProjectItemBackendStore item);
 		
 		/// <summary>
 		/// Gets the minimum version the solution must have to support this project type.
@@ -275,87 +276,9 @@ namespace ICSharpCode.SharpDevelop.Project
 		void SaveProjectExtensions(string name, XElement element);
 	}
 	
-	/// <summary>
-	/// A project or solution.
-	/// The IBuildable interface members are thread-safe.
-	/// </summary>
-	public interface IBuildable
-	{
-		/// <summary>
-		/// Gets the list of projects on which this project depends.
-		/// This method is thread-safe.
-		/// </summary>
-		ICollection<IBuildable> GetBuildDependencies(ProjectBuildOptions buildOptions);
-		
-		/// <summary>
-		/// Starts building the project using the specified options.
-		/// This member must be implemented thread-safe.
-		/// </summary>
-		void StartBuild(ProjectBuildOptions buildOptions, IBuildFeedbackSink feedbackSink);
-		
-		/// <summary>
-		/// Gets the name of the buildable item.
-		/// This property is thread-safe.
-		/// </summary>
-		string Name { get; }
-		
-		/// <summary>
-		/// Gets the parent solution.
-		/// This property is thread-safe.
-		/// </summary>
-		Solution ParentSolution { get; }
-		
-		/// <summary>
-		/// Creates the project-specific build options.
-		/// This member must be implemented thread-safe.
-		/// </summary>
-		/// <param name="options">The global build options.</param>
-		/// <param name="isRootBuildable">Specifies whether this project is the main buildable item.
-		/// The root buildable is the buildable for which <see cref="BuildOptions.ProjectTarget"/> and <see cref="BuildOptions.ProjectAdditionalProperties"/> apply.
-		/// The dependencies of that root buildable are the non-root buildables.</param>
-		/// <returns>The project-specific build options.</returns>
-		ProjectBuildOptions CreateProjectBuildOptions(BuildOptions options, bool isRootBuildable);
-	}
 	
-	/// <summary>
-	/// Interface for adding and removing items from a project. Not part of the IProject
-	/// interface because in nearly all cases, ProjectService.Add/RemoveProjectItem should
-	/// be used instead!
-	/// So IProject implementors should implement this interface, but only the SharpDevelop methods
-	/// ProjectService.AddProjectItem and RemoveProjectItem may call the interface members.
-	/// </summary>
-	public interface IProjectItemListProvider
-	{
-		/// <summary>
-		/// Gets a list of items in the project.
-		/// </summary>
-		ReadOnlyCollection<ProjectItem> Items {
-			get;
-		}
-		
-		/// <summary>
-		/// Adds a new entry to the Items-collection
-		/// </summary>
-		void AddProjectItem(ProjectItem item);
-		
-		/// <summary>
-		/// Removes an entry from the Items-collection
-		/// </summary>
-		bool RemoveProjectItem(ProjectItem item);
-	}
 	
-	/// <summary>
-	/// Interface for changing project or solution configuration.
-	/// IProject implementors should implement this interface, but only the SharpDevelop methods
-	/// Solution.RenameProjectPlatform etc. may call the interface members.
-	/// </summary>
-	public interface IProjectAllowChangeConfigurations
-	{
-		bool RenameProjectConfiguration(string oldName, string newName);
-		bool RenameProjectPlatform(string oldName, string newName);
-		bool AddProjectConfiguration(string newName, string copyFrom);
-		bool AddProjectPlatform(string newName, string copyFrom);
-		bool RemoveProjectConfiguration(string name);
-		bool RemoveProjectPlatform(string name);
-	}
+	
+	
+	
 }

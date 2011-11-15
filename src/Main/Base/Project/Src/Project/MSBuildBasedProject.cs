@@ -152,7 +152,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// <summary>
 		/// Creates a new projectItem for the passed itemType
 		/// </summary>
-		public override ProjectItem CreateProjectItem(IProjectItemBackendStore item)
+		public override IProjectItem CreateProjectItem(IProjectItemBackendStore item)
 		{
 			switch (item.ItemType.ItemName) {
 				case "Reference":
@@ -967,18 +967,18 @@ namespace ICSharpCode.SharpDevelop.Project
 		#endregion
 		
 		#region IProjectItemListProvider interface
-		List<ProjectItem> items = new List<ProjectItem>();
-		volatile ReadOnlyCollection<ProjectItem> itemsReadOnly;
-		volatile ICollection<ItemType> availableFileItemTypes = ItemType.DefaultFileItems;
+		List<IProjectItem> items = new List<IProjectItem>();
+		volatile ReadOnlyCollection<IProjectItem> itemsReadOnly;
+		volatile ICollection<IItemType> availableFileItemTypes = ItemType.DefaultFileItems;
 		
 		/// <summary>
 		/// Gets the list of items in the project. This member is thread-safe.
 		/// The returned collection is guaranteed not to change - adding new items or removing existing items
 		/// will create a new collection.
 		/// </summary>
-		public override ReadOnlyCollection<ProjectItem> Items {
+		public override ReadOnlyCollection<IProjectItem> Items {
 			get {
-				ReadOnlyCollection<ProjectItem> c = itemsReadOnly;
+				ReadOnlyCollection<IProjectItem> c = itemsReadOnly;
 				if (c == null) {
 					lock (SyncRoot) {
 						c = Array.AsReadOnly(items.ToArray());
@@ -992,7 +992,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// <summary>
 		/// Gets the list of available file item types. This member is thread-safe.
 		/// </summary>
-		public override ICollection<ItemType> AvailableFileItemTypes {
+		public override ICollection<IItemType> AvailableFileItemTypes {
 			get {
 				return availableFileItemTypes;
 			}
@@ -1012,7 +1012,7 @@ namespace ICSharpCode.SharpDevelop.Project
 				items.Clear();
 				itemsReadOnly = null; // remove readonly variant of item list - will regenerate on next Items call
 				
-				SortedSet<ItemType> availableFileItemTypes = new SortedSet<ItemType>();
+				SortedSet<IItemType> availableFileItemTypes = new SortedSet<IItemType>();
 				availableFileItemTypes.AddRange(ItemType.DefaultFileItems);
 				foreach (var item in c.Project.GetItems("AvailableItemName")) {
 					availableFileItemTypes.Add(new ItemType(item.EvaluatedInclude));
@@ -1029,7 +1029,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			}
 		}
 		
-		void IProjectItemListProvider.AddProjectItem(ProjectItem item)
+		void IProjectItemListProvider.AddProjectItem(IProjectItem item)
 		{
 			if (item == null)
 				throw new ArgumentNullException("item");
@@ -1081,7 +1081,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			}
 		}
 		
-		bool IProjectItemListProvider.RemoveProjectItem(ProjectItem item)
+		bool IProjectItemListProvider.RemoveProjectItem(IProjectItem item)
 		{
 			if (item == null)
 				throw new ArgumentNullException("item");
@@ -1112,7 +1112,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		#endregion
 		
 		#region Building
-		public override ICollection<IBuildable> GetBuildDependencies(ProjectBuildOptions buildOptions)
+		public override ICollection<IBuildable> GetBuildDependencies(IProjectBuildOptions buildOptions)
 		{
 			ICollection<IBuildable> result = base.GetBuildDependencies(buildOptions);
 			foreach (ProjectItem item in GetItemsOfType(ItemType.ProjectReference)) {
@@ -1123,15 +1123,15 @@ namespace ICSharpCode.SharpDevelop.Project
 			return result;
 		}
 		
-		public override void StartBuild(ProjectBuildOptions options, IBuildFeedbackSink feedbackSink)
+		public override void StartBuild(IProjectBuildOptions options, IBuildFeedbackSink feedbackSink)
 		{
 			MSBuildEngine.StartBuild(this, options, feedbackSink, MSBuildEngine.AdditionalTargetFiles);
 		}
 		
-		public override ProjectBuildOptions CreateProjectBuildOptions(BuildOptions options, bool isRootBuildable)
+		public override IProjectBuildOptions CreateProjectBuildOptions(IBuildOptions options, bool isRootBuildable)
 		{
-			ProjectBuildOptions projectOptions = base.CreateProjectBuildOptions(options, isRootBuildable);
-			Solution solution = this.ParentSolution;
+			IProjectBuildOptions projectOptions = base.CreateProjectBuildOptions(options, isRootBuildable);
+			ISolution solution = this.ParentSolution;
 			var configMatchings = solution.GetActiveConfigurationsAndPlatformsForProjects(options.SolutionConfiguration, options.SolutionPlatform);
 			// Find the project configuration, and build an XML string containing all configurations from the solution
 			StringWriter solutionConfigurationXml = new StringWriter();

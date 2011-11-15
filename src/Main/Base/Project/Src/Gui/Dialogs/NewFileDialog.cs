@@ -486,7 +486,7 @@ namespace ICSharpCode.SharpDevelop.Gui
 					// add required assembly references to the project
 					bool changes = false;
 					foreach (ReferenceProjectItem reference in item.Template.RequiredAssemblyReferences) {
-						IEnumerable<ProjectItem> refs = ProjectService.CurrentProject.GetItemsOfType(ItemType.Reference);
+						IEnumerable<IProjectItem> refs = ProjectService.CurrentProject.GetItemsOfType(ItemType.Reference);
 						if (!refs.Any(projItem => string.Equals(projItem.Include, reference.Include, StringComparison.OrdinalIgnoreCase))) {
 							ReferenceProjectItem projItem = (ReferenceProjectItem)reference.CloneFor(ProjectService.CurrentProject);
 							ProjectService.AddProjectItem(ProjectService.CurrentProject, projItem);

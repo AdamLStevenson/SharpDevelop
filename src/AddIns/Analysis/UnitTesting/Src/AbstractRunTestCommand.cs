@@ -295,7 +295,7 @@ namespace ICSharpCode.UnitTesting
 		/// <summary>
 		/// Runs the test for the project after a successful build.
 		/// </summary>
-		void OnBuildComplete(BuildResults results, SelectedTests selectedTests)
+		void OnBuildComplete(IBuildResults results, SelectedTests selectedTests)
 		{
 			if (BuildHasNoErrorsAndStillRunningTests(results)) {
 				RunTests(selectedTests);
@@ -307,7 +307,7 @@ namespace ICSharpCode.UnitTesting
 			}
 		}
 		
-		bool BuildHasNoErrorsAndStillRunningTests(BuildResults results)
+		bool BuildHasNoErrorsAndStillRunningTests(IBuildResults results)
 		{
 			return (results.ErrorCount == 0) && IsRunningTest;
 		}

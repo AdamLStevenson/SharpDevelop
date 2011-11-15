@@ -40,7 +40,7 @@ namespace ICSharpCode.RubyBinding
 		/// <summary>
 		/// Returns ItemType.Compile if the filename has a Ruby extension (.rb).
 		/// </summary>
-		public override ItemType GetDefaultItemType(string fileName)
+		public override IItemType GetDefaultItemType(string fileName)
 		{
 			if (fileName != null) {
 				string extension = Path.GetExtension(fileName);

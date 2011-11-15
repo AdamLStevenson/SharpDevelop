@@ -15,18 +15,18 @@ namespace ICSharpCode.SharpDevelop.Project
 {
 	public class ReferenceProjectItem : ProjectItem
 	{
-		protected ReferenceProjectItem(IProject project, ItemType itemType)
+		protected ReferenceProjectItem(IProject project, IItemType itemType)
 			: base(project, itemType)
 		{
 		}
 		
 		public ReferenceProjectItem(IProject project)
-			: base(project, ItemType.Reference)
+            : base(project, ICSharpCode.SharpDevelop.Project.ItemType.Reference)
 		{
 		}
 		
 		public ReferenceProjectItem(IProject project, string include)
-			: base(project, ItemType.Reference, include)
+            : base(project, ICSharpCode.SharpDevelop.Project.ItemType.Reference, include)
 		{
 		}
 		

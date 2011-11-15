@@ -132,7 +132,7 @@ namespace CSharpBinding
 				);
 			
 			
-			TargetFramework tf = project.CurrentTargetFramework;
+			ITargetFramework tf = project.CurrentTargetFramework;
 
 			if (tf == null)
 				throw new InvalidOperationException();
@@ -156,7 +156,7 @@ namespace CSharpBinding
 			return string.Format("#line {0} \"{1}\"", line, filename.Replace("\\", "\\\\"));
 		}
 		
-		static string GetMscorlibPath(TargetFramework tf)
+		static string GetMscorlibPath(ITargetFramework tf)
 		{
 			while (tf != null) {
 				string path = Path.Combine(Util.ToolLocationHelper.GetPathToDotNetFramework(VersionForString(tf.Name)), "mscorlib.dll");
@@ -217,7 +217,7 @@ namespace CSharpBinding
 			if (FileUtility.IsEqualFileName(excludeFilename, c.CompilationUnit.FileName))
 				return;
 			if (project != null) {
-				FileProjectItem file = project.FindFile(c.CompilationUnit.FileName);
+				IFileProjectItem file = project.FindFile(c.CompilationUnit.FileName);
 				if (file == null || file.BuildAction != "Compile")
 					return;
 			}

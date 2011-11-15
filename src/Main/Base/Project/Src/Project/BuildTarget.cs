@@ -10,15 +10,15 @@ namespace ICSharpCode.SharpDevelop.Project
 	/// - we don't want to use strings everywhere.
 	/// Basically this is something like a typedef for C# (without implicit conversions).
 	/// </summary>
-	public struct BuildTarget : IEquatable<BuildTarget>, IComparable<BuildTarget>
+    public struct BuildTarget : IBuildTarget
 	{
 		// Known MSBuild targets:
-		public readonly static BuildTarget Build = new BuildTarget("Build");
-		public readonly static BuildTarget Rebuild = new BuildTarget("Rebuild");
-		public readonly static BuildTarget Clean = new BuildTarget("Clean");
+		public readonly static IBuildTarget Build = new BuildTarget("Build");
+		public readonly static IBuildTarget Rebuild = new BuildTarget("Rebuild");
+		public readonly static IBuildTarget Clean = new BuildTarget("Clean");
 		
-		public readonly static BuildTarget ResolveReferences = new BuildTarget("ResolveReferences");
-		public readonly static BuildTarget ResolveComReferences = new BuildTarget("ResolveComReferences");
+		public readonly static IBuildTarget ResolveReferences = new BuildTarget("ResolveReferences");
+		public readonly static IBuildTarget ResolveComReferences = new BuildTarget("ResolveComReferences");
 		
 		readonly string targetName;
 		
@@ -50,10 +50,10 @@ namespace ICSharpCode.SharpDevelop.Project
 				return false;
 		}
 		
-		public bool Equals(BuildTarget other)
+		public bool Equals(IBuildTarget other)
 		{
 			// add comparisions for all members here
-			return this.targetName == other.targetName;
+			return this.targetName == other.TargetName;
 		}
 		
 		public override int GetHashCode()
@@ -73,9 +73,9 @@ namespace ICSharpCode.SharpDevelop.Project
 		}
 		#endregion
 		
-		public int CompareTo(BuildTarget other)
+		public int CompareTo(IBuildTarget other)
 		{
-			return targetName.CompareTo(other.targetName);
+			return targetName.CompareTo(other.TargetName);
 		}
 	}
 }

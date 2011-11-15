@@ -35,14 +35,14 @@ namespace ICSharpCode.PackageManagement.Scripting
 			RunPackageInitializationScripts(e.Solution);
 		}
 		
-		void RunPackageInitializationScripts(Solution solution)
+		void RunPackageInitializationScripts(ISolution solution)
 		{
 			if (SolutionHasPackageInitializationScripts(solution)) {
 				RunInitializePackagesCmdlet();
 			}
 		}
 		
-		bool SolutionHasPackageInitializationScripts(Solution solution)
+		bool SolutionHasPackageInitializationScripts(ISolution solution)
 		{
 			IPackageInitializationScripts scripts = CreatePackageInitializationScripts(solution);
 			return scripts.Any();
@@ -54,7 +54,7 @@ namespace ICSharpCode.PackageManagement.Scripting
 			scriptsConsole.ExecuteCommand(command);
 		}
 		
-		IPackageInitializationScripts CreatePackageInitializationScripts(Solution solution)
+		IPackageInitializationScripts CreatePackageInitializationScripts(ISolution solution)
 		{
 			return scriptsFactory.CreatePackageInitializationScripts(solution);
 		}

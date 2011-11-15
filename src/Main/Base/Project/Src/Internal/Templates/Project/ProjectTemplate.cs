@@ -304,7 +304,7 @@ namespace ICSharpCode.SharpDevelop.Internal.Templates
 				if (createNewSolution) {
 					string fileName = Path.Combine(projectCreateInformation.SolutionPath, projectCreateInformation.SolutionName + ".sln");
 					projectCreateInformation.Solution = new Solution(new ProjectChangeWatcher(fileName));
-					projectCreateInformation.Solution.Name = projectCreateInformation.SolutionName;
+					((IAbstractSolutionFolder)projectCreateInformation.Solution).Name = projectCreateInformation.SolutionName;
 					projectCreateInformation.Solution.FileName = fileName;
 				}
 				IProject project = projectDescriptor.CreateProject(projectCreateInformation, this.languagename);

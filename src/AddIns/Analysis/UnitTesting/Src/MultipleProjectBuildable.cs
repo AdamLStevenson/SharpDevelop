@@ -24,22 +24,22 @@ namespace ICSharpCode.UnitTesting
 			get { return string.Empty; }
 		}
 		
-		public Solution ParentSolution {
+		public ISolution ParentSolution {
 			get { return projects.Length > 0 ? projects[0].ParentSolution : null; }
 		}
 		
-		public ICollection<IBuildable> GetBuildDependencies(ProjectBuildOptions buildOptions)
+		public ICollection<IBuildable> GetBuildDependencies(IProjectBuildOptions buildOptions)
 		{
 			return projects;
 		}
 		
-		public void StartBuild(ProjectBuildOptions buildOptions, IBuildFeedbackSink feedbackSink)
+		public void StartBuild(IProjectBuildOptions buildOptions, IBuildFeedbackSink feedbackSink)
 		{
 			// SharpDevelop already has built our dependencies, so we're done immediately.
 			feedbackSink.Done(true);
 		}
-		
-		public ProjectBuildOptions CreateProjectBuildOptions(BuildOptions options, bool isRootBuildable)
+
+        public IProjectBuildOptions CreateProjectBuildOptions(ICSharpCode.SharpDevelop.Project.IBuildOptions options, bool isRootBuildable)
 		{
 			return null;
 		}

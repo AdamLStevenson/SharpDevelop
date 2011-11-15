@@ -38,21 +38,21 @@ namespace ICSharpCode.PackageManagement
 			return new IProject[0];
 		}
 		
-		public void AddProjectItem(IProject project, ProjectItem item)
+		public void AddProjectItem(IProject project, IProjectItem item)
 		{
 			if (WorkbenchSingleton.InvokeRequired) {
-				Action<IProject, ProjectItem> action = AddProjectItem;
-				WorkbenchSingleton.SafeThreadCall<IProject, ProjectItem>(action, project, item);
+				Action<IProject, IProjectItem> action = AddProjectItem;
+				WorkbenchSingleton.SafeThreadCall<IProject, IProjectItem>(action, project, item);
 			} else {
 				ProjectService.AddProjectItem(project, item);
 			}
 		}
 		
-		public void RemoveProjectItem(IProject project, ProjectItem item)
+		public void RemoveProjectItem(IProject project, IProjectItem item)
 		{
 			if (WorkbenchSingleton.InvokeRequired) {
-				Action<IProject, ProjectItem> action = RemoveProjectItem;
-				WorkbenchSingleton.SafeThreadCall<IProject, ProjectItem>(action, project, item);
+				Action<IProject, IProjectItem> action = RemoveProjectItem;
+				WorkbenchSingleton.SafeThreadCall<IProject, IProjectItem>(action, project, item);
 			} else {
 				ProjectService.RemoveProjectItem(project, item);
 			}

@@ -99,10 +99,10 @@ namespace ICSharpCode.PythonBinding
 			}
 		}
 		
-		void WriteProjectFileItems(ReadOnlyCollection<ProjectItem> items)
+		void WriteProjectFileItems(ReadOnlyCollection<IProjectItem> items)
 		{
-			foreach (ProjectItem item in items) {
-				FileProjectItem fileItem = item as FileProjectItem;
+			foreach (IProjectItem item in items) {
+				IFileProjectItem fileItem = item as IFileProjectItem;
 				if (fileItem != null) {
 					WriteFileNameWithoutExtension(fileItem.FileName);
 				}

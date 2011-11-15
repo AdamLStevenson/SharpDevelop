@@ -22,7 +22,7 @@ namespace ICSharpCode.SharpDevelop.Project
 	/// </summary>
 	public interface ICustomTool
 	{
-		void GenerateCode(FileProjectItem item, CustomToolContext context);
+		void GenerateCode(IFileProjectItem item, CustomToolContext context);
 	}
 	
 	#region CustomToolContext
@@ -98,12 +98,12 @@ namespace ICSharpCode.SharpDevelop.Project
 			}
 		}
 		
-		public string GetOutputFileName(FileProjectItem baseItem, string additionalExtension)
+		public string GetOutputFileName(IFileProjectItem baseItem, string additionalExtension)
 		{
 			return GetOutputFileName(baseItem, additionalExtension, true);
 		}
 		
-		public string GetOutputFileName(FileProjectItem baseItem, string additionalExtension, bool isPrimaryOutput)
+		public string GetOutputFileName(IFileProjectItem baseItem, string additionalExtension, bool isPrimaryOutput)
 		{
 			if (baseItem == null)
 				throw new ArgumentNullException("baseItem");
@@ -136,7 +136,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			string newFileName = Path.ChangeExtension(baseItem.FileName, additionalExtension + newExtension);
 			int retryIndex = 0;
 			while (true) {
-				FileProjectItem item = project.FindFile(newFileName);
+				IFileProjectItem item = project.FindFile(newFileName);
 				// If the file does not exist in the project, we can use that name.
 				if (item == null)
 					return newFileName;
@@ -149,12 +149,12 @@ namespace ICSharpCode.SharpDevelop.Project
 			}
 		}
 		
-		public FileProjectItem EnsureOutputFileIsInProject(FileProjectItem baseItem, string outputFileName)
+		public IFileProjectItem EnsureOutputFileIsInProject(IFileProjectItem baseItem, string outputFileName)
 		{
 			return EnsureOutputFileIsInProject(baseItem, outputFileName, true);
 		}
 		
-		public FileProjectItem EnsureOutputFileIsInProject(FileProjectItem baseItem, string outputFileName, bool isPrimaryOutput)
+		public IFileProjectItem EnsureOutputFileIsInProject(IFileProjectItem baseItem, string outputFileName, bool isPrimaryOutput)
 		{
 			if (baseItem == null)
 				throw new ArgumentNullException("baseItem");
@@ -169,7 +169,7 @@ namespace ICSharpCode.SharpDevelop.Project
 					baseItem.SetEvaluatedMetadata("LastGenOutput", Path.GetFileName(outputFileName));
 				}
 			}
-			FileProjectItem outputItem = project.FindFile(outputFileName);
+			IFileProjectItem outputItem = project.FindFile(outputFileName);
 			if (outputItem == null) {
 				outputItem = new FileProjectItem(project, ItemType.Compile);
 				outputItem.FileName = outputFileName;
@@ -185,7 +185,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			return outputItem;
 		}
 		
-		public void WriteCodeDomToFile(FileProjectItem baseItem, string outputFileName, CodeCompileUnit ccu)
+		public void WriteCodeDomToFile(IFileProjectItem baseItem, string outputFileName, CodeCompileUnit ccu)
 		{
 			WorkbenchSingleton.AssertMainThread();
 			CodeDomProvider provider = project.LanguageProperties.CodeDomProvider;
@@ -337,11 +337,11 @@ namespace ICSharpCode.SharpDevelop.Project
 		class CustomToolRun {
 			internal CustomToolContext context;
 			internal string file;
-			internal FileProjectItem baseItem;
+			internal IFileProjectItem baseItem;
 			internal ICustomTool customTool;
 			internal bool showMessageBoxOnErrors;
 			
-			public CustomToolRun(CustomToolContext context, string file, FileProjectItem baseItem, ICustomTool customTool, bool showMessageBoxOnErrors)
+			public CustomToolRun(CustomToolContext context, string file, IFileProjectItem baseItem, ICustomTool customTool, bool showMessageBoxOnErrors)
 			{
 				this.context = context;
 				this.file = file;
@@ -377,7 +377,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			if (solution == null) return;
 			IProject project = solution.FindProjectContainingFile(e.FileName);
 			if (project == null) return;
-			FileProjectItem item = project.FindFile(e.FileName);
+			IFileProjectItem item = project.FindFile(e.FileName);
 			if (item == null) return;
 			if (!string.IsNullOrEmpty(item.CustomTool)) {
 				RunCustomTool(item, false);
@@ -415,7 +415,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// <summary>
 		/// Runs the custom tool specified by the base items' CustomTool property on the base item.
 		/// </summary>
-		public static void RunCustomTool(FileProjectItem baseItem, bool showMessageBoxOnErrors)
+		public static void RunCustomTool(IFileProjectItem baseItem, bool showMessageBoxOnErrors)
 		{
 			if (baseItem == null)
 				throw new ArgumentNullException("baseItem");
@@ -440,7 +440,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// <summary>
 		/// Runs the specified custom tool on the base item.
 		/// </summary>
-		public static void RunCustomTool(FileProjectItem baseItem, ICustomTool customTool, bool showMessageBoxOnErrors)
+		public static void RunCustomTool(IFileProjectItem baseItem, ICustomTool customTool, bool showMessageBoxOnErrors)
 		{
 			if (baseItem == null)
 				throw new ArgumentNullException("baseItem");

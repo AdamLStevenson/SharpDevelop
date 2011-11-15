@@ -18,7 +18,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			TypeGuid = "{00000000-0000-0000-0000-000000000000}";
 		}
 		
-		public override void StartBuild(ProjectBuildOptions options, IBuildFeedbackSink feedbackSink)
+		public override void StartBuild(IProjectBuildOptions options, IBuildFeedbackSink feedbackSink)
 		{
 			MSBuildEngine.StartBuild(this, options, feedbackSink, MSBuildEngine.AdditionalTargetFiles);
 		}

@@ -127,8 +127,8 @@ namespace ICSharpCode.CppBinding.Project
 		string GetApplicationIconPathFromResourceScripts() {
 			foundIconEntry = null;
 			iconResourceScriptPath = null;
-			IEnumerable <ProjectItem> resourceScripts = project.Items.Where(
-						item => item is FileProjectItem && ((FileProjectItem)item).BuildAction == "ResourceCompile");			
+			IEnumerable <IProjectItem> resourceScripts = project.Items.Where(
+						item => item is IFileProjectItem && ((IFileProjectItem)item).BuildAction == "ResourceCompile");			
 			
 			// search in all resource scripts, but due to limitation in resource compiler, only one of them can contain icons
 			foreach (ProjectItem item in resourceScripts) {

@@ -32,6 +32,9 @@ namespace ICSharpCode.SharpDevelop.Project.Commands
 		
 		public virtual void AfterBuild() {}
 		
+        /// <summary>
+        /// The command that is called when Build Solution is executed from the GUI.
+        /// </summary>
 		public override void Run()
 		{
 			if (CanRunBuild) {
@@ -45,20 +48,22 @@ namespace ICSharpCode.SharpDevelop.Project.Commands
 					}
 				}
 				BeforeBuild();
+
+
 				StartBuild();
 			} else {
 				AddNoSingleFileCompilationError();
 			}
 		}
 		
-		BuildResults lastBuildResults;
+		IBuildResults lastBuildResults;
 		
-		public BuildResults LastBuildResults {
+		public IBuildResults LastBuildResults {
 			get { return lastBuildResults; }
 			protected set { lastBuildResults = value; }
 		}
 		
-		protected void CallbackMethod(BuildResults results)
+		protected void CallbackMethod(IBuildResults results)
 		{
 			lastBuildResults = results;
 			AfterBuild();

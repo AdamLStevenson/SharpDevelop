@@ -19,7 +19,7 @@ namespace ICSharpCode.TextTemplating
 			this.context = context;
 		}
 		
-		public FileProjectItem EnsureOutputFileIsInProject(FileProjectItem baseItem, string outputFileName)
+		public IFileProjectItem EnsureOutputFileIsInProject(IFileProjectItem baseItem, string outputFileName)
 		{
 			return context.EnsureOutputFileIsInProject(baseItem, outputFileName);
 		}

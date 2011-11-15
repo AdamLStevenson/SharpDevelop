@@ -61,10 +61,10 @@ namespace ICSharpCode.RubyBinding
 			WriteTestsForProjectFileItems(project.Items);
 		}
 		
-		void WriteTestsForProjectFileItems(ReadOnlyCollection<ProjectItem> items)
+		void WriteTestsForProjectFileItems(ReadOnlyCollection<IProjectItem> items)
 		{
-			foreach (ProjectItem item in items) {
-				FileProjectItem fileItem = item as FileProjectItem;
+			foreach (IProjectItem item in items) {
+				IFileProjectItem fileItem = item as IFileProjectItem;
 				if (fileItem != null) {
 					WriteTestFileName(fileItem.FileName);
 				}

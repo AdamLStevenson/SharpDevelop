@@ -31,7 +31,7 @@ namespace FSharpBinding
 			}
 		}
 		
-		public override ItemType GetDefaultItemType(string fileName)
+		public override IItemType GetDefaultItemType(string fileName)
 		{
 			if (string.Equals(".fs", Path.GetExtension(fileName), StringComparison.InvariantCultureIgnoreCase)) {
 				return ItemType.Compile;

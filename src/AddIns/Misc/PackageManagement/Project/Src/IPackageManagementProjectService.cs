@@ -18,8 +18,8 @@ namespace ICSharpCode.PackageManagement
 		event EventHandler<SolutionEventArgs> SolutionLoaded;
 		
 		void RefreshProjectBrowser();
-		void AddProjectItem(IProject project, ProjectItem item);
-		void RemoveProjectItem(IProject project, ProjectItem item);
+		void AddProjectItem(IProject project, IProjectItem item);
+		void RemoveProjectItem(IProject project, IProjectItem item);
 		void Save(IProject project);
 		
 		IEnumerable<IProject> GetOpenProjects();		

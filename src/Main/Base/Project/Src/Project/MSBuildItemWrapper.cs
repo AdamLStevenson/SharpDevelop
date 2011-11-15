@@ -37,7 +37,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			 set { item.UnevaluatedInclude = MSBuildInternals.Escape(value); }
 		}
 		
-		public ItemType ItemType { 
+		public IItemType ItemType { 
 			get { return new ItemType(item.ItemType); }
 			set { item.ItemType = value.ItemName; }
 		}

@@ -115,7 +115,7 @@ namespace ICSharpCode.SharpDevelop
 		
 		// do not use an event for this because a solution might be loaded before ParserService
 		// is initialized
-		internal static void OnSolutionLoaded(List<ParseProjectContent> createdContents)
+		internal static void OnSolutionLoaded(List<IParseProjectContent> createdContents)
 		{
 			WorkbenchSingleton.DebugAssertMainThread();
 			Debug.Assert(jobs != null);
@@ -126,13 +126,13 @@ namespace ICSharpCode.SharpDevelop
 			WorkbenchSingleton.SafeThreadAsyncCall(ProjectService.ParserServiceCreatedProjectContents);
 			
 			for (int i = 0; i < createdContents.Count; i++) {
-				ParseProjectContent pc = createdContents[i];
+				IParseProjectContent pc = createdContents[i];
 				jobs.AddJob(new JobTask(pc.Initialize1,
 				                        GetLoadReferenceTaskTitle(pc.ProjectName),
 				                        10));
 			}
 			for (int i = 0; i < createdContents.Count; i++) {
-				ParseProjectContent pc = createdContents[i];
+				IParseProjectContent pc = createdContents[i];
 				jobs.AddJob(new JobTask(pc.Initialize2,
 				                        GetParseTaskTitle(pc.ProjectName),
 				                        pc.GetInitializationWorkAmount()));
@@ -151,7 +151,7 @@ namespace ICSharpCode.SharpDevelop
 			return StringParser.Parse("${res:ICSharpCode.SharpDevelop.Internal.ParserService.Parsing} ")  + projectName + "...";
 		}
 		
-		internal static void InitNewProject(ParseProjectContent pc)
+		internal static void InitNewProject(IParseProjectContent pc)
 		{
 			jobs.AddJob(new JobTask(pc.Initialize1,
 			                        GetLoadReferenceTaskTitle(pc.ProjectName),

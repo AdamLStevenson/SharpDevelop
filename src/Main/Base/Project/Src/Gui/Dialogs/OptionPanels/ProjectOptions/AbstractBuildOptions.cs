@@ -243,7 +243,7 @@ namespace ICSharpCode.SharpDevelop.Gui.OptionPanels
 			ComboBox targetFrameworkComboBox = ControlDictionary["targetFrameworkComboBox"] as ComboBox;
 			if (targetFrameworkComboBox != null) {
 				targetFrameworkComboBox.Enabled = false;
-				TargetFramework fx = ((IUpgradableProject)project).CurrentTargetFramework;
+				ITargetFramework fx = ((IUpgradableProject)project).CurrentTargetFramework;
 				if (fx != null) {
 					targetFrameworkComboBox.Items.Add(fx.DisplayName);
 					targetFrameworkComboBox.SelectedIndex = 0;

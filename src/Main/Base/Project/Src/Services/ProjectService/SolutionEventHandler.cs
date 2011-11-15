@@ -8,15 +8,15 @@ namespace ICSharpCode.SharpDevelop.Project
 {
 	public class SolutionEventArgs : EventArgs
 	{
-		Solution solution;
+		ISolution solution;
 		
-		public Solution Solution {
+		public ISolution Solution {
 			get {
 				return solution;
 			}
 		}
 		
-		public SolutionEventArgs(Solution solution)
+		public SolutionEventArgs(ISolution solution)
 		{
 			this.solution = solution;
 		}

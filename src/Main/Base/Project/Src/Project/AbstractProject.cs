@@ -196,10 +196,10 @@ namespace ICSharpCode.SharpDevelop.Project
 		#endregion
 		
 		#region ProjectSections
-		List<ProjectSection> projectSections = new List<ProjectSection>();
+		List<IProjectSection> projectSections = new List<IProjectSection>();
 		
 		[Browsable(false)]
-		public List<ProjectSection> ProjectSections {
+		public List<IProjectSection> ProjectSections {
 			get {
 				WorkbenchSingleton.AssertMainThread();
 				return projectSections;
@@ -303,7 +303,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// Gets the list of available file item types. This member is thread-safe.
 		/// </summary>
 		[Browsable(false)]
-		public virtual ICollection<ItemType> AvailableFileItemTypes {
+		public virtual ICollection<IItemType> AvailableFileItemTypes {
 			get {
 				return ItemType.DefaultFileItems;
 			}
@@ -315,9 +315,9 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// will create a new collection.
 		/// </summary>
 		[Browsable(false)]
-		public virtual ReadOnlyCollection<ProjectItem> Items {
+		public virtual ReadOnlyCollection<IProjectItem> Items {
 			get {
-				return new ReadOnlyCollection<ProjectItem>(new ProjectItem[0]);
+				return new ReadOnlyCollection<IProjectItem>(new ProjectItem[0]);
 			}
 		}
 		
@@ -325,10 +325,10 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// Gets all items in the project that have the specified item type.
 		/// This member is thread-safe.
 		/// </summary>
-		public virtual IEnumerable<ProjectItem> GetItemsOfType(ItemType itemType)
+		public virtual IEnumerable<IProjectItem> GetItemsOfType(IItemType itemType)
 		{
 			foreach (ProjectItem item in this.Items) {
-				if (item.ItemType == itemType) {
+				if (item.ItemType.Equals(itemType)) {
 					yield return item;
 				}
 			}
@@ -448,7 +448,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// This member is thread-safe.
 		/// </summary>
 		/// <param name="fileName">The <b>fully qualified</b> file name of the file</param>
-		public FileProjectItem FindFile(string fileName)
+		public IFileProjectItem FindFile(string fileName)
 		{
 			lock (SyncRoot) {
 				if (findFileCache == null) {
@@ -467,11 +467,11 @@ namespace ICSharpCode.SharpDevelop.Project
 			}
 		}
 		
-		ParseProjectContent IProject.CreateProjectContent()
+		IParseProjectContent IProject.CreateProjectContent()
 		{
 			return this.CreateProjectContent();
 		}
-		protected virtual ParseProjectContent CreateProjectContent()
+		protected virtual IParseProjectContent CreateProjectContent()
 		{
 			return null;
 		}
@@ -479,7 +479,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// <summary>
 		/// Creates a new projectItem for the passed itemType
 		/// </summary>
-		public virtual ProjectItem CreateProjectItem(IProjectItemBackendStore item)
+		public virtual IProjectItem CreateProjectItem(IProjectItemBackendStore item)
 		{
 			return new UnknownProjectItem(this, item);
 		}
@@ -511,7 +511,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// Returns ItemType.None for unknown items.
 		/// Every override should call base.GetDefaultItemType for unknown file extensions.
 		/// </summary>
-		public virtual ItemType GetDefaultItemType(string fileName)
+		public virtual IItemType GetDefaultItemType(string fileName)
 		{
 			return ItemType.None;
 		}
@@ -543,6 +543,7 @@ namespace ICSharpCode.SharpDevelop.Project
 						mscorlib |= "mscorlib".Equals(reference.Include, StringComparison.OrdinalIgnoreCase);
 					}
 				}
+                
 			}
 			if (!mscorlib) {
 				referenceItems.Add(new ReferenceProjectItem(this, "mscorlib") { FileName = typeof(object).Module.FullyQualifiedName });
@@ -550,14 +551,14 @@ namespace ICSharpCode.SharpDevelop.Project
 			return referenceItems;
 		}
 		
-		public virtual void StartBuild(ProjectBuildOptions options, IBuildFeedbackSink feedbackSink)
+		public virtual void StartBuild(IProjectBuildOptions options, IBuildFeedbackSink feedbackSink)
 		{
 			feedbackSink.ReportError(new BuildError { ErrorText = "Building project " + Name + " is not supported.", IsWarning = true });
 			// we don't know how to build anything, report that we're done.
 			feedbackSink.Done(true);
 		}
 		
-		public virtual ICollection<IBuildable> GetBuildDependencies(ProjectBuildOptions buildOptions)
+		public virtual ICollection<IBuildable> GetBuildDependencies(IProjectBuildOptions buildOptions)
 		{
 			lock (SyncRoot) {
 				List<IBuildable> result = new List<IBuildable>();
@@ -576,7 +577,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			}
 		}
 		
-		public virtual ProjectBuildOptions CreateProjectBuildOptions(BuildOptions options, bool isRootBuildable)
+		public virtual IProjectBuildOptions CreateProjectBuildOptions(IBuildOptions options, bool isRootBuildable)
 		{
 			if (options == null)
 				throw new ArgumentNullException("options");

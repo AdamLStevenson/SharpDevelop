@@ -420,12 +420,12 @@ namespace ICSharpCode.UnitTesting
 		/// Adds the test project to the test tree view if it is now recognised as a 
 		/// test project and is not already in the test tree.
 		/// </summary>
-		public void ProjectItemAdded(ProjectItem projectItem)
+		public void ProjectItemAdded(IProjectItem projectItem)
 		{
 			AddProject(projectItem.Project);
 		}
 		
-		public void ProjectItemRemoved(ProjectItem projectItem)
+		public void ProjectItemRemoved(IProjectItem projectItem)
 		{
 			if (!testFrameworks.IsTestProject(projectItem.Project)) {
 				RemoveProject(projectItem.Project);

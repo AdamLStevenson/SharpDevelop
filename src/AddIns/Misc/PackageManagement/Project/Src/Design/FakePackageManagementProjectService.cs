@@ -65,12 +65,12 @@ namespace ICSharpCode.PackageManagement.Design
 			return FakeOpenProjects;
 		}
 		
-		public void AddProjectItem(IProject project, ProjectItem item)
+		public void AddProjectItem(IProject project, IProjectItem item)
 		{
 			ProjectService.AddProjectItem(project, item);
 		}
 		
-		public void RemoveProjectItem(IProject project, ProjectItem item)
+		public void RemoveProjectItem(IProject project, IProjectItem item)
 		{
 			ProjectService.RemoveProjectItem(project, item);
 		}

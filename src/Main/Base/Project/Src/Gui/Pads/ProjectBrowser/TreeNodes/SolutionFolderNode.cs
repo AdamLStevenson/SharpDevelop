@@ -13,7 +13,7 @@ namespace ICSharpCode.SharpDevelop.Project
 {
 	public interface ISolutionFolderNode
 	{
-		Solution Solution {
+		ISolution Solution {
 			get;
 		}
 		
@@ -30,10 +30,10 @@ namespace ICSharpCode.SharpDevelop.Project
 	
 	public class SolutionFolderNode : CustomFolderNode, ISolutionFolderNode
 	{
-		Solution       solution;
-		SolutionFolder folder;
+		ISolution       solution;
+		ISolutionFolderContainer folder;
 		
-		public override Solution Solution {
+		public override ISolution Solution {
 			get {
 				Debug.Assert(solution != null);
 				return solution;
@@ -53,7 +53,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			}
 		}
 		
-		public SolutionFolderNode(Solution solution, SolutionFolder folder)
+		public SolutionFolderNode(ISolution solution, ISolutionFolderContainer folder)
 		{
 			sortOrder = 0;
 			canLabelEdit = true;
@@ -94,8 +94,8 @@ namespace ICSharpCode.SharpDevelop.Project
 			foreach (object treeObject in folder.Folders) {
 				if (treeObject is IProject) {
 					NodeBuilders.AddProjectNode(this, (IProject)treeObject);
-				} else if (treeObject is SolutionFolder) {
-					SolutionFolderNode folderNode = new SolutionFolderNode(solution, (SolutionFolder)treeObject);
+				} else if (treeObject is SolutionFolderContainer) {
+                    SolutionFolderNode folderNode = new SolutionFolderNode(solution, (SolutionFolderContainer)treeObject);
 					folderNode.InsertSorted(this);
 				} else {
 					MessageService.ShowWarning("SolutionFolderNode.Initialize(): unknown tree object : " + treeObject);

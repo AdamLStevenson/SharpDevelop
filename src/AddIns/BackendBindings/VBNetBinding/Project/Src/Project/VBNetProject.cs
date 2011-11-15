@@ -65,9 +65,9 @@ namespace ICSharpCode.VBNetBinding
 			            PropertyStorageLocations.ConfigurationSpecific, true);
 		}
 		
-		protected override ParseProjectContent CreateProjectContent()
+		protected override IParseProjectContent CreateProjectContent()
 		{
-			ParseProjectContent pc = base.CreateProjectContent();
+			IParseProjectContent pc = base.CreateProjectContent();
 			MyNamespaceBuilder.BuildNamespace(this, pc);
 			return pc;
 		}
@@ -95,7 +95,7 @@ namespace ICSharpCode.VBNetBinding
 			get { return LanguageProperties.VBNet; }
 		}
 		
-		public override ItemType GetDefaultItemType(string fileName)
+		public override IItemType GetDefaultItemType(string fileName)
 		{
 			if (string.Equals(Path.GetExtension(fileName), ".vb", StringComparison.OrdinalIgnoreCase))
 				return ItemType.Compile;
@@ -103,7 +103,7 @@ namespace ICSharpCode.VBNetBinding
 				return base.GetDefaultItemType(fileName);
 		}
 		
-		public override void StartBuild(ProjectBuildOptions options, IBuildFeedbackSink feedbackSink)
+		public override void StartBuild(IProjectBuildOptions options, IBuildFeedbackSink feedbackSink)
 		{
 			if (this.MinimumSolutionVersion == Solution.SolutionVersionVS2005) {
 				MSBuildEngine.StartBuild(this,

@@ -9,7 +9,7 @@ namespace ICSharpCode.TextTemplating
 {
 	public abstract class TextTemplatingCustomTool : ICustomTool
 	{
-		public abstract void GenerateCode(FileProjectItem item, CustomToolContext context);
+		public abstract void GenerateCode(IFileProjectItem item, CustomToolContext context);
 		
 		protected TextTemplatingHost CreateTextTemplatingHost(IProject project)
 		{

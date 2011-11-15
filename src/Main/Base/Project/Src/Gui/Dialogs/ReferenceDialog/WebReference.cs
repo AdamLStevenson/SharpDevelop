@@ -322,9 +322,9 @@ namespace ICSharpCode.SharpDevelop.Gui
 			throw new NotSupportedException("Unsupported language: " + language);
 		}
 		
-		static WebReferencesProjectItem GetWebReferencesProjectItem(IEnumerable<ProjectItem> items)
+		static WebReferencesProjectItem GetWebReferencesProjectItem(IEnumerable<IProjectItem> items)
 		{
-			foreach (ProjectItem item in items) {
+			foreach (IProjectItem item in items) {
 				if (item.ItemType == ItemType.WebReferences) {
 					return (WebReferencesProjectItem)item;
 				}

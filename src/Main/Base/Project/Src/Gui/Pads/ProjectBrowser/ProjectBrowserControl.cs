@@ -374,7 +374,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		}
 		#endregion
 		
-		public void ViewSolution(Solution solution)
+		public void ViewSolution(ISolution solution)
 		{
 			AbstractProjectBrowserTreeNode solutionNode = new SolutionNode(solution);
 			treeView.Clear();
@@ -384,7 +384,7 @@ namespace ICSharpCode.SharpDevelop.Project
 				if (treeObject is IProject) {
 					NodeBuilders.AddProjectNode(solutionNode, (IProject)treeObject);
 				} else {
-					SolutionFolderNode folderNode = new SolutionFolderNode(solution, (SolutionFolder)treeObject);
+					SolutionFolderNode folderNode = new SolutionFolderNode(solution, (SolutionFolderContainer)treeObject);
 					folderNode.InsertSorted(solutionNode);
 				}
 			}

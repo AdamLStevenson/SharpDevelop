@@ -20,7 +20,7 @@ namespace ICSharpCode.SharpDevelop.Project
 	/// However, prior to the item being added to the project, Include may be an empty string
 	/// (this is also the default for new items created using the (IProject, ItemType) constructor.
 	/// </summary>
-	public abstract class ProjectItem : LocalizedObject, IDisposable, ICloneable
+    public abstract class ProjectItem : LocalizedObject, IProjectItem
 	{
 		IProject project;
 		volatile string fileNameCache;
@@ -31,7 +31,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		
 		// or: (virtual mode)
 		string virtualInclude;
-		ItemType virtualItemType;
+		IItemType virtualItemType;
 		Dictionary<string, string> virtualMetadata = new Dictionary<string, string>();
 		
 		protected ProjectItem(IProject project, IProjectItemBackendStore buildItem)
@@ -43,17 +43,17 @@ namespace ICSharpCode.SharpDevelop.Project
 			this.treatIncludeAsLiteral = true;
 		}
 		
-		protected ProjectItem(IProject project, ItemType itemType)
+		protected ProjectItem(IProject project, IItemType itemType)
 			: this(project, itemType, null)
 		{
 		}
 		
-		protected ProjectItem(IProject project, ItemType itemType, string include)
+		protected ProjectItem(IProject project, IItemType itemType, string include)
 			: this(project, itemType, include, true)
 		{
 		}
 		
-		protected ProjectItem(IProject project, ItemType itemType, string include, bool treatIncludeAsLiteral)
+		protected ProjectItem(IProject project, IItemType itemType, string include, bool treatIncludeAsLiteral)
 		{
 			this.project = project;
 			this.virtualItemType = itemType;
@@ -79,7 +79,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// Gets the object used for synchronization. This is project.SyncRoot for items inside a project; or
 		/// virtualMetadata for items without project.
 		/// </summary>
-		object SyncRoot {
+		public object SyncRoot {
 			get {
 				if (project != null)
 					return project.SyncRoot;
@@ -92,14 +92,14 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// Gets if the item is added to it's owner project.
 		/// </summary>
 		[Browsable(false)]
-		internal bool IsAddedToProject {
+		public bool IsAddedToProject {
 			get {
 				return buildItem != null;
 			}
 		}
 		
 		[Browsable(false)]
-		internal IProjectItemBackendStore BuildItem {
+		public IProjectItemBackendStore BuildItem {
 			get { return buildItem; }
 			set {
 				if (project is AbstractProject) {
@@ -123,7 +123,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		}
 		
 		[Browsable(false)]
-		public ItemType ItemType {
+		public IItemType ItemType {
 			get {
 				lock (SyncRoot) {
 					if (buildItem != null)
@@ -303,7 +303,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// <summary>
 		/// Copies all meta data from this item to the target item.
 		/// </summary>
-		public virtual void CopyMetadataTo(ProjectItem targetItem)
+		public virtual void CopyMetadataTo(IProjectItem targetItem)
 		{
 			lock (SyncRoot) {
 				lock (targetItem.SyncRoot) {
@@ -320,7 +320,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// Using the default Clone() implementation requires that the item is has the Project
 		/// property set - cloning a ProjectItem without a project will result in a NotSupportedException.
 		/// </summary>
-		public virtual ProjectItem Clone()
+		public virtual IProjectItem Clone()
 		{
 			if (this.Project != null) {
 				return CloneFor(this.Project);
@@ -333,14 +333,14 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// Clones this project item by cloning the underlying
 		/// MSBuild item and creating a new project item in the target project for it.
 		/// </summary>
-		public ProjectItem CloneFor(IProject targetProject)
+		public IProjectItem CloneFor(IProject targetProject)
 		{
 			if (targetProject == null)
 				throw new ArgumentNullException("project");
 			
 			// use CreateProjectItem to ensure the clone has the same class
 			//  (derived from ProjectItem)
-			ProjectItem copy = targetProject.CreateProjectItem(new CloneBuildItem(this));
+			IProjectItem copy = targetProject.CreateProjectItem(new CloneBuildItem(this));
 			// remove reference to cloned item, leaving an unbound project item
 			copy.BuildItem = null;
 			return copy;
@@ -369,7 +369,7 @@ namespace ICSharpCode.SharpDevelop.Project
 				get { return parent.Include; }
 				set { throw new NotSupportedException(); }
 			}
-			public ItemType ItemType {
+			public IItemType ItemType {
 				get { return parent.ItemType; }
 				set { throw new NotSupportedException(); }
 			}

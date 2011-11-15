@@ -9,9 +9,9 @@ namespace ICSharpCode.TextTemplating
 	public class NamespaceHint
 	{
 		string hint = String.Empty;
-		FileProjectItem templateFile;
+		IFileProjectItem templateFile;
 		
-		public NamespaceHint(FileProjectItem templateFile)
+		public NamespaceHint(IFileProjectItem templateFile)
 		{
 			this.templateFile = templateFile;
 			GetNamespaceHint();

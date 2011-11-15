@@ -14,22 +14,5 @@ namespace ICSharpCode.SharpDevelop.Project
 		void Rename(string newFileName);
 	}
 	
-	public sealed class MockProjectChangeWatcher : IProjectChangeWatcher
-	{
-		public void Enable()
-		{
-		}
-		
-		public void Disable()
-		{
-		}
-		
-		public void Rename(string newFileName)
-		{
-		}
-		
-		public void Dispose()
-		{
-		}
-	}
+	
 }

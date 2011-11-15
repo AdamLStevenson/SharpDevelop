@@ -36,7 +36,7 @@ namespace ICSharpCode.CppBinding.Project
 		{
 		}
 
-		public override ProjectItem CreateProjectItem(IProjectItemBackendStore item)
+		public override IProjectItem CreateProjectItem(IProjectItemBackendStore item)
 		{
 			if ("ProjectConfiguration" == item.ItemType.ItemName)
 				return new ProjectConfigurationProjectItem(this, item);
@@ -85,7 +85,7 @@ namespace ICSharpCode.CppBinding.Project
 			}
 		}
 
-		public override ItemType GetDefaultItemType(string fileName)
+		public override IItemType GetDefaultItemType(string fileName)
 		{
 			const string RESOURCE_COMPILE = "ResourceCompile";
 
@@ -136,7 +136,7 @@ namespace ICSharpCode.CppBinding.Project
 
 			if (fileName != null)
 			{
-				FileProjectItem fileItem = FindFile(fileName);
+				IFileProjectItem fileItem = FindFile(fileName);
 				if (fileItem != null)
 				{
 					string additionalIncludes = fileItem.GetEvaluatedMetadata("AdditionalIncludeDirectories");
@@ -160,7 +160,7 @@ namespace ICSharpCode.CppBinding.Project
 		{
 			if (fileName == null)
 				throw new ArgumentNullException("fileName");
-			FileProjectItem fileItem = FindFile(fileName);
+			IFileProjectItem fileItem = FindFile(fileName);
 			IList<string> result;
 			if (fileItem != null) {
 				string definedSymbols = fileItem.GetEvaluatedMetadata("PreprocessorDefinitions");
@@ -175,7 +175,7 @@ namespace ICSharpCode.CppBinding.Project
 		{
 			if (fileName == null)
 				throw new ArgumentNullException("fileName");
-			FileProjectItem fileItem = FindFile(fileName);
+			IFileProjectItem fileItem = FindFile(fileName);
 			IList<string> result;
 			if (fileItem != null) {
 				string undefinedSymbols = fileItem.GetEvaluatedMetadata("UndefinePreprocessorDefinitions");

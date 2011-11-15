@@ -8,17 +8,17 @@ using Microsoft.Build.Framework;
 
 namespace ICSharpCode.SharpDevelop.Project
 {
-	public delegate void BuildCallback(BuildResults results);
+	
 	
 	/// <summary>
 	/// Specifies options for building a single project.
 	/// </summary>
-	public class ProjectBuildOptions
+	public class ProjectBuildOptions:IProjectBuildOptions
 	{
-		BuildTarget target;
+		IBuildTarget target;
 		IDictionary<string, string> properties = new SortedList<string, string>();
 		
-		public BuildTarget Target {
+		public IBuildTarget Target {
 			get { return target; }
 		}
 		
@@ -26,7 +26,7 @@ namespace ICSharpCode.SharpDevelop.Project
 			get { return properties; }
 		}
 		
-		public ProjectBuildOptions(BuildTarget target)
+		public ProjectBuildOptions(IBuildTarget target)
 		{
 			this.target = target;
 		}
@@ -47,16 +47,12 @@ namespace ICSharpCode.SharpDevelop.Project
 		public BuildOutputVerbosity BuildOutputVerbosity { get; set; }
 	}
 	
-	public enum BuildOutputVerbosity
-	{
-		Normal,
-		Diagnostic
-	}
+	
 	
 	/// <summary>
 	/// Specifies options when starting a build.
 	/// </summary>
-	public class BuildOptions
+	public class BuildOptions:IBuildOptions
 	{
 		public static bool ShowErrorListAfterBuild {
 			get {
@@ -113,7 +109,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// </summary>
 		public BuildOutputVerbosity BuildOutputVerbosity { get; set; }
 		
-		public BuildOptions(BuildTarget target, BuildCallback callback)
+		public BuildOptions(IBuildTarget target, BuildCallback callback)
 		{
 			this.callback = callback;
 			this.projectTarget = target;
@@ -133,19 +129,19 @@ namespace ICSharpCode.SharpDevelop.Project
 			get { return callback; }
 		}
 		
-		readonly BuildTarget projectTarget;
+		readonly IBuildTarget projectTarget;
 		
 		/// <summary>
 		/// The target to build for the project being built.
 		/// </summary>
-		public BuildTarget ProjectTarget {
+		public IBuildTarget ProjectTarget {
 			get { return projectTarget; }
 		}
 		
 		/// <summary>
 		/// The target to build for dependencies of the project being built.
 		/// </summary>
-		public BuildTarget TargetForDependencies { get; set; }
+		public IBuildTarget TargetForDependencies { get; set; }
 		
 		/// <summary>
 		/// Additional properties used for the build, both for the project being built and its dependencies.
